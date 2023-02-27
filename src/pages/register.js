@@ -11,15 +11,16 @@ function Register() {
     // },[password])
     const  registeruser=async()=>{
        
-        const res = await fetch("http://localhost:3000/api/auth/register",
+        const res = await fetch("http://localhost:5000/api/auth/register",
         {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
           
-            
+            mode:'no-cors',
             body:JSON.stringify({email,username,password})
         })
-        const responddata=res.json()
+        console.log(res);
+        const responddata=await res.json()
        console.log(responddata)
     }
    

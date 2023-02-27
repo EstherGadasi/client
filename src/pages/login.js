@@ -12,13 +12,15 @@ function Login(){
     // },[password])
     const checkuser=async()=>{
         console.log(password ,username)
-        const res = await fetch("http://localhost:3000/api/auth/register",
+        const res = await fetch("http://localhost:5000/api/auth/login",
         {
             method: 'POST',
+    
             headers: { 'Content-Type': 'application/json' },  
-            body:JSON.stringify({username,password})
+            body: JSON.stringify({username:username,password:password})
         })
-        const responddata=res.json()
+        console.log(res)
+        const responddata=await res.json()
         const ressocket=responddata.accessToken
     
        console.log(ressocket)
