@@ -1,26 +1,35 @@
 import React, { useEffect, useState } from "react";
 // import React from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import axios from "axios";
 function Register() {
     const [password ,setpassword ]=useState("")
     const [username,setuserName]=useState("")
     const [email ,setmail ]=useState("")
+    const [err, setErr] = useState(null);
+    const navigate = useNavigate()
+
     //  fetch().username, email, password
     //  then()   
     
     // },[password])
     const  registeruser=async()=>{
-       
-        const res = await fetch("http://localhost:3000/api/auth/register",
-        {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+        try {
+            await axios.post("http://localhost:3000/api/auth/register", { username, password, email});
+            navigate("/login")
+          } catch (err) {
+            setErr(err.response.data?.message);
+          } 
+    //     const res = await fetch("http://localhost:3000/api/auth/register",
+    //     {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
           
             
-            body:JSON.stringify({email,username,password})
-        })
-        const responddata=res.json()
-       console.log(responddata)
+    //         body:JSON.stringify({email,username,password})
+    //     })
+    //     const responddata=res.json()
+    //    console.log(responddata)
     }
    
         
