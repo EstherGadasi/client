@@ -19,13 +19,13 @@ const Site = () => {
     
     useEffect(() => {
         console.log("we")
-        async function fetchData() {
+         const fetchData=async()=> {
             let config = {
                 headers: {
-                  'Authorization': 'Bearer ' + localStorage.getItem("token")
+                  'Authorization': 'Bearer '// + localStorage.getItem("token")
                 }
             }
-            const site = await axios.get("http://localhost:3000/site",config)
+            const site = await axios.get("http://localhost:3000/site")
             if(site?.length) console.log(site)
             // const {data:_authours} = await axios.get("http://localhost:3000/api/authors",config)
             // if(_authours?.length) setAutours(_authours)

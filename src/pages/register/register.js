@@ -14,12 +14,13 @@ function Register() {
     
     // },[password])
     const  registeruser=async()=>{
-<<<<<<< HEAD:src/pages/register/register.js
+
         try {
-            await axios.post("http://localhost:3000/api/auth/register", { username, password, email});
-            navigate("/login")
+           await axios.post("http://localhost:3000/api/auth/register", { username, password, email});
+            // navigate("/login")
           } catch (err) {
-            setErr(err.response.data?.message);
+            // setErr(err.response.data?.message);
+            console.log("site")
           } 
     //     const res = await fetch("http://localhost:3000/api/auth/register",
     //     {
@@ -31,20 +32,20 @@ function Register() {
     //     })
     //     const responddata=res.json()
     //    console.log(responddata)
-=======
+
        
-        const res = await fetch("http://localhost:5000/api/auth/register",
-        {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+    //     const res = await fetch("http://localhost:5000/api/auth/register",
+    //     {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
           
-            mode:'no-cors',
-            body:JSON.stringify({email,username,password})
-        })
-        console.log(res);
-        const responddata=await res.json()
-       console.log(responddata)
->>>>>>> cba0de22e14364b21894943bd8b164b0b36a731c:src/pages/register.js
+    //         mode:'no-cors',
+    //         body:JSON.stringify({email,username,password})
+    //     })
+    //     console.log(res);
+    //     const responddata=await res.json()
+    //    console.log(responddata)
+
     }
    
         
