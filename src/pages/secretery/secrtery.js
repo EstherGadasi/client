@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
-const Site = () => {
+const Secrtery= () => {
     const [idimage,setidimage] = useState("")
     const [num_of_turist,setnum_of_turist] = useState("")
     const [ages,setages] = useState("")
@@ -26,13 +26,13 @@ const Site = () => {
                   'Authorization': 'Bearer ' + localStorage.getItem("token")
                 }
             }    
-          const res = await axios.post("http://localhost:3000/site",  {  idimage,num_of_turist,ages,children,discription,time_it_takes,accible,place1,place2,address}, config);
-          navigate("/book/list")
+          const res = await axios.post("http://localhost:5000/site",  {  idimage,num_of_turist,ages,children,discription,time_it_takes,accible,place1,place2,address}, config);
+          //navigate("/book/list")
         } catch (err) {
           setErr(err.response.data?.message);
         }
       };
-      if(!categories.length || ! autours.length) return <h1>LOADING....</h1>
+      //if(!categories.length || ! autours.length) return <h1>LOADING....</h1>
       return (
         <>
         <div className="new-book">
@@ -124,4 +124,4 @@ const Site = () => {
       )// idimage,num_of_turist,ages,children,discription,time_it_takes,accible,place1,place2,address
     }
     
-    export default Site;
+    export default Secrtery;

@@ -16,10 +16,10 @@ function Login(){
     const checkuser=async()=>{
         // e.preventDefault();
     try {      
-      const res = await axios.post("http://localhost:3600/api/auth/login",  { username, password});
+      const res = await axios.post("http://localhost:5000/api/auth/login",  { username, password});
       console.log(res.data)
       localStorage.setItem("token", JSON.stringify(res.data.accessToken));
-      navigate("/book/list")
+      navigate("/Personal area/Personal_area")
     } catch (err) {
       setErr(err.response.data?.message);
     }

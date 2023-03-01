@@ -3,19 +3,19 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 const Site = () => {
-    const [idimage,setidimage] = useState("")
-    const [num_of_turist,setnum_of_turist] = useState("")
-    const [ages,setages] = useState("")
-    const [children,setchildren] = useState("")
-    const [discription,setdiscription] = useState("")
-    const [time_it_takes,settime_it_takes] = useState("")
-    const [accible,setaccible] = useState("")
-    const [address,setaddress] = useState("")
-    const [place1,setplace1] = useState("")
-    const [place2,setplace2] = useState("")
-    const [constrainsId,setconstrainsId] = useState("")
-    const [err, setErr] = useState(null);
-    const navigate = useNavigate()
+    // const [idimage,setidimage] = useState("")
+    // const [num_of_turist,setnum_of_turist] = useState("")
+    // const [ages,setages] = useState("")
+    // const [children,setchildren] = useState("")
+    // const [discription,setdiscription] = useState("")
+    // const [time_it_takes,settime_it_takes] = useState("")
+    // const [accible,setaccible] = useState("")
+    // const [address,setaddress] = useState("")
+    // const [place1,setplace1] = useState("")
+    // const [place2,setplace2] = useState("")
+    // const [constrainsId,setconstrainsId] = useState("")
+    // const [err, setErr] = useState(null);
+    // const navigate = useNavigate()
     
     useEffect(() => {
         console.log("we")
@@ -25,10 +25,9 @@ const Site = () => {
                   'Authorization': 'Bearer ' + localStorage.getItem("token")
                 }
             }
-            const site = await axios.get("http://localhost:3000/site")
+            const site = await axios.get("http://localhost:5000/site")
             if(site?.length) console.log(site)
-            // const {data:_authours} = await axios.get("http://localhost:3000/api/authors",config)
-            // if(_authours?.length) setAutours(_authours)
+        
            
           }
           fetchData()
