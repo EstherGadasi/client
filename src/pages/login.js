@@ -13,7 +13,7 @@ function Login(){
     // },[password])
     const checkuser=async()=>{
         console.log(password ,username)
-        const res = await fetch("http://localhost:5000/api/auth/login",
+        const res = await fetch("http://localhost:4000/api/auth/login",
         {
             method: 'POST',
     

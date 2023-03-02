@@ -7,41 +7,43 @@ function Login(){
     const [username,setuserName]=useState("")
     const [err, setErr] = useState(null);
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     // useEffect(()=>{
     //  fetch().
     //  then()   
     
     // },[password])
-    const checkuser=async()=>{
-        // e.preventDefault();
+    const checkuser=async(e)=>{
+     e.preventDefault();
     try {      
-      const res = await axios.post("http://localhost:5000/api/auth/login",  { username, password});
+      const res = await axios.post("http://localhost:4000/api/auth/login",  { username, password});
       console.log(res.data)
-      localStorage.setItem("token", JSON.stringify(res.data.accessToken));
-      navigate("/Personal area/Personal_area")
+      // localStorage.setItem("token", JSON.stringify(res.data.accessToken));
+      // navigate("/Personal area/Personal_area")
     } catch (err) {
       setErr(err.response.data?.message);
     }
     //     console.log(password ,username)
-    //     const res = await fetch("http://localhost:3000/api/auth/register",
-    //     {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },  
-    //         body:JSON.stringify({username,password})
-    //     })
-    //     const responddata=res.json()
-    //     const ressocket=responddata.accessToken
+//         const res = await fetch("http://localhost:3000/api/auth/login",
+//         {
+//             method: 'POST',
+// mode:'no-cors',
+//             headers: { 'Content-Type': 'application/json' },  
+//             body:JSON.stringify({username,password})
+//         })
+//         const responddata=res.json()
+//         const ressocket=responddata.accessToken
     
-    //    console.log(ressocket)
+//        console.log(ressocket)
     
-   
+   };
         
         return( 
             <div className="login-page"><label>user name</label><br>
-            </br><input type={"text"} onChange={(e)=>{setpassword(e.target.value)}}></input>
+            </br><input type={"text"} onChange={(e)=>{setuserName(e.target.value)}}></input>
             <br></br><label>password</label><br></br>
-        <input type={"password"}  onChange={(e)=>{setuserName(e.target.value)}}></input><br></br>
+        <input type={"password"}  onChange={(e)=>{setpassword(e.target.value)}}></input><br></br>
+        {err && err}
             <button onClick={checkuser}>login</button>
             
          </div> 
@@ -50,5 +52,5 @@ function Login(){
             )
     
     
-}}
+}
  export default Login;

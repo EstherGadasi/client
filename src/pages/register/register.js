@@ -16,12 +16,14 @@ function Register() {
     const  registeruser=async()=>{
 
         try {
-           await axios.post("http://localhost:3000/api/auth/register", { username, password, email});
+         const res=  await axios.post("http://localhost:4000/api/auth/register", { username, password, email});
             // navigate("/login")
+             console.log(res.data)
           } catch (err) {
-            // setErr(err.response.data?.message);
-            console.log("site")
-          } 
+           setErr(err.response.data?.message);
+            
+          }
+          
     //     const res = await fetch("http://localhost:3000/api/auth/register",
     //     {
     //         method: 'POST',
