@@ -53,9 +53,9 @@ function Register() {
         
         return( 
             <div className="login-page"><label>user name</label><br></br>
-            <input type={"text"} onChange={(e)=>{setpassword(e.target.value)}}></input><br></br>
+            <input type={"text"} onChange={(e)=>{setuserName(e.target.value)}}></input><br></br>
             <br></br><label>password</label><br></br>
-        <input type={"password"}  onChange={(e)=>{setuserName(e.target.value)}}></input><br></br>
+        <input type={"password"}  onChange={(e)=>{setpassword(e.target.value)}}></input><br></br>
         <br></br><label>mail</label><br></br>
         <input type={"mail"}  onChange={(e)=>{setmail(e.target.value)}}></input><br></br>
             <button onClick={registeruser}>register</button>

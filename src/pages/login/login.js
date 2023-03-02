@@ -2,12 +2,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link,useNavigate } from "react-router-dom";
+// import Personal_area from '/';
+;
 function Login(){
     const [password ,setpassword ]=useState("")
     const [username,setuserName]=useState("")
     const [err, setErr] = useState(null);
 
-    // const navigate = useNavigate()
+   const navigate = useNavigate()
     // useEffect(()=>{
     //  fetch().
     //  then()   
@@ -18,8 +20,8 @@ function Login(){
     try {      
       const res = await axios.post("http://localhost:4000/api/auth/login",  { username, password});
       console.log(res.data)
-      // localStorage.setItem("token", JSON.stringify(res.data.accessToken));
-      // navigate("/Personal area/Personal_area")
+      localStorage.setItem("token", JSON.stringify(res.data));
+    // navigate("Personal area/Personal_area")
     } catch (err) {
       setErr(err.response.data?.message);
     }
