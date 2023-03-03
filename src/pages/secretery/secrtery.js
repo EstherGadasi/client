@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 const Secrtery = () => {
-    const [idimage, setidimage] = useState("")
+    
     const [num_of_turist, setnum_of_turist] = useState("")
     const [ages, setages] = useState("")
     const [children, setchildren] = useState("")
@@ -38,21 +38,10 @@ const Secrtery = () => {
     //   }, []);
 
 
-    const handleaddimage = async (e) => {
+  
+    const handleAddSite = async (e) => {
         try {
-            console.log("K")
-            const res=  await axios.post("http://localhost:4000/images",{url});
-               // navigate("/login")
-                console.log(res.data)
-             } catch (err) {
-            //   setErr(err.response.data?.message);
-
-             }
-        alert("hello")
-    };
-    const handleAddBook = async (e) => {
-        try {
-            const res = await axios.post("http://localhost:4000/site", { idimage, num_of_turist, ages, children, discription, time_it_takes, accible, place1, place2, address });
+            const res = await axios.post("http://localhost:4000/site", {  num_of_turist, ages, children, discription, time_it_takes, accible, place1, place2, address ,url});
             // navigate("/login")
             console.log(res.data)
         } catch (err) {
@@ -81,12 +70,7 @@ const Secrtery = () => {
             })}
         </select> */}
 
-                <input
-                    type="text"
-                    placeholder="idimage"
-                    name="idimage"
-                    onChange={(e) => setidimage(e.target.value)}
-                />
+              
                 <input
                     type="text"
                     placeholder="num_of_turist"
@@ -141,9 +125,9 @@ const Secrtery = () => {
                     name="address"
                     onChange={(e) => setaddress(e.target.value)}
                 />
-                <button onClick={handleaddimage}>ADD image</button>
+               
                 {err && err}
-                <button onClick={handleAddBook}>ADD site</button>
+                <button onClick={handleAddSite}>ADD site</button>
                 <input
                     type="text"
                     placeholder="url"

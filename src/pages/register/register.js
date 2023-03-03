@@ -20,7 +20,7 @@ function Register() {
             // navigate("/login")
              console.log(res.data)
           } catch (err) {
-           setErr(err.response.data?.message);
+        //    setErr(err.response.data?.message);
             
           }
           
