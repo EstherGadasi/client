@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Personal_area from '../Personal area/Personal_area'
+import Personal_area from '../Personal_area/Personal_area'
 import {BrowserRouter as Router, Routes, Route, Link, NavLink} from 'react-router-dom'
 ;
 function Login(){
@@ -22,17 +22,17 @@ function Login(){
       const res = await axios.post("http://localhost:4000/api/auth/login",  { username, password});
       console.log(res.data)
       localStorage.setItem("token", JSON.stringify(res.data));
-      // navigate("/Personal area/Personal_area")
-      <Router>
-      <nav className='main-nav'>
+      navigate("/Personal_area")
+    //   <Router>
+    //   <nav className='main-nav'>
         
-        <NavLink to="/Personal area/Personal_area">ספרים </NavLink>
-      </nav>
-      <Routes>
+    //     <NavLink to="/Personal area/Personal_area">ספרים </NavLink>
+    //   </nav>
+    //   <Routes>
       
-        <Route path="/Personal area/Personal_area" element={<Personal_area />} />
-      </Routes>
-    </Router>
+    //     <Route path="/Personal area/Personal_area" element={<Personal_area />} />
+    //   </Routes>
+    // </Router>
   
     } catch (err) {
       setErr(err.response.data?.message);

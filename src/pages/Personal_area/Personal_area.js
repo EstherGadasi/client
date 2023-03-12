@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Planning_a_trip from "../Planning a trip/Planning_a_trip";
+import Planning_a_trip from "../Planning_a_trip/Planning_a_trip";
 import {BrowserRouter as Router, Routes, Route, Link, NavLink} from 'react-router-dom'
 import ConstrainsA from "../allconstrains/a";
 function Personal_area(){

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ConstrainsB from "./b";
-import Planning_a_trip from "../Planning a trip/Planning_a_trip";
+import Planning_a_trip from "../Planning_a_trip/Planning_a_trip";
 function ConstrainsC(arrcs) {
 
     const [area, setarea] = useState("")

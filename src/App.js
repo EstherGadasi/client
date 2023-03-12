@@ -1,13 +1,13 @@
 import Login from './pages/login/login';
 import ConstrainsA from './pages/allconstrains/a';
 import {BrowserRouter as Router, Routes, Route, Link, NavLink} from 'react-router-dom'
-import Home from './pages/Home page/home'
+import Home from './pages/Home_page/home'
 import './App.css';
 import Register from './pages/register/register'
 //import Sitefrom  from './pages/sites/site';
 import Site from './pages/sites/site';
 import Secrtery from './pages/secretery/secrtery';
-import Personal_area from './pages/Personal area/Personal_area'
+import Personal_area from './pages/Personal_area/Personal_area'
 function App() {
   return (
     <div className="App">
