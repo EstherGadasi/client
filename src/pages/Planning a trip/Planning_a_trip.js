@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import FinallTrip from "../FinallTrip/FinallTrip";
 import Show from "../showdetails";
+import ConstrainsC from "../allconstrains/c";
 
 function Planning_a_trip(arrcs, arrsites, tripid) {
     const current = new Date();
@@ -19,6 +20,7 @@ function Planning_a_trip(arrcs, arrsites, tripid) {
 
 
     const [sites, setsites] = useState(arrsites)
+    const[correntitem,setcorrentitem]= useState("")
     const [username, setuserName] = useState("")
     const [err, setErr] = useState(null);
     let matcessites = []
@@ -44,15 +46,15 @@ function Planning_a_trip(arrcs, arrsites, tripid) {
         CountTrip()
     }, [sites]);
 
-    async function addsite(e) {
-        newsites = sites.push(e)
+    async function addsite() {
+        newsites = sites.push(correntitem)
         setsites(...newsites)
     }
-    async function ReduceSite(e) {
-        newsites = sites.pop(e)
+    async function ReduceSite() {
+        newsites = sites.pop(correntitem)
         setsites(...newsites)
     }
-    async function finish(e) {
+    async function finish() {
         try {
             const trip = { // area:arrcs.area,
                 userId: 1,
@@ -73,13 +75,8 @@ function Planning_a_trip(arrcs, arrsites, tripid) {
             // setErr(err.response.data?.message);
         }
     }
-    async function ShowSiteDetails(e) {
-        try {
-            const res = await axios.get("http://localhost:4000/trip", { e });
-            <Show res={res}></Show>
-        } catch (err) {
-            // setErr(err.response.data?.message);
-        }
+    async function form() {
+        <ConstrainsC arrcs={arrcs}></ConstrainsC>
     }
     async function update(e) {
         const trip = { // area:arrcs.area,
@@ -93,7 +90,12 @@ function Planning_a_trip(arrcs, arrsites, tripid) {
             constrainsoftrip: consrains
         }
         try {
-            const res = await axios.update("http://localhost:4000/trip/{tripid}", { trip });
+            let config = {
+                headers: {
+                  'Authorization': 'Bearer ' + localStorage.getItem("token")
+                }
+            }    
+            const res = await axios.update('http://localhost:4000/trip/${tripid}', { trip },config);
             res.data.forEach(element => matcessites.push(element));
             <FinallTrip trip={res}></FinallTrip>
         } catch (err) {
@@ -101,12 +103,37 @@ function Planning_a_trip(arrcs, arrsites, tripid) {
         }
     }
     return <>
-        {matcessites.map((e) => <button onClick={(e) => { ShowSiteDetails }} key={e.id}>{e}</button>)}
+        {/* {matcessites.map((e) => <button onClick={(e) => { ShowSiteDetails }} key={e.id}>{e}</button>)} */}
         <div>hello </div>
-        {/* <button onClick={() => { addsite }}></button>
-        <button onClick={() => { ReduceSite }}></button>
-        <button onClick={() => { finish }}></button> */}
-        <button onClick={() => { update }}></button>
+
+        <div>
+
+            <label>
+
+            <select  onChange={(e)=>setcorrentitem(e.target.value)} >
+        <option>-select--</option>
+        {matcessites?.map((e)=>{
+            return <option  value={e.id} >{e.name}</option>
+        })}
+    </select>
+
+                
+
+            </label>
+
+           
+
+        </div>
+        <button onClick={addsite}></button>
+        <button onClick={ReduceSite}></button>
+        <button onClick={finish}></button>
+        <button onClick={update}></button>
+        <button onClick={form}></button>
     </>
 }
 export default Planning_a_trip;
+{/* <option value="fruit">Fruit</option>
+
+         <option value="vegetable">Vegetable</option>
+
+         <option value="meat">Meat</option> */}
