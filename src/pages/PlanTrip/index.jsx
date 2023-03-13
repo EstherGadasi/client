@@ -1,10 +1,10 @@
-import { dblClick } from "@testing-library/user-event/dist/click"
+//import { dblClick } from "@testing-library/user-event/dist/click"
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import FinallTrip from "../FinallTrip";
-import Show from "../showdetails";
+//import Show from "../showdetails";
 import ConstrainsC from "../allconstrains/c";
 import SearchParameters from "./SearchParameters";
 import TripsOptions from "./TripsOPtions";

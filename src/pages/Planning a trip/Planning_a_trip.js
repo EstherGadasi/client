@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import FinallTrip from "../FinallTrip";
-import Show from "../showdetails";
+//import Show from "../showdetails";
 import ConstrainsC from "../allconstrains/c";
 
 function Planning_a_trip({arrcs, arrsites, tripid}) {

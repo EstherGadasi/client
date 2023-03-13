@@ -12,7 +12,7 @@ function Trip(props) {
             <div className="site">
              <span>ahdgyfdguy</span>    
          {props.trip?.map((e)=>{
-            <div> {e.begin_point1?e.begin_point1:<></>}    {e.begin_point2?e.begin_point2:<></>}  {e.end_point1?e.end_point1:<></>}  {e.end_point2?e.end_point2:<></>} {e.area?e.area:<></>} 
+           return <div> {e.begin_point1?e.begin_point1:<></>}    {e.begin_point2?e.begin_point2:<></>}  {e.end_point1?e.end_point1:<></>}  {e.end_point2?e.end_point2:<></>} {e.area?e.area:<></>} 
             {e.sites?.map((site)=> <Siteshow name={site.name}/>)}
             </div>
          })}
