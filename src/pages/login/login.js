@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Personal_area from '../Personal_area/Personal_area'
+import Personal_area from '../Personal area/Personal_area'
 import {BrowserRouter as Router, Routes, Route, Link, NavLink} from 'react-router-dom'
 ;
 function Login(){

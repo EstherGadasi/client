@@ -4,18 +4,19 @@ import FinallTrip from "../FinallTrip/FinallTrip";
 import Show from "../showdetails";
 import ConstrainsC from "../allconstrains/c";
 
-function Planning_a_trip(arrcs, arrsites, tripid) {
+function Planning_a_trip({arrcs, arrsites, tripid}) {
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
-    const consrains = {
-        num_of_turist: arrcs.num_of_turist,
-        ages: arrcs.ages,
-        children: arrcs.children,
-        bicycles: arrcs.bicycles,
-        tripsKind: arrcs.tripsKind,
-        description: arrcs.description,
-        trufic: arrcs.trufic,
-        area: arrcs.area
+    const constrains = {
+        num_of_turist: arrcs[5],
+        ages: arrcs[0],
+        children: arrcs[1],
+        bicycles: arrcs[2],
+        tripsKind: arrcs[6],
+        description: arrcs[7],
+        trufic: arrcs[4],
+        area: arrcs[3],
+        payment: arrcs[8]
     }
 
 
@@ -23,14 +24,15 @@ function Planning_a_trip(arrcs, arrsites, tripid) {
     const[correntitem,setcorrentitem]= useState("")
     const [username, setuserName] = useState("")
     const [err, setErr] = useState(null);
-    let matcessites = []
-    let newsites = []
+   const [matchesites,setmatchesites]=useState([])
+   let newsites=[]
     useEffect(() => {
         console.log("we")
-        const GetMatchesSites = async () => {
+        const GetMatchesSites = async () => {//ages,children,bicycles,area,trufic,num_of_turist,tripsKind,description,payment
             try {
-                const res = await axios.get("http://localhost:4000/site", consrains);//the url not excat
-                res.data.forEach(element => matcessites.push(element));
+                const res = await axios.get("http://localhost:4000/site/constrains", {constrains});//the url not excat
+                res.data.forEach(element => setmatchesites([...matchesites,element]));
+                console.log(res)
             } catch (err) {
                 // setErr(err.response.data?.message);
             }
@@ -64,12 +66,12 @@ function Planning_a_trip(arrcs, arrsites, tripid) {
                 end_point2: 4,
                 date: date,
                 listofsites: sites,
-                constrainsoftrip: consrains
+                constrainsoftrip: constrains
             }
 
 
             const res = await axios.post("http://localhost:4000/trip", { trip });//the url not excat
-            res.data.forEach(element => matcessites.push(element));
+           
             <FinallTrip trip={res}></FinallTrip>
         } catch (err) {
             // setErr(err.response.data?.message);
@@ -87,7 +89,7 @@ function Planning_a_trip(arrcs, arrsites, tripid) {
             end_point2: 4,
             date: date,
             listofsites: sites,
-            constrainsoftrip: consrains
+            constrainsoftrip: constrains
         }
         try {
             let config = {
@@ -95,8 +97,8 @@ function Planning_a_trip(arrcs, arrsites, tripid) {
                   'Authorization': 'Bearer ' + localStorage.getItem("token")
                 }
             }    
-            const res = await axios.update('http://localhost:4000/trip/${tripid}', { trip },config);
-            res.data.forEach(element => matcessites.push(element));
+            const res = await axios.update(`http://localhost:4000/trip/${tripid}`, { trip },config);
+            res.data.forEach(element => setmatchesites([...matchesites,element]));
             <FinallTrip trip={res}></FinallTrip>
         } catch (err) {
             // setErr(err.response.data?.message);
@@ -110,12 +112,11 @@ function Planning_a_trip(arrcs, arrsites, tripid) {
 
             <label>
 
-            <select  onChange={(e)=>setcorrentitem(e.target.value)} >
-        <option>-select--</option>
-        {matcessites?.map((e)=>{
-            return <option  value={e.id} >{e.name}</option>
+           
+        {matchesites?.map((e)=>{
+            return <div onChange={(e)=>setcorrentitem(e.target.value)} value={e.id} >{e.idsite}</div>
         })}
-    </select>
+   
 
                 
 
@@ -124,11 +125,11 @@ function Planning_a_trip(arrcs, arrsites, tripid) {
            
 
         </div>
-        <button onClick={addsite}></button>
-        <button onClick={ReduceSite}></button>
-        <button onClick={finish}></button>
-        <button onClick={update}></button>
-        <button onClick={form}></button>
+        <button onClick={addsite}>addsite</button>
+        <button onClick={ReduceSite}>ReduceSite</button>
+        <button onClick={finish}>finish</button>
+        <button onClick={update}>update</button>
+        <button onClick={form}>form</button>
     </>
 }
 export default Planning_a_trip;

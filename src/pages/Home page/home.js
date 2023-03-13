@@ -1,4 +1,5 @@
-
+import Opinion from "../../components/Opinion/opinion";
+import Site from "../../components/site/site";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 export const Home = () => {
@@ -10,7 +11,7 @@ export const Home = () => {
     const GetBestOpinions = async () => {
       try {
       
-        const resopinion = await axios.get("http://localhost:4000/opinion");
+        const resopinion = await axios.get("http://localhost:4000/generalopinion");
         // res.data.forEach(element => matcessites.push(element));
         console.log(resopinion.data)
         setOpinions(resopinion.data)
@@ -25,6 +26,8 @@ export const Home = () => {
         // res.data.forEach(element => matcessites.push(element));
         console.log(ressites.data)
         setBestSites(ressites.data)
+       
+
       } catch (err) {
         // setErr(err.response.data?.message);
       }
@@ -47,12 +50,12 @@ export const Home = () => {
 
   return (<>
     <div>Hello </div>
-    {images?.map((e) => <div key={e.idimages}>{e.idimages}</div>)}
-    {Opinions?.map((e) => <div key={e.userid}>opinions{e.userid}</div>)}
-    {BestSites?.map((e) => <div key={e.idsite}>sites{e.idsite}</div>)}
+    {images?.map((e) => <span key={e.idimages}>{e.url}  </span>)}
+    {Opinions?.map((e) => <Opinion  opinion={e.opinion} level={e.level}></Opinion>)}
+    {BestSites?.map((e) => <Site id={e[0].idsites} name={e[0].name} num_of_turist={e[0].num_of_turist}ages={e[0].ages} children={e[0].children}address={e.address}accible={e[0].accible} ></Site>)}
      
   </>
   )
 }
-export default Home;
+export default Home; 
 

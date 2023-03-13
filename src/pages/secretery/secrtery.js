@@ -14,6 +14,7 @@ const Secrtery = () => {
     const [place1, setplace1] = useState("")
     const [place2, setplace2] = useState("")
     const [url, seturl] = useState("")
+    const [name, setname] = useState("")
     const [constrainsId, setconstrainsId] = useState("")
     const [err, setErr] = useState(null);
     const navigate = useNavigate()
@@ -41,7 +42,7 @@ const Secrtery = () => {
   
     const handleAddSite = async (e) => {
         try {
-            const res = await axios.post("http://localhost:4000/site", {  num_of_turist, ages, children, discription, time_it_takes, accible, place1, place2, address ,url});
+            const res = await axios.post("http://localhost:4000/site", { name, num_of_turist, ages, children, discription, time_it_takes, accible, place1, place2, address ,url});
             // navigate("/login")
             console.log(res.data)
         } catch (err) {
@@ -76,6 +77,12 @@ const Secrtery = () => {
                     placeholder="num_of_turist"
                     name="num_of_turist"
                     onChange={(e) => setnum_of_turist(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="name"
+                    name="name"
+                    onChange={(e) => setname(e.target.value)}
                 />
                 <input
                     type="text"
