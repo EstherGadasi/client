@@ -1,6 +1,6 @@
 import { dblClick } from "@testing-library/user-event/dist/click"
 import React, { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import FinallTrip from "../FinallTrip";
@@ -11,7 +11,7 @@ import TripsOptions from "./TripsOPtions";
 import TripSettings from "./TripSettings";
 import Save from "./Save";
 function Planning_a_trip({ arrcs, arrsites, tripid }) {
-
+const navigate=useNavigate()
 
     //     const [sites, setsites] = useState(arrsites)
     //     const[correntitem,setcorrentitem]= useState("")
@@ -19,6 +19,7 @@ function Planning_a_trip({ arrcs, arrsites, tripid }) {
     //     const [err, setErr] = useState(null);
     //    const [matchesites,setmatchesites]=useState([])
     //    let newsites=[]
+    const [constrains, setconstrains] = useState([])
     const [tripsOptions, setTripsOptions] = useState([])
     const [selectOption, setSelectedOption] = useState([])
     const [TripSettings, setTripSettings] = useState([])
@@ -51,14 +52,13 @@ function Planning_a_trip({ arrcs, arrsites, tripid }) {
                 })} */}
 
 
-                <SearchParameters setTripsOptions />
-                <TripsOptions tripsOptions />
-                <TripSettings TripSettings />
+                <SearchParameters setTripsOptions={setTripsOptions} setconstrains={setconstrains}/>
+                {/* <TripsOptions tripsOptions={tripsOptions} />
+                <TripSettings TripSettings={TripSettings} />
 
                 <Save setTrip>Save Trip</Save>
-                <FinallTrip trip={trip}></FinallTrip>
-                1
-                2 navigate ("/FinallTrip")
+                <FinallTrip trip={trip} sites={selectOption}  constrains={constrains}></FinallTrip> */}
+                {navigate ("/FinallTrip")}
 
             </label>
 

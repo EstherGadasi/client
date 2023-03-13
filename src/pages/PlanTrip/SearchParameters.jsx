@@ -1,6 +1,6 @@
 import React , { useEffect, useState } from "react";
 import axios from "axios";
-function SearchParameters(setTripsOptions) {
+function SearchParameters(setTripsOptions,setconstrains) {
     const [ages, setages] = useState("")
     const [children, setchildren] = useState("")
     const [bicycles, setbicycles] = useState("");
@@ -12,11 +12,12 @@ function SearchParameters(setTripsOptions) {
     const [trufic, settrufic] = useState("")
     const [currPage, setCurrPage] = useState(2)
     const [payment, setpayment] = useState("")
-    const [arrcs, setarrcs] = useState("")
+    const [arrcs, setarrcs] = useState([])
     // let arrcs=[];
 
     async function bringmatchessites() {
-        setarrcs([...arrcs, ages, children, bicycles, area, trufic, num_of_turist, tripsKind, description, payment]);
+        setarrcs([...arrcs, ages]);
+        // setconstrains(arrcs), children, bicycles, area, trufic, num_of_turist, tripsKind, description, payment
         setCurrPage(3)
     
 
@@ -35,8 +36,8 @@ function SearchParameters(setTripsOptions) {
             }
         
             try {
-                const res = await axios.get("http://localhost:4000/site/constrains", { constrains });//the url not excat
-                setTripsOptions(res.data)
+                const res = await axios.post("http://localhost:4000/site/constrains", { constrains });//the url not excat
+                // setTripsOptions(res.data)
                 console.log(res)
             } catch (err) {
                 // setErr(err.response.data?.message);
@@ -47,7 +48,7 @@ function SearchParameters(setTripsOptions) {
 }
     return <>
 
-        <button onClick={bringmatchessites}>continues</button><br></br>
+        <button onClick={bringmatchessites}>bringmatchessites</button><br></br>
 
         <input type={"text"} placeholder="ages" onChange={(e) => { setages(e.target.value) }}></input><br></br>
         <input type={"text"} placeholder="bicycles" onChange={(e) => { setbicycles(e.target.value) }}></input><br></br>

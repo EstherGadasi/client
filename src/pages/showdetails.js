@@ -4,4 +4,4 @@ return <>
 {res.map((e)=>{<div>{e}</div>})}
 </>
 }
-export default Show;
+export default Show;cccccccc

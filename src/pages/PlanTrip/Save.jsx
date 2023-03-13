@@ -3,7 +3,7 @@ import React , { useEffect, useState } from "react";
 
 import axios from "axios";
 
-async function Save() {
+async function Save(setTrip,sites,constrains) {
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
     try {
@@ -20,7 +20,7 @@ async function Save() {
 
 
         const res = await axios.post("http://localhost:4000/trip", { trip });//the url not excat
-       
+        setTrip(res)
        
     } catch (err) {
         // setErr(err.response.data?.message);
