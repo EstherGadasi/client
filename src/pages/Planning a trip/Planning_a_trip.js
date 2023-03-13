@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import FinallTrip from "../FinallTrip/FinallTrip";
+import FinallTrip from "../FinallTrip";
 import Show from "../showdetails";
 import ConstrainsC from "../allconstrains/c";
 

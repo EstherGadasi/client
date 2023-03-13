@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ConstrainsA from "./a";
+
 import ConstrainsC from "./c";
 function ConstrainsB({arrcs}) {
 
