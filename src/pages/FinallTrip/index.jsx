@@ -1,17 +1,25 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Trip from "../../components/trip/trip";
 
 
+async function FinallTrip(id) {
+const[trip,settrip]=useState({})
+    try {
+         // area:arrcs.area,
 
-function FinallTrip(res) {
-
-    
+        const trip = await axios.get(`http://localhost:4000/trip${id}`);//the url not excat
+        settrip(trip.data)
+       
+    } catch (err) {
+        // setErr(err.response.data?.message);
+    }
 
    
    
     return <>
-         {res.map((e) => <div>{e}</div>)}
-        <div>hello </div>
+         <Trip trip={trip}/>
+       
         
     </>
 }

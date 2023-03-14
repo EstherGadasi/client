@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import React from "react";
 
-function Site({idsites,name,num_of_turist,ages,children,address,accible}) {
+function Site({e,idsites,name,num_of_turist,ages,children,address,accible,setcorrentitem}) {
     
 
 
@@ -9,10 +9,12 @@ function Site({idsites,name,num_of_turist,ages,children,address,accible}) {
       
   return (
     <>
-    <div className="new-book">
+    <div className="new-book" >
+      {/* onClick={(e)=>{setcorrentitem(e.target.innerText)}} */}
         
-  <span>{name}</span> <span>{num_of_turist}</span>  <span>{ages} </span> <span>{children}</span><span>{address}</span><span>{accible}</span>
-        
+      idsites:{idsites} name: {name} num_of_turist:{num_of_turist}
+       {/* {ages} {children} {address} {accible} */}
+       
     
     </div>
    

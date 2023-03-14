@@ -6,8 +6,12 @@ import Register from './pages/register/register'
 //import Sitefrom  from './pages/sites/site';
 import FinallTrip from './pages/FinallTrip';
 import Secrtery from './pages/secretery/secrtery';
-import Personal_area from './pages/Personal area/Personal_area'
+
+
 import Planning_a_trip from './pages/PlanTrip';
+
+import Personal_area from './pages/Personal_area/Personal_area'
+
 function App() {
   return (
     <div className="App">
@@ -16,7 +20,7 @@ function App() {
     <NavLink to='/'>Home</NavLink><br></br>
     <NavLink to='/login'>login</NavLink><br></br>
     <NavLink to='/register'>register</NavLink><br></br>
-    {/* <NavLink to='/Personal_area'>Personal_area</NavLink><br></br> */}
+    <NavLink to='/index'>index</NavLink><br></br>
     {/* <NavLink to='/Personal_area'>Personal area</NavLink><br></br> */}
     <NavLink to='/secrtery'>Secrtery</NavLink>
     {/* <NavLink to='/ConstrainsA'>ConstrainsA</NavLink><br></br> */}
@@ -25,6 +29,7 @@ function App() {
     <Route path='/' element={<Home />} />
     <Route path='/login' element={<Login />} />
     <Route path='/register' element={<Register />} />
+    <Route path='/index' element={<Planning_a_trip />} />
     
     {/* <Route path='/secrtery' element={<Secrtery/>} /> */}
     <Route path='*' element={<h1> 404 Page not found</h1>} />
