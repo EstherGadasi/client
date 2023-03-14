@@ -22,10 +22,7 @@ function Login(){
       const res = await axios.post("http://localhost:4000/api/auth/login",  { username, password});
       console.log(res.data)
       localStorage.setItem("token", JSON.stringify(res.data));
-<<<<<<< HEAD:src/pages/login/login.js
 
-      navigate("/Personal_area")
-=======
       debugger;
       navigate("/Personal_area",{replace:false})
 >>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c:src/pages/login/index.js

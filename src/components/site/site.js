@@ -16,14 +16,7 @@ function Site({e,idsites,name,num_of_turist,ages,children,address,accible,setcor
       
   return (
     <>
-<<<<<<< HEAD
-    <div className="new-book" >
-      {/* onClick={(e)=>{setcorrentitem(e.target.innerText)}} */}
-        
-      idsites:{idsites} name: {name} num_of_turist:{num_of_turist}
-       {/* {ages} {children} {address} {accible} */}
-       
-=======
+
     <div className="new-book">
         
   <span>{name}</span> <span>{num_of_turist}</span>  <span>{ages} </span> <span>{children}</span><span>{address}</span><span>{accible}</span>
