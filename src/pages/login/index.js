@@ -25,7 +25,7 @@ function Login(){
 
       debugger;
       navigate("/Personal_area",{replace:false})
->>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c:src/pages/login/index.js
+
     //   <Router>
     //   <nav className='main-nav'>
         
@@ -38,12 +38,9 @@ function Login(){
     // </Router>
 
 // <<<<<<< HEAD
-<<<<<<< HEAD:src/pages/login/login.js
-        navigate("/index")
-=======
-      //  navigate("/index")
->>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c:src/pages/login/index.js
-// =======
+
+     //   navigate("/index")
+
 //       // navigate("/Personal area/Personal_area")
 //       <Router>
 //       <nav className='main-nav'>

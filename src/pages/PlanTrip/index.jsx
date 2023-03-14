@@ -11,22 +11,20 @@ import TripsOptions from "./TripsOPtions";
 import TripSettings from "./TripSettings";
 import Save from "./Save";
 function Planning_a_trip({ arrcs, arrsites, tripid }) {
-<<<<<<< HEAD
+
     const navigate = useNavigate()
-=======
-const navigate=useNavigate()
->>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c
+
 
     //     const [sites, setsites] = useState(arrsites)
     const [correntitem, setcorrentitem] = useState({})
     //     const [username, setuserName] = useState("")
     //     const [err, setErr] = useState(null);
     //    const [matchesites,setmatchesites]=useState([])
-<<<<<<< HEAD
+
     let newsites = []
-=======
+
     //    let newsites=[]
->>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c
+
     const [constrains, setconstrains] = useState([])
     const [tripsOptions, setTripsOptions] = useState([])
     const [selectOption, setSelectedOption] = useState([])
@@ -66,22 +64,22 @@ let i=-1;
                 })} */}
 
 
-<<<<<<< HEAD
+
                 <SearchParameters setTripsOptions={setTripsOptions} setconstrains={setconstrains} />
                 <TripsOptions tripsOptions={tripsOptions} setcorrentitem={setcorrentitem} i={i} />
                 {/* <TripSettings TripSettings={selectOption} setbegin_point1={setbegin_point1} setbegin_point2={setbegin_point2} setend_point1={setend_point1} setend_point2={setend_point2}/> */}
                 <button onClick={save}>save</button>
 
                 {/* {navigate ("/FinallTrip${tripid}")}  */}
-=======
-                <SearchParameters setTripsOptions={setTripsOptions} setconstrains={setconstrains}/>
+
+                
                 {/* <TripsOptions tripsOptions={tripsOptions} />
                 <TripSettings TripSettings={TripSettings} />
 
                 <Save setTrip>Save Trip</Save>
                 <FinallTrip trip={trip} sites={selectOption}  constrains={constrains}></FinallTrip> */}
-                {navigate ("/FinallTrip")}
->>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c
+                {/* {navigate ("/FinallTrip")} */}
+
 
             </label>
 

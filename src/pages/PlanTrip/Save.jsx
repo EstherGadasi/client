@@ -3,11 +3,10 @@ import React , { useEffect, useState } from "react";
 
 import axios from "axios";
 
-<<<<<<< HEAD
+
 async function Save({setTrip,selectOption,constrains, begin_point1, begin_point2,end_point1,end_point2}) {
-=======
-async function Save(setTrip,sites,constrains) {
->>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c
+
+
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
     try {
@@ -24,11 +23,9 @@ async function Save(setTrip,sites,constrains) {
 
 
         const res = await axios.post("http://localhost:4000/trip", { trip });//the url not excat
-<<<<<<< HEAD
+
         setTrip(res.data.tripid)
-=======
-        setTrip(res)
->>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c
+
        
     } catch (err) {
         // setErr(err.response.data?.message);

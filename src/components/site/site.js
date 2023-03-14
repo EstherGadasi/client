@@ -40,7 +40,7 @@ function Site({e,idsites,name,num_of_turist,ages,children,address,accible,setcor
         <Button size="small">Learn More</Button>
       </CardActions>
     </Card> */}
->>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c
+
     
     </div>
    

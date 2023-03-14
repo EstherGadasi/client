@@ -1,10 +1,8 @@
 import React , { useEffect, useState } from "react";
 import axios from "axios";
-<<<<<<< HEAD
+
 function SearchParameters({setTripsOptions,setconstrains}) {
-=======
-function SearchParameters(setTripsOptions,setconstrains) {
->>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c
+
     const [ages, setages] = useState("")
     const [children, setchildren] = useState("")
     const [bicycles, setbicycles] = useState("");
@@ -20,13 +18,10 @@ function SearchParameters(setTripsOptions,setconstrains) {
     // let arrcs=[];
 
     async function bringmatchessites() {
-<<<<<<< HEAD
+
         setarrcs([...arrcs, ages, children, bicycles, area, trufic, num_of_turist, tripsKind, description, payment]);
         // setconstrains(arrcs)
-=======
-        setarrcs([...arrcs, ages]);
-        // setconstrains(arrcs), children, bicycles, area, trufic, num_of_turist, tripsKind, description, payment
->>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c
+
         setCurrPage(3)
     
 
@@ -56,14 +51,12 @@ function SearchParameters(setTripsOptions,setconstrains) {
             }
         setconstrains(constrains)
             try {
-<<<<<<< HEAD
+
                 const res = await axios.post("http://localhost:4000/site/constrains",  constrains );//the url not excat
                 
                setTripsOptions([res.data])
-=======
-                const res = await axios.post("http://localhost:4000/site/constrains", { constrains });//the url not excat
-                // setTripsOptions(res.data)
->>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c
+
+
                 console.log(res)
             } catch (err) {
                 // setErr(err.response.data?.message);
