@@ -42,7 +42,7 @@ function Login(){
 
      //   navigate("/index")
 
->>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
+
 //       // navigate("/Personal area/Personal_area")
 //       <Router>
 //       <nav className='main-nav'>

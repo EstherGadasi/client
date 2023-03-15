@@ -4,15 +4,16 @@ import axios from "axios";
 function SearchParameters({setTripsOptions,setconstrains}) {
 
 
+
     const [ages, setages] = useState("")
     const [children, setchildren] = useState("")
     const [bicycles, setbicycles] = useState("");
 
     const [num_of_turist, setnum_of_turist] = useState("")
-    const [tripsKind, settripsKind] = useState("")
+    const [tripstype, settripsKind] = useState("")
     const [description, setdescription] = useState("");
     const [area, setarea] = useState("")
-    const [trufic, settrufic] = useState("")
+    const [truffic, settrufic] = useState("")
     const [currPage, setCurrPage] = useState(2)
     const [payment, setpayment] = useState("")
     const [arrcs, setarrcs] = useState([])
@@ -20,20 +21,13 @@ function SearchParameters({setTripsOptions,setconstrains}) {
 
     async function bringmatchessites() {
 
-<<<<<<< HEAD
-        setarrcs([ ages, children, bicycles, area, trufic, num_of_turist, tripsKind, description, payment]);
+        setarrcs([ ages, children, bicycles, area, truffic, num_of_turist, tripstype, description, payment]);
         // setconstrains(arrcs)
 
        
         // setconstrains(arrcs), children, bicycles, area, trufic, num_of_turist, tripsKind, description, payment
 
        
-=======
-        setarrcs([...arrcs, ages, children, bicycles, area, trufic, num_of_turist, tripsKind, description, payment]);
-        // setconstrains(arrcs)
-
-        setCurrPage(3)
->>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
     
 
    
@@ -52,9 +46,9 @@ function SearchParameters({setTripsOptions,setconstrains}) {
                 ages: " ",
                 children: " ",
                 bicycles: " ",
-                tripsKind: " ",
+                tripstype: " ",
                 description: " ",
-                trufic: " ",
+                truffic: " ",
                 area: " ",
                 payment: " ",
                 time_it_takes:" "
@@ -65,15 +59,11 @@ function SearchParameters({setTripsOptions,setconstrains}) {
 
                 const res = await axios.post("http://localhost:4000/site/constrains",  constrains );//the url not excat
                 
-<<<<<<< HEAD
                setTripsOptions(res.data)
 
                
                 // setTripsOptions(res.data)
  
-=======
-               setTripsOptions([res.data])
-
                 console.log(res)
             } catch (err) {
                 // setErr(err.response.data?.message);
@@ -90,10 +80,10 @@ function SearchParameters({setTripsOptions,setconstrains}) {
         <input type={"text"} placeholder="bicycles" onChange={(e) => { setbicycles(e.target.value) }}></input><br></br>
         <input type={"text"} placeholder="children" onChange={(e) => { setchildren(e.target.value) }}></input><br></br>
         <input type={"text"} placeholder="num_of_turist" onChange={(e) => { setnum_of_turist(e.target.value) }}></input><br></br>
-        <input type={"text"} placeholder="tripsKind" onChange={(e) => { settripsKind(e.target.value) }}></input><br></br>
+        <input type={"text"} placeholder="tripstype" onChange={(e) => { settripsKind(e.target.value) }}></input><br></br>
         <input type={"text"} placeholder="description" onChange={(e) => { setdescription(e.target.value) }}></input><br></br>
         <input type={"text"} placeholder="area" onChange={(e) => { setarea(e.target.value) }}></input><br></br>
-        <input type={"text"} placeholder="trufic" onChange={(e) => { settrufic(e.target.value) }}></input><br></br>
+        <input type={"text"} placeholder="truffic" onChange={(e) => { settrufic(e.target.value) }}></input><br></br>
 
         <input type={"text"} placeholder="payment" onChange={(e) => { setpayment(e.target.value) }}></input><br></br>
     </>
