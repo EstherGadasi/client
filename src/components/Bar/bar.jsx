@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {BrowserRouter as Router, Routes, Route, Link, NavLink} from 'react-router-dom'; 
@@ -56,10 +56,20 @@ const secrtery=()=>{
  
   navigate("../secrtery",{replace:false})
 }
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#1976d2',
+    },
+  },
+});
   return (
     <div className={classes.root}>
+    
       <AppBar position="static">
-        <Toolbar>
+      
+        <Toolbar >
           <Button onClick={home} color="inherit">Home</Button>
           <Button onClick={planTrip} color="inherit">Planing Trip</Button>
           <Button onClick={login} color="inherit">Login</Button>
@@ -67,7 +77,10 @@ const secrtery=()=>{
           <Button onClick={personal_area} color="inherit">Personal  area</Button>
           <Button onClick={secrtery} color="inherit">Secrtery</Button>
         </Toolbar>
+
+
       </AppBar>
+      
     </div>
   );
 }
