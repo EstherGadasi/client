@@ -23,8 +23,12 @@ function Login(){
       console.log(res.data)
       localStorage.setItem("token", JSON.stringify(res.data));
 
+<<<<<<< HEAD
       
       
+=======
+      debugger;
+>>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
       navigate("/Personal_area",{replace:false})
 
     //   <Router>
@@ -40,10 +44,15 @@ function Login(){
 
 // <<<<<<< HEAD
 
+<<<<<<< HEAD
 
       //  navigate("/index")
 
 // =======
+=======
+     //   navigate("/index")
+
+>>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
 //       // navigate("/Personal area/Personal_area")
 //       <Router>
 //       <nav className='main-nav'>

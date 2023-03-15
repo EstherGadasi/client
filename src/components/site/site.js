@@ -1,5 +1,9 @@
 //import React, { useEffect, useState } from "react";
+
 // import React from "react";
+
+//import React from "react";
+
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -16,6 +20,7 @@ function Site({e, setcorrentitem}) {
       
   return (
     <>
+
     <div className="new-book"  onClick={(e)=>{setcorrentitem(JSON.stringify(e.currentTarget.textContent ))}} >
 <Card sx={{ maxWidth: 300 }}>
       <CardMedia
@@ -39,32 +44,16 @@ function Site({e, setcorrentitem}) {
     
      
         
-     
   
-  {/* <Card sx={{ maxWidth: 345 }}>
-      <CardMedian
-        sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
-        title="green iguana"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card> */}
 
-    
+     
    
     </div>
+
+   
+
+    
+
    
         
     </>
