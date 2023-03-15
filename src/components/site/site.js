@@ -7,22 +7,24 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { json } from 'react-router-dom';
 
-function Site({e, setcorrentitem}) {
-    // {e,idsites,name,num_of_turist,ages,children,address,accible,setcorrentitem}
+function Site({e,addsite,RemoveSite}) {
+    // {e,idsites,name,num_of_turist,ages,children,address,accible,setcorrentitem} onClick={(e)=>{setcorrentitem((e) )}}
 
 
 
       
   return (
     <>
-    <div className="new-book"  onClick={(e)=>{setcorrentitem(JSON.parse(`{${e.currentTarget.textContent}}`))}} >
+    <span className="new-book"  >
 <Card sx={{ maxWidth: 300 }}>
       <CardMedia
         sx={{ height: 100 }}
         image="/static/images/cards/contemplative-reptile.jpg"
         title="green iguana"
       />
+      "name":{e.name}
       <CardContent> 
         <Typography gutterBottom variant="h5" component="div">
         {/* site :{e.name}  */}
@@ -32,8 +34,8 @@ function Site({e, setcorrentitem}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Add</Button>
-        <Button size="small">Remove</Button>
+     { addsite?  <Button size="small"  onClick={() =>addsite(e)}>Add</Button>:<></>}
+      {  RemoveSite? <Button size="small" onClick={() =>RemoveSite(e)}>Remove</Button>:<></>}
       </CardActions>
     </Card>
     
@@ -41,7 +43,7 @@ function Site({e, setcorrentitem}) {
         
      
   
-  {/* <Card sx={{ maxWidth: 345 }}>
+  {/* <Card sx={{ maxWidth: 345 }}>onClick={(e)=>{setcorrentitem(JSON.parse(`{${e.target.textContent}}`))}}
       <CardMedian
         sx={{ height: 140 }}
         image="/static/images/cards/contemplative-reptile.jpg"
@@ -64,7 +66,7 @@ function Site({e, setcorrentitem}) {
 
     
    
-    </div>
+    </span>
    
         
     </>

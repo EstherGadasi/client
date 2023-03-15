@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState, navigate } from "react";
-import Planning_a_trip from "../Planning a trip/Planning_a_trip";
+import Planning_a_trip from "../PlanTrip";
 import { BrowserRouter as Router, Routes, Route, Link, NavLink } from 'react-router-dom'
-
+import { useNavigate } from "react-router-dom";
 import Trip from "../../components/trip/trip";
 function Personal_area() {
-
+const navigate=useNavigate()
     const [usertrip, setusertrip] = useState([])
     const [arrusertrip, setarrusertrip] = useState([])
     const [arrusersites, setarrusersites] = useState([])
@@ -22,9 +22,9 @@ function Personal_area() {
             }
             const res = await axios.get("http://localhost:4000/trip/1");
             setarrusertrip(res.data)
-            res.data.forEach(element => {
-                arr.push(element.sites)
-            });
+            // res.data.forEach(element => {
+            //     arr.push(element.sites)
+            // });
          setCurrPage(3)
             // setarrusersites(arr)
             console.log(res.data)
@@ -35,7 +35,7 @@ function Personal_area() {
     }
 
     async function plan_new_trip() {
-       
+        navigate('/PlanTrip')
     }
     async function updatetrip() {
         setstateold(true)
@@ -47,20 +47,9 @@ function Personal_area() {
 
 
 
-                {/* {arrusertrip?.map((trips) => {
-
-                    
-                    return <div key={trips.idtrips} >{trips.idtrips}
-                        {trips.sites?.map((site) => {
-
-                         return(    <div style={{color:"red"}}>
-                                {site.idsites}
-                            </div>)
-                            // return <div key={trips.idtrips} >{trips.idtrips}
-                            // </div>
-                        })}
-                    </div>
-                })} */}
+                {arrusertrip?.map((trip) => {return<Trip trip={trip}/>
+     
+                })}
 
                 {/* {trips?.sites.map((site)=>{
             
@@ -73,15 +62,15 @@ function Personal_area() {
          
         <button onClick={bringuser}>bring my trips</button>
 
-        <button onClick={()=>setCurrPage(1)}>plan_new_trip</button>
+        <button onClick={plan_new_trip}>plan_new_trip</button>
         {/* {currPage ===1 && <ConstrainsA />} */}
-        {currPage ===2 && <plan_new_trip />} 
+        
        {/* { arrusertrip.map((e)=>{ */}
-        {currPage ===3 && <Trip trip={arrusertrip}></Trip> } 
+        
        {/* })} */}
         {/* {ststenew && <ConstrainsA setCurrPage={setCurrPage}></ConstrainsA>} */}
-        <button onClick={()=>setCurrPage(2)}>updatetrip</button>
-        {ststeold && <Planning_a_trip arrcs={usertrip.constrainsoflist} arrsites={usertrip.listofsites} tripid={usertrip.idtrip}></Planning_a_trip>}
+        {/* <button onClick={()=>setCurrPage(2)}>updatetrip</button> */}
+      
     </>
 }
 export default Personal_area;

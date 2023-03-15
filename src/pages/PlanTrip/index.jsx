@@ -5,13 +5,18 @@ import axios from "axios";
 
 import FinallTrip from "../FinallTrip";
 //import Show from "../showdetails";
-import ConstrainsC from "../allconstrains/c";
+
 import SearchParameters from "./SearchParameters";
 import TripsOptions from "./TripsOPtions";
 import TripSettings from "./TripSettings";
 import Save from "./Save";
+
+
 import Site from "../../components/site/site";
+
 function Planning_a_trip({ arrcs, arrsites }) {
+
+
 
     const navigate = useNavigate()
 
@@ -22,11 +27,19 @@ function Planning_a_trip({ arrcs, arrsites }) {
     //     const [err, setErr] = useState(null);
     //    const [matchesites,setmatchesites]=useState([])
 
-    
+
+
 
     //    let newsites=[]
     const [correntitemReduce, setcorrentitemReduce] = useState({})
-    const [correntitemAdd, setcorrentitemAdd] = useState({})
+    const [correntitemAdd, setcorrentitemAdd] = useState()
+
+    let newsites = []
+
+    //    let newsites=[]
+
+
+
     const [constrains, setconstrains] = useState([])
     const [tripsOptions, setTripsOptions] = useState([])
     const [selectOption, setSelectedOption] = useState([])
@@ -37,30 +50,38 @@ function Planning_a_trip({ arrcs, arrsites }) {
     const [begin_point2, setbegin_point2] = useState("")
     const [end_point1, setend_point1] = useState("")
     const [end_point2, setend_point2] = useState("")
+    const[arrid,setarrid]=useState([])
 
-
-   
-    async function addsite() {
-
-        setSelectedOption([...selectOption, correntitemAdd])
-        
-    }
-    async function ReduceSite() {
-        var index = selectOption.indexOf(correntitemReduce)
-        setSelectedOption([[
-            ...selectOption.slice(0, index),
-            ...selectOption.slice(index + 1)
-          ]])
+let arrhelper=selectOption;
+let aaridhelper=arrid
+    async function addsite(e) {
        
-        console.log(correntitemReduce)
+        setSelectedOption([...selectOption, e])
+ console.log(selectOption)
+ setarrid([...arrid,e.idsites])
+    }
+    async function RemoveSite(e) {
+        //  const v=selectOption.pop(e)
+        arrhelper=arrhelper.pop(e)
+        setSelectedOption(
+           [arrhelper]
+            
+        )
+        aaridhelper=aaridhelper.pop(e.idsites)
+        setarrid(
+           [aaridhelper]
+            
+        )
+
+       
         console.log(selectOption)
         // newsites = selectOption.pop(correntitem)
         // setSelectedOption([...newsites])
     }
     async function save() {
         const current = new Date();
-    const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
-    
+        const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
+
         const trip = { // area:arrcs.area,
             userId: 1,
             begin_point1: begin_point1,
@@ -68,10 +89,11 @@ function Planning_a_trip({ arrcs, arrsites }) {
             end_point1: end_point1,
             end_point2: end_point2,
             date: date,
-            listofsites: selectOption,
+            listofsites: arrid,
             constrainsoftrip: constrains
         }
-  setTrip(trip)
+        console.log(trip)
+       setTrip(trip)
 
     }
 
@@ -92,19 +114,20 @@ function Planning_a_trip({ arrcs, arrsites }) {
 
 
                 <SearchParameters setTripsOptions={setTripsOptions} setconstrains={setconstrains} />
-                <TripsOptions tripsOptions={tripsOptions} setcorrentitem={setcorrentitemAdd} />
+                <TripsOptions tripsOptions={tripsOptions} setcorrentitem={setcorrentitemAdd} addsite={addsite} />
                 {selectOption?.map((e) => {
 
                     return <>
-                        <Site e={e} setcorrentitem={setcorrentitemReduce}></Site>
+                        <Site RemoveSite={RemoveSite} e={e} setcorrentitem={setcorrentitemReduce}></Site>
 
                     </>
                 })}
                 {/* <TripSettings TripSettings={selectOption} setbegin_point1={setbegin_point1} setbegin_point2={setbegin_point2} setend_point1={setend_point1} setend_point2={setend_point2}/> */}
                 <button onClick={save}>save</button>
-              {/* <Save  setTripid={setTripid}/> */}
-             { trip?  <Save trip={trip} setTripid={setTripid}/>:<></>}
+                {/* <Save  setTripid={setTripid}/> */}
+                {trip ? <Save trip={trip} setTripid={setTripid} /> : <></>}
                 {/* {navigate ("/FinallTrip${tripid}")}   trip={trip}*/}
+
 
 
                 {/* <TripsOptions tripsOptions={tripsOptions} />
@@ -114,13 +137,13 @@ function Planning_a_trip({ arrcs, arrsites }) {
                 <FinallTrip trip={trip} sites={selectOption}  constrains={constrains}></FinallTrip> */}
                 {/* {navigate ("/FinallTrip")} */}
 
+
             </label>
 
 
 
         </div>
-        <button onClick={addsite}>addsite</button>
-        <button onClick={ReduceSite}>ReduceSite</button>
+        
 
     </>
 }

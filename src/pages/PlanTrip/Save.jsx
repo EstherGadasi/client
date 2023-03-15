@@ -25,12 +25,18 @@ console.log("LK")
 
         const res = await axios.post("http://localhost:4000/trip", { trip });//the url not excat
 
+
         setTripid(res.data.tripid)
 
        
        
-    // } catch (err) {
+
+
+       
+       
+    //  catch (err) {
     //     // setErr(err.response.data?.message);
     // }
 }
-export default Save;
+ export default Save;
+

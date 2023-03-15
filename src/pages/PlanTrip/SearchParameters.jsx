@@ -21,13 +21,13 @@ function SearchParameters({setTripsOptions,setconstrains}) {
 
     async function bringmatchessites() {
 
-        setarrcs([ ages, children, bicycles, area, truffic, num_of_turist, tripstype, description, payment]);
+
+
+        setarrcs([...arrcs, ages, children, bicycles, area, truffic, num_of_turist, tripstype, description, payment]);
         // setconstrains(arrcs)
 
-       
-        // setconstrains(arrcs), children, bicycles, area, trufic, num_of_turist, tripsKind, description, payment
+        setCurrPage(3)
 
-       
     
 
    
@@ -59,11 +59,16 @@ function SearchParameters({setTripsOptions,setconstrains}) {
 
                 const res = await axios.post("http://localhost:4000/site/constrains",  constrains );//the url not excat
                 
+
                setTripsOptions(res.data)
 
                
                 // setTripsOptions(res.data)
  
+               
+
+
+
                 console.log(res)
             } catch (err) {
                 // setErr(err.response.data?.message);
