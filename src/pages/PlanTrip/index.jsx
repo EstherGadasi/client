@@ -10,12 +10,11 @@ import SearchParameters from "./SearchParameters";
 import TripsOptions from "./TripsOPtions";
 import TripSettings from "./TripSettings";
 import Save from "./Save";
-<<<<<<< HEAD
+
 import Site from "../../components/site/site";
-function Planning_a_trip({ arrcs, arrsites }) {
-=======
-function Planning_a_trip({ arrcs, arrsites, tripid }) {
->>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
+
+function Planning_a_trip({ arrcs, arrsites}) {
+
 
     const navigate = useNavigate()
 
@@ -26,18 +25,18 @@ function Planning_a_trip({ arrcs, arrsites, tripid }) {
     //     const [err, setErr] = useState(null);
     //    const [matchesites,setmatchesites]=useState([])
 
-<<<<<<< HEAD
+
     
 
     //    let newsites=[]
     const [correntitemReduce, setcorrentitemReduce] = useState({})
     const [correntitemAdd, setcorrentitemAdd] = useState({})
-=======
+
     let newsites = []
 
     //    let newsites=[]
 
->>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
+
     const [constrains, setconstrains] = useState([])
     const [tripsOptions, setTripsOptions] = useState([])
     const [selectOption, setSelectedOption] = useState([])
@@ -118,22 +117,19 @@ function Planning_a_trip({ arrcs, arrsites, tripid }) {
                 {/* {navigate ("/FinallTrip${tripid}")}   trip={trip}*/}
 
 
-<<<<<<< HEAD
-=======
+
                 {/* {navigate ("/FinallTrip${tripid}")}  */}
 
                 
->>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
+
                 {/* <TripsOptions tripsOptions={tripsOptions} />
                 <TripSettings TripSettings={TripSettings} />
 
                 <Save setTrip>Save Trip</Save>
                 <FinallTrip trip={trip} sites={selectOption}  constrains={constrains}></FinallTrip> */}
                 {/* {navigate ("/FinallTrip")} */}
-<<<<<<< HEAD
-=======
 
->>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
+
 
             </label>
 
