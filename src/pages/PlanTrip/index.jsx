@@ -11,7 +11,7 @@ import TripsOptions from "./TripsOPtions";
 import TripSettings from "./TripSettings";
 import Save from "./Save";
 function Planning_a_trip({ arrcs, arrsites, tripid }) {
-<<<<<<< HEAD
+
     const navigate = useNavigate()
 =======
 const navigate=useNavigate()
@@ -81,7 +81,6 @@ let i=-1;
                 <Save setTrip>Save Trip</Save>
                 <FinallTrip trip={trip} sites={selectOption}  constrains={constrains}></FinallTrip> */}
                 {navigate ("/FinallTrip")}
->>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c
 
             </label>
 
