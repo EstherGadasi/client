@@ -118,22 +118,13 @@ function Planning_a_trip({ arrcs, arrsites, tripid }) {
                 {/* {navigate ("/FinallTrip${tripid}")}   trip={trip}*/}
 
 
-<<<<<<< HEAD
-=======
-                {/* {navigate ("/FinallTrip${tripid}")}  */}
-
-                
->>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
                 {/* <TripsOptions tripsOptions={tripsOptions} />
                 <TripSettings TripSettings={TripSettings} />
 
                 <Save setTrip>Save Trip</Save>
                 <FinallTrip trip={trip} sites={selectOption}  constrains={constrains}></FinallTrip> */}
                 {/* {navigate ("/FinallTrip")} */}
-<<<<<<< HEAD
-=======
 
->>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
 
             </label>
 

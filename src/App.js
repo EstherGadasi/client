@@ -16,20 +16,12 @@ import Planning_a_trip from './pages/PlanTrip';
 
 import ButtonAppBar from './components/Bar/bar';
 
-=======
 
 
 
-import Planning_a_trip from './pages/PlanTrip';
 
 
 
-import ButtonAppBar from './components/Bar/bar';
-
-
-
-import Personal_area from './pages/Personal_area'
->>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
 
 
 function App() {
@@ -41,9 +33,6 @@ function App() {
 <<<<<<< HEAD
     <div className='nav'>
 
-    </div> 
-=======
->>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
   
 
  
@@ -63,11 +52,7 @@ function App() {
     <Route path='/PlanTrip' element={<Planning_a_trip />} />
     <Route path='/Personal_area' element={<Personal_area/>} />
     <Route path='/secrtery' element={<Secrtery/>} />
-<<<<<<< HEAD
- 
-=======
 
->>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
     <Route path='*' element={<h1> 404 Page not found</h1>} />
     
     {/* <Route path='/ConstrainsA' element={<ConstrainsA />} /> */}

@@ -3,11 +3,7 @@ import axios from "axios";
 
 function SearchParameters({setTripsOptions,setconstrains}) {
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
     const [ages, setages] = useState("")
     const [children, setchildren] = useState("")
     const [bicycles, setbicycles] = useState("");
@@ -78,8 +74,6 @@ function SearchParameters({setTripsOptions,setconstrains}) {
 =======
                setTripsOptions([res.data])
 
-
->>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
                 console.log(res)
             } catch (err) {
                 // setErr(err.response.data?.message);

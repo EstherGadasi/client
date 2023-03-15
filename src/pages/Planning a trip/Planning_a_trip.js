@@ -2,10 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import FinallTrip from "../FinallTrip";
 
-<<<<<<< HEAD
-// import Show from "../showdetails";
-=======
->>>>>>> 6f756724b2a6bbfc4e6c5d6166d5b08ed178abeb
 
 //import Show from "../showdetails";
 
