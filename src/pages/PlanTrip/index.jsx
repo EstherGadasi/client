@@ -10,45 +10,69 @@ import SearchParameters from "./SearchParameters";
 import TripsOptions from "./TripsOPtions";
 import TripSettings from "./TripSettings";
 import Save from "./Save";
-function Planning_a_trip({ arrcs, arrsites, tripid }) {
+import Site from "../../components/site/site";
+function Planning_a_trip({ arrcs, arrsites }) {
 
     const navigate = useNavigate()
-=======
-const navigate=useNavigate()
->>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c
+
 
     //     const [sites, setsites] = useState(arrsites)
-    const [correntitem, setcorrentitem] = useState({})
+
     //     const [username, setuserName] = useState("")
     //     const [err, setErr] = useState(null);
     //    const [matchesites,setmatchesites]=useState([])
-<<<<<<< HEAD
-    let newsites = []
-=======
+
+    
+
     //    let newsites=[]
->>>>>>> 9a4dcaee47d2b7caf949d89dfaa18d67b40c784c
+    const [correntitemReduce, setcorrentitemReduce] = useState({})
+    const [correntitemAdd, setcorrentitemAdd] = useState({})
     const [constrains, setconstrains] = useState([])
     const [tripsOptions, setTripsOptions] = useState([])
     const [selectOption, setSelectedOption] = useState([])
     const [TripSettings, setTripSettings] = useState([])
-    const [trip, setTrip] = useState({})
+    const [trip, setTrip] = useState()
+    const [tripid, setTripid] = useState({})
     const [begin_point1, setbegin_point1] = useState("")
     const [begin_point2, setbegin_point2] = useState("")
     const [end_point1, setend_point1] = useState("")
     const [end_point2, setend_point2] = useState("")
 
 
-let i=-1;
+   
     async function addsite() {
-        newsites = selectOption.push(correntitem)
-        setSelectedOption([...newsites])
+
+        setSelectedOption([...selectOption, correntitemAdd])
+        
     }
     async function ReduceSite() {
-        newsites = selectOption.pop(correntitem)
-        setSelectedOption([...newsites])
+        var index = selectOption.indexOf(correntitemReduce)
+        setSelectedOption([[
+            ...selectOption.slice(0, index),
+            ...selectOption.slice(index + 1)
+          ]])
+       
+        console.log(correntitemReduce)
+        console.log(selectOption)
+        // newsites = selectOption.pop(correntitem)
+        // setSelectedOption([...newsites])
     }
     async function save() {
-        <Save setTrip={setTrip} selectOption={selectOption} constrains={constrains} begin_point1={begin_point1} begin_point2={begin_point2} end_point1={end_point1} end_point2={end_point2}>Save Trip</Save>
+        const current = new Date();
+    const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
+    
+        const trip = { // area:arrcs.area,
+            userId: 1,
+            begin_point1: begin_point1,
+            begin_point2: begin_point2,
+            end_point1: end_point1,
+            end_point2: end_point2,
+            date: date,
+            listofsites: selectOption,
+            constrainsoftrip: constrains
+        }
+  setTrip(trip)
+
     }
 
 
@@ -66,21 +90,29 @@ let i=-1;
                 })} */}
 
 
-<<<<<<< HEAD
+
                 <SearchParameters setTripsOptions={setTripsOptions} setconstrains={setconstrains} />
-                <TripsOptions tripsOptions={tripsOptions} setcorrentitem={setcorrentitem} i={i} />
+                <TripsOptions tripsOptions={tripsOptions} setcorrentitem={setcorrentitemAdd} />
+                {selectOption?.map((e) => {
+
+                    return <>
+                        <Site e={e} setcorrentitem={setcorrentitemReduce}></Site>
+
+                    </>
+                })}
                 {/* <TripSettings TripSettings={selectOption} setbegin_point1={setbegin_point1} setbegin_point2={setbegin_point2} setend_point1={setend_point1} setend_point2={setend_point2}/> */}
                 <button onClick={save}>save</button>
+              {/* <Save  setTripid={setTripid}/> */}
+             { trip?  <Save trip={trip} setTripid={setTripid}/>:<></>}
+                {/* {navigate ("/FinallTrip${tripid}")}   trip={trip}*/}
 
-                {/* {navigate ("/FinallTrip${tripid}")}  */}
-=======
-                <SearchParameters setTripsOptions={setTripsOptions} setconstrains={setconstrains}/>
+
                 {/* <TripsOptions tripsOptions={tripsOptions} />
                 <TripSettings TripSettings={TripSettings} />
 
                 <Save setTrip>Save Trip</Save>
                 <FinallTrip trip={trip} sites={selectOption}  constrains={constrains}></FinallTrip> */}
-                {navigate ("/FinallTrip")}
+                {/* {navigate ("/FinallTrip")} */}
 
             </label>
 

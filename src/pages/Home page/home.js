@@ -52,7 +52,7 @@ export const Home = () => {
     <div>Hello </div>
     {images?.map((e) => <span key={e.idimages}>{e.url}  </span>)}
     {Opinions?.map((e) => <Opinion  opinion={e.opinion} level={e.level}></Opinion>)}
-    {BestSites?.map((e) => <Site id={e[0].idsites} name={e[0].name} num_of_turist={e[0].num_of_turist}ages={e[0].ages} children={e[0].children}address={e.address}accible={e[0].accible} ></Site>)}
+    {BestSites?.map((e) => <Site e={e} ></Site>)}
      
   </>
   )
