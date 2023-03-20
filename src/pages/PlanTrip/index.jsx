@@ -43,22 +43,25 @@ function Planning_a_trip({ arrcs, arrsites }) {
     const [constrains, setconstrains] = useState([])
     const [tripsOptions, setTripsOptions] = useState([])
     const [selectOption, setSelectedOption] = useState([])
-    const [TripSettings, setTripSettings] = useState([])
+    const [TripSetting, setTripSettings] = useState([])
     const [trip, setTrip] = useState()
-    const [tripid, setTripid] = useState({})
-    const [begin_point1, setbegin_point1] = useState("")
-    const [begin_point2, setbegin_point2] = useState("")
-    const [end_point1, setend_point1] = useState("")
-    const [end_point2, setend_point2] = useState("")
+    const [tripid, setTripid] = useState()
+    const [begin_point1, setbegin_point1] = useState(1)
+    const [begin_point2, setbegin_point2] = useState(1)
+    const [end_point1, setend_point1] = useState(2)
+    const [end_point2, setend_point2] = useState(3)
     const[arrid,setarrid]=useState([])
+    const[payment,setpayment]=useState(0)
 
 let arrhelper=selectOption;
 let aaridhelper=arrid
     async function addsite(e) {
        
         setSelectedOption([...selectOption, e])
- console.log(selectOption)
+//  console.log(selectOption)
+ console.log(arrid)
  setarrid([...arrid,e.idsites])
+
     }
     async function RemoveSite(e) {
         //  const v=selectOption.pop(e)
@@ -74,7 +77,7 @@ let aaridhelper=arrid
         )
 
        
-        console.log(selectOption)
+        
         // newsites = selectOption.pop(correntitem)
         // setSelectedOption([...newsites])
     }
@@ -82,18 +85,19 @@ let aaridhelper=arrid
         const current = new Date();
         const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
 
-        const trip = { // area:arrcs.area,
+        const theTrip = { // area:arrcs.area,
             userId: 1,
             begin_point1: begin_point1,
             begin_point2: begin_point2,
             end_point1: end_point1,
             end_point2: end_point2,
-            date: date,
+            payment:payment,
+            date: `"${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}"`,
             listofsites: arrid,
             constrainsoftrip: constrains
         }
-        console.log(trip)
-       setTrip(trip)
+        console.log(date);
+       setTrip(theTrip);
 
     }
 
@@ -122,13 +126,16 @@ let aaridhelper=arrid
 
                     </>
                 })}
-                {/* <TripSettings TripSettings={selectOption} setbegin_point1={setbegin_point1} setbegin_point2={setbegin_point2} setend_point1={setend_point1} setend_point2={setend_point2}/> */}
+                {/* <TripSettings /> */}
                 <button onClick={save}>save</button>
                 {/* <Save  setTripid={setTripid}/> */}
-                {trip ? <Save trip={trip} setTripid={setTripid} /> : <></>}
-                {/* {navigate ("/FinallTrip${tripid}")}   trip={trip}*/}
-
-
+                <TripSettings/>
+                {/* {trip ? <Save trip={trip} setTripid={setTripid} tripid={tripid}/> : <></>} */}
+                {/* <TripSettings={selectOption} setbegin_point1={setbegin_point1} setbegin_point2={setbegin_point2} setend_point1={setend_point1} setend_point2={setend_point2} */}
+                {/* {tripid && <span>{tripid}</span>} */}
+                {/* {navigate ("/FinallTrip${tripid}")}   trip={trip}
+{/* 
+               { tripid?<FinallTrip tripid={tripid}></FinallTrip>:<></>} */ }
 
                 {/* <TripsOptions tripsOptions={tripsOptions} />
                 <TripSettings TripSettings={TripSettings} />

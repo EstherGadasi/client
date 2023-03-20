@@ -20,8 +20,9 @@ const navigate=useNavigate()
                     'Authorization': 'Bearer ' + localStorage.getItem("token")
                 }
             }
-            const res = await axios.get("http://localhost:4000/trip/1");
+            const res = await axios.get("http://localhost:4000/trip/1",config);
             setarrusertrip(res.data)
+          
             // res.data.forEach(element => {
             //     arr.push(element.sites)
             // });

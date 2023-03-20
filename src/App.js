@@ -45,18 +45,18 @@ function App() {
 
     <Route path='/index' element={<Planning_a_trip />} />
     
-    {/* <Route path='/secrtery' element={<Secrtery/>} /> */}
+    <Route path='/secrtery' element={<Secrtery/>} />
 
 
     <Route path='/PlanTrip' element={<Planning_a_trip />} />
-    <Route path='/Personal_area' element={<Personal_area/>} />
+    <Route path='/Personal_area' element={<Personal_area/>} /> 
     <Route path='/secrtery' element={<Secrtery/>} />
 
 
     <Route path='*' element={<h1> 404 Page not found</h1>} />
     
-    {/* <Route path='/ConstrainsA' element={<ConstrainsA />} /> */}
-    {/* <Route path='/FinallTrip' element={<FinallTrip />} /> */}
+    {/* /* <Route path='/ConstrainsA' element={<ConstrainsA />} /> */}
+     <Route path='/FinallTrip' element={<FinallTrip />} />
     </Routes>
     </Router>
   

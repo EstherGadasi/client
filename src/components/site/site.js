@@ -30,7 +30,7 @@ function Site({e,addsite,RemoveSite}) {
         {/* site :{e.name}  */}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        "num_of_turist": {e.num_of_turist} "ages": {e.ages} "address": {e.address} "children":{e.children} "accible": {e.truffic}
+        "num_of_turist": {e.num_of_turist} "ages": {e.ages} "address": {e.address} "children":{e.children} "accible": {e.truffic} "num_of_turist": {e.num_of_turist} 
         </Typography>
       </CardContent>
       <CardActions>

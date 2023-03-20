@@ -3,20 +3,22 @@ import React, { useEffect, useState } from "react";
 import Trip from "../../components/trip/trip";
 
 
-async function FinallTrip(id) {
-const[trip,settrip]=useState({})
+ function FinallTrip({tripid}) {
+    const[trip,settrip]=useState({})
+    async function fun(){
+
     try {
          // area:arrcs.area,
 
-        const trip = await axios.get(`http://localhost:4000/trip${id}`);//the url not excat
+        const trip = await axios.get(`http://localhost:4000/trip/${tripid}`);//the url not excat
         settrip(trip.data)
        
     } catch (err) {
         // setErr(err.response.data?.message);
     }
 
-   
-   
+   }
+    useEffect(()=>{fun()}, []);  
     return <>
          <Trip trip={trip}/>
        
