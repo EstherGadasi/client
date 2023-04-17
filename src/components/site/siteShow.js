@@ -1,7 +1,7 @@
-function Siteshow(props) {
+function Siteshow({e}) {
     
    
-
+console.log(e)
     
    
    
@@ -10,7 +10,7 @@ function Siteshow(props) {
     <div className="new-book">
         
 
-    <span>{props.name}</span>  
+    <span>{e.name}</span>  
     
     </div>
    

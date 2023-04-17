@@ -14,7 +14,7 @@ import Save from "./Save";
 
 import Site from "../../components/site/site";
 
-function Planning_a_trip({ arrcs, arrsites }) {
+function Planning_a_trip({ constrainsarr, sites, id, paymenttrip }) {
 
 
 
@@ -37,53 +37,65 @@ function Planning_a_trip({ arrcs, arrsites }) {
     let newsites = []
 
     //    let newsites=[]
+    function fun() {
+        setSelectedOption(sites)
+    }
+    function fun1() {
+        setconstrains(constrainsarr)
+    }
+    const current = new Date();
+    const date = `"${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}"`;
 
-
-
-    const [constrains, setconstrains] = useState([])
+    const [constrains, setconstrains] = useState(constrainsarr)
     const [tripsOptions, setTripsOptions] = useState([])
     const [selectOption, setSelectedOption] = useState([])
     const [TripSetting, setTripSettings] = useState([])
     const [trip, setTrip] = useState()
-    const [tripid, setTripid] = useState()
+    const [tripid, setTripid] = useState(id)
     const [begin_point1, setbegin_point1] = useState(1)
     const [begin_point2, setbegin_point2] = useState(1)
     const [end_point1, setend_point1] = useState(2)
     const [end_point2, setend_point2] = useState(3)
-    const[arrid,setarrid]=useState([])
-    const[payment,setpayment]=useState(0)
+    const [area, setarea] = useState(3)
+    const [arrid, setarrid] = useState([])
+    const [payment, setpayment] = useState(paymenttrip)
+    const [flag, setflag] = useState(false)
+    useEffect(() => { if (sites) fun() }, []);
+    useEffect(() => { if (constrainsarr) fun1() }, []);
 
-let arrhelper=selectOption;
-let aaridhelper=arrid
     async function addsite(e) {
-       
-        setSelectedOption([...selectOption, e])
-//  console.log(selectOption)
- console.log(arrid)
- setarrid([...arrid,e.idsites])
 
+
+        setSelectedOption([...selectOption, e])
+        //  console.log(selectOption)
+        console.log(arrid)
+        setarrid([...arrid, e.idsites])
+        setpayment(payment + e.payment)
     }
     async function RemoveSite(e) {
         //  const v=selectOption.pop(e)
-        arrhelper=arrhelper.pop(e)
+        let arrhelper = selectOption;
+        let aaridhelper = arrid
+        arrhelper=arrhelper.filter((el) => el !== e)
+       
         setSelectedOption(
-           [arrhelper]
-            
+            [arrhelper]
+
         )
-        aaridhelper=aaridhelper.pop(e.idsites)
+        aaridhelper=aaridhelper.filter((el) => el !== e.idsites)
         setarrid(
-           [aaridhelper]
-            
+            [aaridhelper]
+
         )
 
-       
-        
+        setpayment(payment - e.payment)
+
         // newsites = selectOption.pop(correntitem)
-        // setSelectedOption([...newsites])
+        // setSelectedOption([...newsites])e.idsites
     }
     async function save() {
-        const current = new Date();
-        const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
+
+
 
         const theTrip = { // area:arrcs.area,
             userId: 1,
@@ -91,13 +103,13 @@ let aaridhelper=arrid
             begin_point2: begin_point2,
             end_point1: end_point1,
             end_point2: end_point2,
-            payment:payment,
+            payment: payment,
             date: `"${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}"`,
             listofsites: arrid,
             constrainsoftrip: constrains
         }
-        console.log(date);
-       setTrip(theTrip);
+
+        setTrip(theTrip);
 
     }
 
@@ -114,10 +126,10 @@ let aaridhelper=arrid
                 {/* {matchesites?.map((e) => {
                     return <div onChange={(e) => setcorrentitem(e.target.value)} value={e.id} >{e.idsite}</div>
                 })} */}
+                {id ? <button onClick={save}>update</button> : <></>}
 
 
-
-                <SearchParameters setTripsOptions={setTripsOptions} setconstrains={setconstrains} />
+                <SearchParameters setTripsOptions={setTripsOptions} setconstrains={setconstrains} constrains={constrains} />
                 <TripsOptions tripsOptions={tripsOptions} setcorrentitem={setcorrentitemAdd} addsite={addsite} />
                 {selectOption?.map((e) => {
 
@@ -128,8 +140,11 @@ let aaridhelper=arrid
                 })}
                 {/* <TripSettings /> */}
                 <button onClick={save}>save</button>
-                {/* <Save  setTripid={setTripid}/> */}
-                <TripSettings/>
+                <span>payment {payment}</span>
+
+
+                {trip ? <Save setTripid={setTripid} payment={payment} userId={1} begin_point1={begin_point1} begin_point2={begin_point2} end_point1={end_point1} end_point2={end_point2} date={date} listofsites={arrid} constrainsoftrip={constrains} idtrips={tripid} /> : <></>}
+                {/* <TripSettings setbegin_point1={setbegin_point1} setbegin_point2={setbegin_point2} setend_point1={setend_point1} setend_point2={setend_point2} /> */}
                 {/* {trip ? <Save trip={trip} setTripid={setTripid} tripid={tripid}/> : <></>} */}
                 {/* <TripSettings={selectOption} setbegin_point1={setbegin_point1} setbegin_point2={setbegin_point2} setend_point1={setend_point1} setend_point2={setend_point2} */}
                 {/* {tripid && <span>{tripid}</span>} */}
@@ -150,7 +165,7 @@ let aaridhelper=arrid
 
 
         </div>
-        
+
 
     </>
 }

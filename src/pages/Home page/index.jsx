@@ -1,10 +1,10 @@
 import Opinion from "../../components/Opinion/opinion";
-import Site from "../../components/site/site";
+import Siteshow from "../../components/site/siteShow";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 export const Home = () => {
-  const [Opinions, setOpinions] = useState([])
-  const [BestSites, setBestSites] = useState([])
+  const [Opinions, setOpinions] = useState(null)
+  const [BestSites, setBestSites] = useState(null)
   const [images, setimages] = useState(null);
   useEffect(() => {
     console.log("we")
@@ -51,8 +51,8 @@ export const Home = () => {
   return (<>
     <div>Hello </div>
     {images? images?.map((e) => <span key={e.idimages}>{e.url}  </span>):<></>}
-    {Opinions?.map((e) => <Opinion  opinion={e.opinion} level={e.level}></Opinion>)}
-    {BestSites?.map((e) => <Site e={e} ></Site>)}
+    {Opinions?.map((e) => <Opinion  opinion={e} ></Opinion>)}
+    {BestSites?.map((e) => e.map((ev)=><Siteshow e={ev} ></Siteshow>))}
      
   </>
   )

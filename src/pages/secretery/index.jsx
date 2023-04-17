@@ -19,7 +19,7 @@ const Secrtery = () => {
     const [place2, setplace2] = useState(null)
     const [adress, setadress] = useState(null)
     const [url, seturl] = useState(null)
-    let arrcsh = [];
+  
     function check(event, set, arr) {
         if (event.target.checked){
             const newArray = [...arr, event.target.value]
@@ -28,11 +28,13 @@ const Secrtery = () => {
         // console.log(arr)acces,bicycles,categories,tripstype,description,area,truffic,payment,level,name,place1,place2,url,adress
     }
         else
-        arrcsh=arr.pop(event.target.value)
+        {
+        let arrcsh = arr;
+        arrcsh.pop(event.target.value)
         set(
            [arrcsh]
             
-        )
+        )}
 
     }
     async function addsite() {

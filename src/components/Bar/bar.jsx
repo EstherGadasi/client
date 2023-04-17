@@ -11,7 +11,7 @@ import axios from "axios";
 import {BrowserRouter as Router, Routes, Route, Link, NavLink} from 'react-router-dom'; 
 import { Replay } from '@material-ui/icons';
 import Personal_area from '../../pages/Personal_area';
-import Secrtery from '../../pages/secretery/secrtery';
+import Secrtery from '../../pages/secretery';
 //const navigate = useNavigate();
 
 const useStyles = makeStyles((theme) => ({

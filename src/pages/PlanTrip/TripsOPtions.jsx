@@ -12,6 +12,7 @@ function TripsOptions({tripsOptions,setcorrentitem,addsite}){
     // }, [sites]);
     
     return<>
+    {/* <label>jhjg</label> */}
 
     {tripsOptions?.map((e)=>{
         
