@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-
+import Point from "./points"
 const Secrtery = () => {
     
     
@@ -15,34 +15,40 @@ const Secrtery = () => {
     const [payment, setpayment] = useState(null)
     const [level, setlevel] = useState([])
     const [name, setname] = useState(null)
-    const [place1, setplace1] = useState(null)
-    const [place2, setplace2] = useState(null)
-    const [adress, setadress] = useState(null)
+    const [place, setplace] = useState(null)
+    const [place1, setpoint1] = useState(null)
+    const [place2, setpoint2] = useState(null)
+    const [address, setadress] = useState(null)
     const [url, seturl] = useState(null)
+    const[current,setcorrent]=useState(false)
+    
   
-    function check(event, set, arr) {
+    function check(event, set, arr,num) {
         if (event.target.checked){
-            const newArray = [...arr, event.target.value]
+            const newArray = [...arr, num]
             console.log(newArray)
        set(newArray);
         // console.log(arr)acces,bicycles,categories,tripstype,description,area,truffic,payment,level,name,place1,place2,url,adress
     }
         else
         {
-        let arrcsh = arr;
-        arrcsh.pop(event.target.value)
-        set(
-           [arrcsh]
-            
-        )}
+            let arrcsh = arr;
+            //  console.log("arrcsh",arrcsh)
+            // arrcsh.concat(event.target.value)
+            arrcsh=arrcsh.filter((e) => e !== num)
+            console.log("2arrcsh",arrcsh)
+            set(
+                arrcsh
+            )
+      }
 
     }
     async function addsite() {
-       
+        console.log(address)
         
         const handleAddSite = async (e) => {
             try {
-                const res = await axios.post("http://localhost:4000/site", { acces,bicycles,categories,tripstype,description,area,truffic,payment,level,name,place1,place2,url,adress});
+                const res = await axios.post("http://localhost:4000/site", { acces,bicycles,categories,tripstype,description,area,truffic,payment,level,name,place1,place2,url,address});
                 // navigate("/login")
                 console.log(res.data)
             } catch (err) {
@@ -50,7 +56,11 @@ const Secrtery = () => {
     
             }
         };
-        handleAddSite()
+         handleAddSite()
+    }
+    function f(e){
+        setplace(e.target.value)
+        setcorrent(true) 
     }
     return <>
 
@@ -93,7 +103,7 @@ const Secrtery = () => {
         <label for="area2"> south</label><br></br>
         <input type="radio" id="area3" name="area" value="center" onChange={(e) => { setarea(e.target.value) }}></input><br></br>
         <label for="area3"> center</label><br></br>
-        <input type="radio" id="area3" name="area" value="JerusalemSurroundingArea" ></input><br></br>
+        <input type="radio" id="area3" name="area" value="JerusalemSurroundingArea" onChange={(e) => { setarea(e.target.value) }} ></input><br></br>
         <label for="area4"> JerusalemSurroundingArea</label>
         <button type="submit">Submit form</button><br></br>
 
@@ -107,21 +117,22 @@ const Secrtery = () => {
         <button type="submit">Submit form</button><br></br>
 
         <p>categories</p>
-        <input type="checkbox" id="categories1" name="categories1" value="families" onChange={(e) => { check(e, setcategories, categories)}}></input><br></br>
+        <input type="checkbox" id="categories1" name="categories1" value="families" onChange={(e) => { check(e, setcategories, categories,1)}}></input><br></br>
         <label for="categories1"> families</label><br></br>
-        <input type="checkbox" id="categories2" name="categories2" value="groups" onChange={(e) => { check(e, setcategories, categories)}}></input><br></br>
+        <input type="checkbox" id="categories2" name="categories2" value="groups" onChange={(e) => { check(e, setcategories, categories,2)}}></input><br></br>
         <label for="categories2"> groups</label><br></br>
-        <input type="checkbox" id="categories3" name="categories3" value="pairs" onChange={(e) => { check(e, setcategories, categories)}}></input><br></br>
+        <input type="checkbox" id="categories3" name="categories3" value="pairs" onChange={(e) => { check(e, setcategories, categories,3)}}></input><br></br>
         <label for="categories3"> pairs</label><br></br>
-        <input type="checkbox" id="categories3" name="categories4" value="children" onChange={(e) => { check(e, setcategories, categories)}}></input><br></br>
+        <input type="checkbox" id="categories3" name="categories4" value="children" onChange={(e) => { check(e, setcategories, categories,4)}}></input><br></br>
         <label for="categories4"> children</label><br></br>
         <button type="submit">Submit form</button> <br></br>
 
-         <input type={"text"} placeholder="place1" onChange={(e) => { setplace1(e.target.value) }}></input><br></br>  
-         <input type={"text"} placeholder="place2" onChange={(e) => { setplace2(e.target.value) }}></input><br></br> 
+        
+         <input type={"text"} placeholder="place2" onChange={(e) => { f(e)}}></input><br></br> 
          <input type={"text"} placeholder="name" onChange={(e) => { setname(e.target.value) }}></input><br></br>
          <input type={"text"} placeholder="url" onChange={(e) => { seturl(e.target.value) }}></input><br></br>  
-         <input type={"text"} placeholder="adress" onChange={(e) => { setadress(e.target.value) }}></input><br></br>  
+         {/* <input type={"text"} placeholder="adress" onChange={(e) => { setadress(e.target.value) }}></input><br></br> */}
+         {current?<Point place={place} setpoint1={setpoint1} setpoint2={setpoint2} setcorrent={setcorrent} setadress={setadress}/>:<></>}  
         </>
 
 

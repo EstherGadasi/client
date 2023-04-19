@@ -16,7 +16,7 @@ import Planning_a_trip from './pages/PlanTrip';
 // import Personal_area from './pages/Personal_area/Personal_area'
 
 import ButtonAppBar from './components/Bar/bar';
-
+import { AuthContextProvider } from "./context/authContext";
 
 
 
@@ -28,7 +28,9 @@ import ButtonAppBar from './components/Bar/bar';
 
 function App() {
   return (
-    <div className="App">  
+    <div className="App">
+        <AuthContextProvider>
+      
     <Router>
     <ButtonAppBar/>
     
@@ -60,7 +62,7 @@ function App() {
      {/* <Route path='/FinallTrip' element={<FinallTrip />} /> */}
     </Routes>
     </Router>
-  
+  </AuthContextProvider>  
     </div>
     );
     

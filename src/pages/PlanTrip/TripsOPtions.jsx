@@ -1,7 +1,7 @@
 import React , { useEffect, useState } from "react";
 import axios from "axios";
 import Site from "../../components/site/site";
-function TripsOptions({tripsOptions,setcorrentitem,addsite}){
+function TripsOptions({tripsOptions,setcorrentitem,addsite,}){
     // option onClick={setSelectedOption(optionn.id)
     // useEffect(() => {
 

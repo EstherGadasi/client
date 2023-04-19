@@ -10,6 +10,7 @@ function Save({ setTripid,  payment,  area,  userId, begin_point1,  begin_point2
 
 
     async function save() {
+        // console.log(begin_point1,  begin_point2,  end_point1, end_point2)
         const res = await axios.post("http://localhost:4000/trip", {payment,  area,  userId, begin_point1,  begin_point2,  end_point1, end_point2,  date,  listofsites,  constrainsoftrip})
         console.log(res.data)
         setTripid(res.data.tripcreated.idtrips);

@@ -21,7 +21,7 @@ function Login(){
     try {      
       const res = await axios.post("http://localhost:4000/api/auth/login",  { username, password});
       console.log(res.data)
-      localStorage.setItem("token", JSON.stringify(res.data));
+      localStorage.setItem("token", JSON.stringify(res.data.user.accessToken));
 
 
       navigate("/Personal_area",{replace:false})
@@ -57,9 +57,13 @@ function Login(){
 
   
 // >>>>>>> dd6749b7f0884ab480801413d2447a7af8bd50c6
-    } catch (err) {
-      setErr(err.response.data?.message);
     }
+    catch(err){
+
+    }
+    //  catch (err) {
+    //   setErr(err.res.data.user?.message);
+    // }
     //     console.log(password ,username)
 //         const res = await fetch("http://localhost:3000/api/auth/login",
 //         {

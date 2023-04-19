@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 // import React from "react";
 import Planning_a_trip from "../../pages/PlanTrip";
 import Siteshow from "../site/siteShow";
+import Site from "../site/site";
 function Trip({ trip }) {
 
     const [CurrPage, setCurrPage] = useState(0)
@@ -15,7 +16,7 @@ function Trip({ trip }) {
 
 
             <div> {trip.begin_point1 ? trip.begin_point1 : <></>}    {trip.begin_point2 ? trip.begin_point2 : <></>}  {trip.end_point1 ? trip.end_point1 : <></>}  {trip.end_point2 ? trip.end_point2 : <></>} {trip.area ? trip.area : <></>}
-                {trip.sites?.map((site) => <Siteshow e={site} />)}
+                {trip.sites?.map((site) => <Site e={site} flag={true}/>)}
             </div>
 
             {/* <span>{props.opinion}</span>  <span>{props.level}</span> */}

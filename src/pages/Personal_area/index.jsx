@@ -1,20 +1,28 @@
 import axios from "axios";
-import React, { useEffect, useState, navigate } from "react";
+import React, { useContext,useEffect, useState, navigate } from "react";
 import Planning_a_trip from "../PlanTrip";
 import { BrowserRouter as Router, Routes, Route, Link, NavLink } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import Trip from "../../components/trip/trip";
+import { AuthContext } from "../../context/authContext"
 function Personal_area() {
     const navigate = useNavigate()
     const [updatebutton, setupdatebutton] = useState()
     const [trip, settrips] = useState([])
 
+    const {token} = useContext(AuthContext)
+
     useEffect(() => {
         bringuser()
     }, []);
     async function bringuser() {
+        let config = {
+            headers: {
+              'Authorization': 'Bearer ' + token
+            }
+        }
         try {
-            const res = await axios.get("http://localhost:4000/trip/1");
+            const res = await axios.get(`http://localhost:4000/trip/${AuthContext.currentUser.idusers}`, config);
             // navigate("/login")
             console.log(res.data)
             settrips(res.data)
