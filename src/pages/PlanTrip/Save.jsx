@@ -1,57 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext,useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-
+import { AuthContext } from "../../context/authContext"
 import axios from "axios";
 import { func } from "prop-types";
 
 
-function Save({ setTripid,  payment,  area,  userId, begin_point1,  begin_point2,  end_point1, end_point2,  date,  listofsites,  constrainsoftrip ,idtrips}) {
-
-
-
+function Save({namestart, selectOption,setend_point1, setend_point2,duration, setTripid,  payment,  area,  userId, begin_point1,  begin_point2,  end_point1, end_point2,  date,  listofsites,  constrainsoftrip ,idtrips}) {
+    const navigate = useNavigate()
+let i=0
     async function save() {
-        // console.log(begin_point1,  begin_point2,  end_point1, end_point2)
-        const res = await axios.post("http://localhost:4000/trip", {payment,  area,  userId, begin_point1,  begin_point2,  end_point1, end_point2,  date,  listofsites,  constrainsoftrip})
+        i++
+         console.log(listofsites)
+        const res = await axios.post("http://localhost:4000/trip", {namestart,duration,payment,  area,  userId, begin_point1,  begin_point2,  end_point1, end_point2,  date,  listofsites,  constrainsoftrip})
         console.log(res.data)
         setTripid(res.data.tripcreated.idtrips);
-    }
-   async function update() {
-        const res = await axios.put(`http://localhost:4000/trip/${idtrips}`,{payment,  area,  userId, begin_point1,  begin_point2,  end_point1, end_point2,  date,  listofsites,  constrainsoftrip})
-        console.log(res.data)
+       const id=res.data.tripcreated.idtrips
+        navigate("/FinallTrip", { state: { id: {  id} } })
     }
 
-    const fun = async () => {
+   async function update() {
+    i++
+    console.log(listofsites)
+        const res = await axios.put(`http://localhost:4000/trip/${idtrips}`,{namestart,duration,payment,  area,  userId, begin_point1,  begin_point2,  end_point1, end_point2,  date,  listofsites})
+        console.log(res.data)
+       const id=idtrips
+        navigate("/FinallTrip", { state: { id: {id  } } })
+    }
+
+    const SaveOrUpdate = async () => {
+       setend_point1(selectOption.place1)
+       setend_point2(selectOption.place2)
         if (idtrips) {
             update()
         }
         else
             save()
-        // const res = await axios.post("http://localhost:4000/trip",  props.trip);//the url not excat
-        // console.log(props.tripid);
-        // // console.log(res.data.tripcreated[0].idtrips)
-        // // props.setTripid(res.data.tripcreated.idtrips);
-        // console.log(props.tripid);
-       
     }
-    useEffect(() => { fun() }, []);
-    // const current = new Date()
-    // const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
-    // try {
-    //     const trip = { // area:arrcs.area,
-    //         userId: 1,
-    //         begin_point1: begin_point1,
-    //         begin_point2: begin_point2,
-    //         end_point1: end_point1,
-    //         end_point2: end_point2,
-    //         date: date,
-    //         listofsites: selectOption,
-    //         constrainsoftrip: constrains
-    //     }
-
-    //  catch (err) {
-    //     // setErr(err.response.data?.message);
-    // }
-
+    useEffect(() => {if(i==0) SaveOrUpdate() }, []);
+    
     return (<></>)
 }
 export default Save;

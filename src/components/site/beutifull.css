@@ -1,0 +1,20 @@
+.sitesadd{
+    display: flex;
+    justify-content: center;
+    border: 3px;
+    border-color: brown;
+width: 500px;
+background-color: bisque;
+}
+.sitesremove{
+    display: flex;
+    justify-content:center;
+    border-color:aqua;
+    width: 500px;
+} 
+.card{
+    display: flex;
+    justify-content:center;
+    border-color:blue
+   
+} 

@@ -1,27 +1,22 @@
-import React , { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Site from "../../components/site/site";
-function TripsOptions({tripsOptions,setcorrentitem,addsite,}){
-    // option onClick={setSelectedOption(optionn.id)
-    // useEffect(() => {
+import { Box } from '@mui/material';
 
-    //     const CountTrip = async () => {
+function TripsOptions({ tripsOptions, setcorrentitem, addsite }) {
 
-    //     }
-    //     CountTrip()
-    // }, [sites]);
-    
-    return<>
-    {/* <label>jhjg</label> */}
-
-    {tripsOptions?.map((e)=>{
-        
-        return <> 
-        <Site e={e} addsite={addsite} setcorrentitem={setcorrentitem}></Site>
-       
-   </> })}
-</>
-
+    return (<>
+    <Box sx={{display:"block",width:"100vw"}}>
+    <div display="flex">
+        <label> choose your favorate sites   </label>
+        <label style={{color:"darkblue"}}> for more details click on "show site" </label></div>
+        <Box sx={{ display: "grid", gridTemplateColumns: { xs: "repeat(1, minmax(0,1fr))", sm: "repeat(3, minmax(0,1fr))" } }} style={{ width: "75vw" }}>
+            {tripsOptions?.map((e, i) => {
+                return <>
+                    <Site key={i} e={e} addsite={addsite} setcorrentitem={setcorrentitem}></Site>
+                </>
+            })}
+        </Box></Box></>)
 }
+
 export default TripsOptions;
-// e={e} setcorrentitem={setcorrentitem} idsites={e.idsites} name={e.name} num_of_turist={e.num_of_turist}ages={e.ages} children={e.children}address={e.address}accible={e.accible}

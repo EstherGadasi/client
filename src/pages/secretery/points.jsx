@@ -13,51 +13,45 @@ import {
 } from "@react-google-maps/api";
 Geocode.setApiKey("AIzaSyBWW1xrjKfvdMk2-oVeMEHDyYW83E0nU0A");
 const Point = ({
-place,setpoint1,setpoint2,setcurrent,setadress
-
+  place, setpoint1, setpoint2, setcurrent, setadress, setoptionalladress, optionalladress,setcorrent,setlngbegin,setlatbegin
 }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyBWW1xrjKfvdMk2-oVeMEHDyYW83E0nU0A",
+  libraries:['places']
   });
+  const [newArray, setnewArray] = useState([])
 
-  
-function f(){
-  if (isLoaded) {
-  
-    Geocode.fromAddress(place).then(
-      (response) => {
-        const { lat, lng } = response.results[0].geometry.location;
-        console.log("H")
-        console.log(lat, lng);
-        setpoint1(lat)
-        setpoint2(lng)
-        setadress(response.results[0].formatted_address)
-          console.log(response.results[0].formatted_address)
-      },
-      
-    );
+  function returnPoints() {
+    if (isLoaded)
+     {
+      Geocode.fromAddress(place).then(
+          (response) => {
+            if(response.results.length){
+            const { lat, lng } = response.results[0].geometry.location;
+            console.log("H")
+            console.log(lat, lng);
+            if(setpoint1)
+           { setpoint1(lat)
+            setpoint2(lng) 
+             setadress(response.results[0].formatted_address)}
+            const formated = response.results.map(item=>{
+              return item.formatted_address
+            })
+            console.log("formated", formated) 
+             setoptionalladress(formated) 
+             setlatbegin(lat)
+             setlngbegin(lng)
+             setcorrent(false)
+          }
+        },
 
-      
-  
+      )
+    }
   }
-}
-useEffect(() => {  f() });
-
-  function callback(response, status) {
-    console.log("f")
-    console.log(response)
-    console.log(status)
-    // setcurrent(false)
-    // See Parsing the Results for
-    // the basics of a callback function.
-  }
-  //Sataf
-
+  useEffect(() => { returnPoints() });
   return (<>
-    {isLoaded}
- 
-    </>
+  </>
   );
 };
 export default Point;
