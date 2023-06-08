@@ -57,16 +57,7 @@ function SearchParameters({ setTripsOptions, setconstrains, constrains }) {
         }
 
     }
-    function showconstrains() {
-        setf(true)
-    }
     async function bringmatchessites() {
-        // const site = {
-        //     "lat": selectoptions[0].place1,
-        //     "lng": selectoptions[0].place2
-
-        // }
-        // set([{name: selectoptions[0].name, min: 0, site: site }])
         setempty("")
         const GetMatchesSites = async () => {//ages,children,bicycles,area,trufic,num_of_turist,tripsKind,description,payment
             const constrain = {
@@ -182,7 +173,6 @@ function SearchParameters({ setTripsOptions, setconstrains, constrains }) {
         <label for="categories4"> children</label><br></br>
 </>:<></>}
 
-        {/* {/* <input type={"text"} placeholder="description" onChange={(e) => { setdescription(e.target.value) }}></input><br></br>  */}
 
 
 
@@ -190,7 +180,6 @@ function SearchParameters({ setTripsOptions, setconstrains, constrains }) {
 
 
     </>
-
 
 }
 export default SearchParameters;

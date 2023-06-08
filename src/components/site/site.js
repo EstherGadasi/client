@@ -28,9 +28,6 @@ function Site({ e, addsite, RemoveSite, flag }) {
       }
       catch { }
     }
-  }
-  useEffect(() => {
-    getopion()
 
   }, []);
   async function getopion() {
@@ -47,7 +44,6 @@ function Site({ e, addsite, RemoveSite, flag }) {
 
   return (
     <>
-      <div dir={RemoveSite ? 'rtl' : 'ltr'}>
 
         {/* {opinion?.map((e) => <Opinion opinion={e}/>)} */}
         <span className="new-book"  >
@@ -57,7 +53,6 @@ function Site({ e, addsite, RemoveSite, flag }) {
               image="/static/images/cards/contemplative-reptile.jpg"
               title="green iguana"
             />
-            "name":{e.name}
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 site :{e.name}
@@ -84,34 +79,7 @@ function Site({ e, addsite, RemoveSite, flag }) {
 
 
 
-
-
-          {/* <Card sx={{ maxWidth: 345 }}>onClick={(e)=>{setcorrentitem(JSON.parse(`{${e.target.textContent}}`))}}
-      <CardMedian
-        sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
-        title="green iguana"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card> */}
-
-
-
-        </span>
-
-      </div>
+        
     </>
   )
   // idimage,num_of_turist,ages,children,discription,time_it_takes,accible,place1,place2,address
