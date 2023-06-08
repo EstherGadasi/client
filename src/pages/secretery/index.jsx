@@ -24,6 +24,7 @@ const Secrtery = ({site,setcurrentsite}) => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [completed, setCompleted] = React.useState({});
     const [acces, setacces] = useState(false)
+    const [visible, setvisible] = useState(true)
     const [bicycles, setbicycles] = useState(false);
     const [categories, setcategories] = useState([]);
     const [tripstype, settripstype] = useState([])
@@ -191,7 +192,8 @@ const Secrtery = ({site,setcurrentsite}) => {
          {site?  <>   <Site e={site}/>      
            <Button onClick={update}>update</Button></> :<></>}  
        
-       <TextField type="text" placeholder="enter an admine code" style={{marginTop:"20vh", margin:"auto"}} onChange={(e) => { checkadmine(e) }}/><br></br>
+       <TextField type="password" placeholder="enter an admine code" visible={visible} style={{marginTop:"20vh", margin:"auto"}} onChange={(e) => { checkadmine(e) }}/><br></br>
+        
         {flag ? <><Button onClick={addsite}>addsite</Button><br></br>
         
         <Box sx={{ width: '60vw',margin:'auto'  }} >
@@ -332,6 +334,7 @@ const Secrtery = ({site,setcurrentsite}) => {
         />
       </div>
             <Button onClick={showallsites}>הצג את כל האתרים</Button>
+           
             </>
             : <input type="text" placeholder="enter an admine code" onChange={(e) => { checkadmine(e) }}></input>}
     </>

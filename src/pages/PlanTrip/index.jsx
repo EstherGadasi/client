@@ -206,9 +206,10 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
                 <div style={{ width: "100vw", display: "flex" }}>
                     <TripsOptions tripsOptions={tripsOptions} setcorrentitem={setcorrentitemAdd} addsite={addsite} />
                     <div style={{
-                        height: '100vh', width: "23vw", overflow: 'scroll', borderColor: "GrayText", borderWidth: "2px",
-                        border: "double",
-                        marginLeft: "2px"
+                        height: '100vh', width: "25vw", overflow: 'scroll', borderColor: "GrayText", borderWidth: "2px",
+                        border: "solid",
+                        marginLeft: "0.5px",marginRight:"1px"
+
                     }}>
                         {selectOption?.map((e, i) => {
                             return <>

@@ -81,8 +81,9 @@ export const Home = () => {
       {BestSites?.map((e,i) => e.map((ev) => <Site index={i} e={ev} startindex={startindex} endindex={endindex}></Site>))}</Box>
     {BestSites&& endindex<BestSites.length&&<ArrowForwardIos  onClick={right}></ArrowForwardIos>}</Box>
     {/* <ArrowForwardIos style={{ right: 150, position: "fixed", zIndex: 100 }} */}
-    <Box sx={{display:"flex",margin:"auto",alignItems:"center",textAlign:"center"}}></Box>
-    {Opinions?.map((e, i) => <Opinion key={i} e={e} ></Opinion>)}
+    <h5>מה אנשים אומרים עלינו</h5>
+    <Box sx={{display:"flex",margin:"auto",alignItems:"center",textAlign:"center"}}>{Opinions?.map((e, i) => <Opinion key={i} e={e} ></Opinion>)}</Box>
+    
     <button onClick={addopinion}>tell us about our site</button>
     <input placeholder='youropinion' onChange={(e) => { setopinion(e.target.value) }}></input>
     <Rating
