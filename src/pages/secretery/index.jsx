@@ -27,6 +27,7 @@ const Secrtery = ({site,setcurrentsite}) => {
     const [visible, setvisible] = useState(true)
     const [bicycles, setbicycles] = useState(false);
     const [categories, setcategories] = useState([]);
+    const [categories1, setcategories1] = useState([]);
     const [tripstype, settripstype] = useState([])
     const [description, setdescription] = useState(null);
     const [area, setarea] = useState([])
@@ -82,9 +83,19 @@ const Secrtery = ({site,setcurrentsite}) => {
     }
     function check(event,setcategories,categories, num) {
         const arr=categories
+        let arr1=categories1
         arr[num]=event.target.checked
        setcategories([...arr]) 
-        console.log("aaa",categories)
+        
+        
+        if(arr[num]==false)
+        {
+          arr1=arr1.filter((e)=>e!=(num+1))
+        }
+        else
+        arr1.push(num+1);
+        setcategories1([...arr1])
+        console.log("aaa",categories,categories1)
 
     }
     function check2(event,setlevel,Level, num) {
@@ -195,7 +206,7 @@ const Secrtery = ({site,setcurrentsite}) => {
        <TextField type="password" placeholder="enter an admine code" visible={visible} style={{marginTop:"20vh", margin:"auto"}} onChange={(e) => { checkadmine(e) }}/><br></br>
         
         {flag ? <><Button onClick={addsite}>addsite</Button><br></br>
-        
+        <Button onClick={showallsites}>הצג את כל האתרים</Button>
         <Box sx={{ width: '60vw',margin:'auto'  }} >
             <Stepper nonLinear activeStep={activeStep}>
                 {steps.map((label, index) => (
@@ -314,13 +325,7 @@ const Secrtery = ({site,setcurrentsite}) => {
                 )}
             </div>
         </Box>  
-        
-            <Autocomplete1 endpoint2={place2} endpoint1={place1} setpoint1={setpoint1} setpoint2={setpoint2} f={true} ></Autocomplete1>
-           
-            <Uploader file={url} setFile={seturl} label="Add Picture" />
-            {/* <input type={"text"} placeholder="place2" onChange={(e) => { f(e) }}></input><br></br> */}
-            <div>
-        <TextField
+         <TextField
           label="שם"
           variant="standard"
            placeholder="שם האתר" 
@@ -332,8 +337,15 @@ const Secrtery = ({site,setcurrentsite}) => {
           placeholder="משך זמן שהיה באתר" 
           onChange={(e) => { setduration(e.target.value) }}
         />
+        
+            <Autocomplete1 endpoint2={place2} endpoint1={place1} setpoint1={setpoint1} setpoint2={setpoint2} f={true} ></Autocomplete1>
+           
+            <Uploader file={url} setFile={seturl} label="Add Picture" />
+            {/* <input type={"text"} placeholder="place2" onChange={(e) => { f(e) }}></input><br></br> */}
+            <div>
+       
       </div>
-            <Button onClick={showallsites}>הצג את כל האתרים</Button>
+            
            
             </>
             : <input type="text" placeholder="enter an admine code" onChange={(e) => { checkadmine(e) }}></input>}

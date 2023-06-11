@@ -17,16 +17,20 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
     const [acces, setacces] = useState(false)
     const [bicycles, setbicycles] = useState(false);
     const [categories, setcategories] = useState([false, false, false, false]);
-
+    const [categories1, setcategories1] = useState([]);
    // const [categories, setcategories] = useState();
-    const [tripstype, settripstype] = useState(["around", "riding", "lines"])
+    const [tripstype, settripstype] = useState([false, false, false])
+    const [tripstype1, settripstype1] = useState([])
+    // const [tripstype1, settripstype1] = useState(["around", "riding", "lines"])
     const [description, setdescription] = useState(null);
    // const [area, setarea] = useState(["south", "center", "JerusalemSurroundingArea", "north"])
    const [area, setarea] = useState([false, false, false, false])
+   const [area1, setarea1] = useState([])
     const [truffic, settruffic] = useState(false)
     const [payment, setpayment] = useState(200)
     //const [level, setlevel] = useState(["medium", "hard", "easy"])
     const [level, setlevel] = useState([false, false,  false])
+    const [level1, setlevel1] = useState([])
     const [empty, setempty] = useState("")
     const steps = ['Participants', 'Select type', 'Constrains'];
     const [f, setf] = useState(true)
@@ -66,9 +70,19 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
 
     function check(event,setcategories,categories, num) {
         const arr=categories
+        let arr1=categories1
         arr[num]=event.target.checked
        setcategories([...arr]) 
-        console.log("aaa",categories)
+        
+        
+        if(arr[num]==false)
+        {
+          arr1=arr1.filter((e)=>e!=(num+1))
+        }
+        else
+        arr1.push(num+1);
+        setcategories1([...arr1])
+        console.log("aaa",categories,categories1)
 
     }
     function check2(event,setlevel,Level, num) {

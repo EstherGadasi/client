@@ -4,10 +4,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Rating from '@mui/material/Rating';
 import Site from "../../components/site/site";
-import { Box } from '@mui/material';
+import { Box,Button, TextField } from '@mui/material';
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIos from '@material-ui/icons/ArrowForwardIos';
 import { func } from "prop-types";
+import CarouselImg from "./carousel";
 //sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
 export const Home = () => {
   const [Opinions, setOpinions] = useState(null)
@@ -71,27 +72,28 @@ export const Home = () => {
     setendindex(endindex - 1)
   }
   return (<>
-    <img src='/assets/front_image.jpg' style={{ width: '100vw', height: '50vh' }}></img>
+    {/* <img src='/assets/front_image.jpg' style={{ width: '100vw', height: '50vh' }}></img> */}
+    <CarouselImg></CarouselImg>
     <div>Hello we suggest you to register to our special site for surfing experience</div>
     <label> our site.... </label><br></br>
     <h3>our most visits sites:</h3>
     <Box sx={{ display: "flex",alignItems:"center" ,margin:"auto" }} style={{ width: "75vw" }}>
-   { startindex>0&&<ArrowBackIos style={{ left: 150, zIndex: 100 }} onClick={left}></ArrowBackIos>}
+   { startindex>0&&<ArrowForwardIos style={{ left: 150, zIndex: 100 }} onClick={left}></ArrowForwardIos>}
    <Box sx={{ display: "flex",alignItems:"center",margin:"auto"   }} style={{ width: "75vw" }}>
       {BestSites?.map((e,i) => e.map((ev) => <Site index={i} e={ev} startindex={startindex} endindex={endindex}></Site>))}</Box>
-    {BestSites&& endindex<BestSites.length&&<ArrowForwardIos  onClick={right}></ArrowForwardIos>}</Box>
+    {BestSites&& endindex<BestSites.length&&<ArrowBackIos  onClick={right}></ArrowBackIos>}</Box>
     {/* <ArrowForwardIos style={{ right: 150, position: "fixed", zIndex: 100 }} */}
     <h5>מה אנשים אומרים עלינו</h5>
     <Box sx={{display:"flex",margin:"auto",alignItems:"center",textAlign:"center"}}>{Opinions?.map((e, i) => <Opinion key={i} e={e} ></Opinion>)}</Box>
+    <h5>מה דעתך על האתר שלנו</h5>
     
-    <button onClick={addopinion}>tell us about our site</button>
-    <input placeholder='youropinion' onChange={(e) => { setopinion(e.target.value) }}></input>
-    <Rating
+    <TextField placeholder='   הדעה שלך' onChange={(e) => { setopinion(e.target.value) }}></TextField>
+       <span>   </span><Rating
       name="simple-controlled"
       value={level}
       onChange={(event, newValue) => {
         setlevel(newValue);
-      }} />
+      }} /><Button onClick={addopinion}>הוסף את דעתך</Button>
   </>
   )
 }

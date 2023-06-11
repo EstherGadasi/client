@@ -50,8 +50,9 @@ function Trip({settrips, trip,trips, setflag, flag, setlocation, setcurrentitem 
 
   useEffect(() => { if (trip.idtrips && setlocation) setlocations() }, [trip])
 
-  return (<>
-    {flag ? <><Button onClick={update} variant="text" color="secondary" size="medium" startIcon={<EditIcon />}>EDIT</Button>
+  return (<><div style={{borderColor:"pink", borderWidth: "0.5px",border: "solid",margin:"2px",alignItems:"center", alignContent:'center'}}>
+    {flag ? <>
+    <Button onClick={update} variant="text" color="secondary" size="medium" startIcon={<EditIcon />}>EDIT</Button>
     
       <Button onClick={showFullTrip} style={{color:"black"}} size="medium" startIcon={<CommuteIcon />}> SHOW FULL TRIP</Button> 
       <Button onClick={deletetrip} variant="text"  size="medium"  startIcon={<DeleteIcon />}>DELETE</Button>
@@ -59,13 +60,13 @@ function Trip({settrips, trip,trips, setflag, flag, setlocation, setcurrentitem 
     </> : <></>}
     <div className="site">
       <div>
-        <Box sx={{ display: "grid", gridTemplateColumns: { xs: "repeat(1, minmax(0,1fr))", sm: "repeat(3, minmax(0,1fr))" } }} style={{ width: "75vw" }}>
+        <Box sx={{ display: "grid", gridTemplateColumns: { xs: "repeat(1, minmax(0,1fr))", sm: "repeat(3, minmax(0,1fr))" } }} style={{ width: "75vw", alignItems:"center", width:'100vw' }}>
           {trip.idtrips ? trip.sites.map((site, i) => <Site e={site} flag={true} key={i} />
           ) : <></>}
         </Box>
       </div>
     </div>
-    <div>{trip.namestart}</div> </>
+    <div>{trip.namestart}</div></div> </>
   )
 }
 export default Trip
