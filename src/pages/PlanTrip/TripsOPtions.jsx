@@ -8,8 +8,8 @@ function TripsOptions({ tripsOptions, setcorrentitem, addsite }) {
     return (<>
     <Box sx={{display:"block",width:"100vw"}}>
     <div display="flex">
-        <label> choose your favorate sites   </label>
-        <label style={{color:"darkblue"}}> for more details click on "show site" </label></div>
+        <label>בחר את האתר המועדף עליך בהוסף   </label><br></br>
+        <label style={{color:"darkblue"}}> לפרטים נוספים לחץ על הראה אתר </label></div>
         <Box sx={{ display: "grid", gridTemplateColumns: { xs: "repeat(1, minmax(0,1fr))", sm: "repeat(3, minmax(0,1fr))" } }} style={{ width: "75vw" }}>
             {tripsOptions?.map((e, i) => {
                 return <>

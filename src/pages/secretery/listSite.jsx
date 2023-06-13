@@ -7,6 +7,7 @@ import { Box } from '@mui/material';
 import Secrtery from ".";
 
 function ListSite({ code }) {
+    const [visible, setvisible] = useState(true)
     const [sites, setsites] = useState([]);
     const [flag, setflag] = useState(false);
     const [current, setcurrent] = useState(false);
@@ -38,7 +39,8 @@ function ListSite({ code }) {
         }
     }
 
-    return (<> <input type="text" placeholder="enter an admine code" onChange={(e) => { checkadmine(e) }}></input><br></br>
+    return (<> <TextField type="password" placeholder="הכנס קוד מזכירה" visible={visible} style={{marginTop:"20vh", margin:"auto"}} onChange={(e) => { checkadmine(e) }}/><br></br>
+                 
         {flag && !currentsite ?
             <Box sx={{ display: "grid", gridTemplateColumns: { xs: "repeat(1, minmax(0,1fr))", sm: "repeat(4, minmax(0,1fr))" } }}>
                 {sites?.map((site, i) => <Site key={i} setcurrentsite={setcurrentsite} e={site} realcode={realcode} setcurrent={setcurrent} />)}

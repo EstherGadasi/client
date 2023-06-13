@@ -203,8 +203,7 @@ const Secrtery = ({site,setcurrentsite}) => {
          {site?  <>   <Site e={site}/>      
            <Button onClick={update}>update</Button></> :<></>}  
        
-       <TextField type="password" placeholder="enter an admine code" visible={visible} style={{marginTop:"20vh", margin:"auto"}} onChange={(e) => { checkadmine(e) }}/><br></br>
-        
+       
         {flag ? <><Button onClick={addsite}>addsite</Button><br></br>
         <Button onClick={showallsites}>הצג את כל האתרים</Button>
         <Box sx={{ width: '60vw',margin:'auto'  }} >
@@ -238,18 +237,18 @@ const Secrtery = ({site,setcurrentsite}) => {
                            
                             <FormLabel id="demo-controlled-radio-buttons-group">Participants</FormLabel>
                            
-                            <FormControlLabel checked={categories[0]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 0)  }/>} label="Families"/>
-                                 <FormControlLabel checked={categories[1]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 1) }/>} label="Groups"/>
-                                 <FormControlLabel checked={categories[2]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 2) }/>} label="Pairs"/>
-                                 <FormControlLabel checked={categories[3]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 3) }/>} label="Children"/>
+                            <FormControlLabel checked={categories[0]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 0)  }/>} label="משפחות"/>
+                                 <FormControlLabel checked={categories[1]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 1) }/>} label="קבוצות"/>
+                                 <FormControlLabel checked={categories[2]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 2) }/>} label="זוגות"/>
+                                 <FormControlLabel checked={categories[3]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 3) }/>} label="ילדים"/>
 </Box>
                            
                             <Box sx={{alignItems:"center", display:"flex", gap:1}}>
                             <FormLabel id="demo-controlled-radio-buttons-group">Accesible</FormLabel>
                             
-                                <FormControlLabel control={<Checkbox checked={bicycles}  onChange={(e)=>setbicycles(e.target.checked)}/>} label="Bicycles"/>
-                                <FormControlLabel control={<Checkbox checked={truffic}  onChange={(e) => { settruffic(e.target.checked)}}/>} label="Public truffic"/>
-                                <FormControlLabel control={<Checkbox checked={acces}  onChange={(e) => { setacces(e.target.checked)}}/>} label="acces"/>
+                                <FormControlLabel control={<Checkbox checked={bicycles}  onChange={(e)=>setbicycles(e.target.checked)}/>} label="אופניים"/>
+                                <FormControlLabel control={<Checkbox checked={truffic}  onChange={(e) => { settruffic(e.target.checked)}}/>} label="תחבורה ציבורית"/>
+                                <FormControlLabel control={<Checkbox checked={acces}  onChange={(e) => { setacces(e.target.checked)}}/>} label="גישה"/>
                               </Box>  </Box>
                              : (activeStep === 1) ? 
                               <Box sx={{alignItems:"center",display: 'block'}}>
@@ -258,9 +257,9 @@ const Secrtery = ({site,setcurrentsite}) => {
                             <FormLabel id="demo-controlled-radio-buttons-group">Level</FormLabel>
                         
                           
-                           <FormControlLabel checked={level[0]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 0)  }/>} label="Hard"/>
-                                <FormControlLabel checked={level[1]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 1) }/>} label="Easy"/>
-                                <FormControlLabel checked={level[2]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 2)}/>} label="Medium"/>
+                           <FormControlLabel checked={level[0]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 0)  }/>} label="קשה"/>
+                                <FormControlLabel checked={level[1]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 1) }/>} label="קל"/>
+                                <FormControlLabel checked={level[2]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 2)}/>} label="בינוני"/>
                                
 </Box>
                            
@@ -270,9 +269,9 @@ const Secrtery = ({site,setcurrentsite}) => {
                            
                            <FormLabel id="demo-controlled-radio-buttons-group">Type</FormLabel>
                           
-                           <FormControlLabel checked={tripstype[0]} control={<Checkbox onChange={(e) =>check4(e,settripstype,tripstype, 0)  }/>} label="Around"/>
-                                <FormControlLabel checked={tripstype[1]} control={<Checkbox onChange={(e) =>check4(e,settripstype,tripstype, 1) }/>} label="Lines"/>
-                                <FormControlLabel checked={tripstype[2]} control={<Checkbox onChange={(e) =>check4(e,settripstype,tripstype, 2) }/>} label="Riding"/>
+                           <FormControlLabel checked={tripstype[0]} control={<Checkbox onChange={(e) =>check4(e,settripstype,tripstype, 0)  }/>} label="סיבובי"/>
+                                <FormControlLabel checked={tripstype[1]} control={<Checkbox onChange={(e) =>check4(e,settripstype,tripstype, 1) }/>} label="קווי"/>
+                                <FormControlLabel checked={tripstype[2]} control={<Checkbox onChange={(e) =>check4(e,settripstype,tripstype, 2) }/>} label="רכיבה"/>
                                
 </Box>
                           </Box>
@@ -284,13 +283,13 @@ const Secrtery = ({site,setcurrentsite}) => {
                            
                            
                            <FormLabel id="demo-controlled-radio-buttons-group">Area</FormLabel>
-                           <FormControlLabel checked={area[0]} control={<Checkbox onChange={(e) =>check3(e,setarea,area, 0)  }/>} label="North"/>
-                                <FormControlLabel checked={area[1]} control={<Checkbox onChange={(e) =>check3(e,setarea,area, 1) }/>} label="South"/>
-                                <FormControlLabel checked={area[2]} control={<Checkbox onChange={(e) =>check3(e,setarea,area, 2) }/>} label="Center"/>
-                                <FormControlLabel checked={area[3]} control={<Checkbox onChange={(e) =>check3(e,setarea,area, 3) }/>} label="Jerusalem Surrounding Area"/>
+                           <FormControlLabel checked={area[0]} control={<Checkbox onChange={(e) =>check3(e,setarea,area, 0)  }/>} label="צפון"/>
+                                <FormControlLabel checked={area[1]} control={<Checkbox onChange={(e) =>check3(e,setarea,area, 1) }/>} label="דרום"/>
+                                <FormControlLabel checked={area[2]} control={<Checkbox onChange={(e) =>check3(e,setarea,area, 2) }/>} label="מרכז"/>
+                                <FormControlLabel checked={area[3]} control={<Checkbox onChange={(e) =>check3(e,setarea,area, 3) }/>} label="ירושלים והסביבה"/>
 </Box>
 </Box> 
-                            <TextField  label="Payment" id="fullWidth" value={payment}  onChange={(e) => { setpayment(e.target.value) }}/>
+                            <TextField  label="תשלום" id="fullWidth" value={payment}  onChange={(e) => { setpayment(e.target.value) }}/>
                             <TextField fullWidth label="description" id="fullWidth" value={description} onChange={(e) => { setdescription(e.target.value) }}/>
                         </Box>
                             }
@@ -316,7 +315,7 @@ const Secrtery = ({site,setcurrentsite}) => {
                                 ) : (
                                     <Button onClick={handleComplete}>
                                         {completedSteps() === totalSteps() - 1
-                                            ? 'Finish'
+                                            ? 'גמרת'
                                             : 'Complete Step'}
                                     </Button>
                                 ))}
@@ -337,10 +336,10 @@ const Secrtery = ({site,setcurrentsite}) => {
           placeholder="משך זמן שהיה באתר" 
           onChange={(e) => { setduration(e.target.value) }}
         />
-        
+        <div>
             <Autocomplete1 endpoint2={place2} endpoint1={place1} setpoint1={setpoint1} setpoint2={setpoint2} f={true} ></Autocomplete1>
-           
-            <Uploader file={url} setFile={seturl} label="Add Picture" />
+     </div>      
+            <Uploader file={url} setFile={seturl} label="הוסף תמונה" />
             {/* <input type={"text"} placeholder="place2" onChange={(e) => { f(e) }}></input><br></br> */}
             <div>
        
@@ -348,11 +347,12 @@ const Secrtery = ({site,setcurrentsite}) => {
             
            
             </>
-            : <input type="text" placeholder="enter an admine code" onChange={(e) => { checkadmine(e) }}></input>}
-    </>
+            : <TextField type="password" placeholder="הכנס קוד מזכירה" visible={visible} style={{marginTop:"20vh", margin:"auto"}} onChange={(e) => { checkadmine(e) }}/>}
+        
+   
 
 
-
+</>
 
 
 

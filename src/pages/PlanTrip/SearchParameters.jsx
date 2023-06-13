@@ -17,23 +17,19 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
     const [acces, setacces] = useState(false)
     const [bicycles, setbicycles] = useState(false);
     const [categories, setcategories] = useState([false, false, false, false]);
-    const [categories1, setcategories1] = useState([]);
+
    // const [categories, setcategories] = useState();
-    const [tripstype, settripstype] = useState([false, false, false])
-    const [tripstype1, settripstype1] = useState([])
-    // const [tripstype1, settripstype1] = useState(["around", "riding", "lines"])
+    const [tripstype, settripstype] = useState(["around", "riding", "lines"])
     const [description, setdescription] = useState(null);
    // const [area, setarea] = useState(["south", "center", "JerusalemSurroundingArea", "north"])
    const [area, setarea] = useState([false, false, false, false])
-   const [area1, setarea1] = useState([])
     const [truffic, settruffic] = useState(false)
     const [payment, setpayment] = useState(200)
     //const [level, setlevel] = useState(["medium", "hard", "easy"])
     const [level, setlevel] = useState([false, false,  false])
-    const [level1, setlevel1] = useState([])
     const [empty, setempty] = useState("")
     const steps = ['Participants', 'Select type', 'Constrains'];
-    const [f, setf] = useState(true)
+    const [f, setf] = useState(false)
     const [flagcon, setflagcon] = useState(false)
     const [flagd, setflagd] = useState(false)
     const [load, setload] = useState("")
@@ -70,43 +66,30 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
 
     function check(event,setcategories,categories, num) {
         const arr=categories
-        let arr1=categories1
         arr[num]=event.target.checked
        setcategories([...arr]) 
-        
-        
-        if(arr[num]==false)
-        {
-          arr1=arr1.filter((e)=>e!=(num+1))
-        }
-        else
-        arr1.push(num+1);
-        setcategories1([...arr1])
-        console.log("aaa",categories,categories1)
 
     }
     function check2(event,setlevel,Level, num) {
         const arr=Level
         arr[num]=event.target.checked
        setlevel([...arr]) 
-        console.log("aaa",Level)
 
     }
     function check3(event,setarea,area, num) {
         const arr=area
         arr[num]=event.target.checked
        setarea([...arr]) 
-        console.log("aaa",area)
 
     }
     function check4(event,settripstype,tripstype, num) {
         const arr=tripstype
         arr[num]=event.target.checked
        settripstype([...arr]) 
-        console.log("aaa",tripstype)
 
     }
     async function bringmatchessites() {
+        setf(false)
         setempty("")
         console.log("Gjhkuyhkuhegliutr")
         const GetMatchesSites = async () => {
@@ -154,16 +137,15 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
             let specialarr = []
 
             arrorgin = await GetMatchesSites()
-            console.log("kjgkj",arrorgin)
             if (arrorgin=="ho no there is any matcn site!!") {
-                setempty("ho no there is any matcn site!!")
+                setempty("אוי לא אין אתר מתאים!!")
                 return
             }
             if (description) {
-                setload("match to you sites, it takes time...")
+                setload("מתאים לך אתרים...")
                 specialarr = await getSitesByDescription()
                 if (specialarr)
-                    setempty("ho no there is any matcn site!!")
+                setempty("אוי לא אין אתר מתאים!!")
                 setload("")
             }
             if (!description) {
@@ -175,7 +157,6 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
             let a
             let newarr = specialarr.filter((el) => { return arrorgin.find((e) => el[0] == e.idsites) != undefined && el[1] > 0.5 })
             newarr = arrorgin.filter((e) => newarr.find((el) => el[0] == e.idsites))
-            console.log(newarr)
             setTripsOptions(newarr)
             setTripsOptionsh(newarr)
             setf(false)
@@ -234,13 +215,13 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
 
     return (<>
         {flagd && <>
-            <label>filter just by description</label><br></br>
-            <input placeholder="description" onChange={(e) => { setdescription(e.target.value) }}></input>
+            <label>סנן רק לפי תאור</label><br></br>
+            <input placeholder="תאור" onChange={(e) => { setdescription(e.target.value) }}></input>
             <h1>{load}</h1></>}
         <Box>
-            <Button onClick={() => { setflagd(true) ;clearConstrains()}}>filter just by description </Button>
-            <Button onClick={showconstrains}>Show constrains </Button>
-            <Button onClick={bringmatchessites}>Bring matches sites</Button><br></br><br></br>
+            <Button onClick={() => { setflagd(true) ;clearConstrains()}}>סנן רק לפי תאור </Button>
+            <Button onClick={showconstrains}>בחירת אילוצים </Button>
+            <Button onClick={bringmatchessites}>התאם לי אתרים</Button><br></br><br></br>
             {empty ? <h2>{empty}</h2> : <></>}
             {f ? <div style={{ width: '100vw' }}><Box sx={{ width: '60vw',margin:'auto'  }} >
             <Stepper nonLinear activeStep={activeStep}>
@@ -273,18 +254,18 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
                            
                             <FormLabel id="demo-controlled-radio-buttons-group">Participants</FormLabel>
                            
-                            <FormControlLabel checked={categories[0]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 0)  }/>} label="Families"/>
-                                 <FormControlLabel checked={categories[1]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 1) }/>} label="Groups"/>
-                                 <FormControlLabel checked={categories[2]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 2) }/>} label="Pairs"/>
-                                 <FormControlLabel checked={categories[3]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 3) }/>} label="Children"/>
+                            <FormControlLabel checked={categories[0]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 0)  }/>} label="משפחות"/>
+                                 <FormControlLabel checked={categories[1]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 1) }/>} label="קבוצות"/>
+                                 <FormControlLabel checked={categories[2]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 2) }/>} label="זוגות"/>
+                                 <FormControlLabel checked={categories[3]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 3) }/>} label="ילדים"/>
 </Box>
                            
                             <Box sx={{alignItems:"center", display:"flex", gap:1}}>
                             <FormLabel id="demo-controlled-radio-buttons-group">Accesible</FormLabel>
                             
-                                <FormControlLabel control={<Checkbox checked={bicycles}  onChange={(e)=>setbicycles(e.target.checked)}/>} label="Bicycles"/>
-                                <FormControlLabel control={<Checkbox checked={truffic}  onChange={(e) => { settruffic(e.target.checked)}}/>} label="Public truffic"/>
-                                <FormControlLabel control={<Checkbox checked={acces}  onChange={(e) => { setacces(e.target.checked)}}/>} label="acces"/>
+                                <FormControlLabel control={<Checkbox checked={bicycles}  onChange={(e)=>setbicycles(e.target.checked)}/>} label="אופניים"/>
+                                <FormControlLabel control={<Checkbox checked={truffic}  onChange={(e) => { settruffic(e.target.checked)}}/>} label=" תחבורה"/>
+                                <FormControlLabel control={<Checkbox checked={acces}  onChange={(e) => { setacces(e.target.checked)}}/>} label="גישה"/>
                               </Box>  </Box>
                              : (activeStep === 1) ? 
                               <Box sx={{alignItems:"center",display: 'block'}}>
@@ -293,9 +274,9 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
                             <FormLabel id="demo-controlled-radio-buttons-group">Level</FormLabel>
                         
                           
-                           <FormControlLabel checked={level[0]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 0)  }/>} label="Hard"/>
-                                <FormControlLabel checked={level[1]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 1) }/>} label="Easy"/>
-                                <FormControlLabel checked={level[2]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 2)}/>} label="Medium"/>
+                           <FormControlLabel checked={level[0]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 0)  }/>} label="קשה"/>
+                                <FormControlLabel checked={level[1]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 1) }/>} label="קל"/>
+                                <FormControlLabel checked={level[2]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 2)}/>} label="בינוני"/>
                                
 </Box>
                            

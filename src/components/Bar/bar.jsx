@@ -99,11 +99,11 @@ export default function ButtonAppBar() {
 
       <AppBar position="fixed" style={{ backgroundColor: "GrayText" }}>
         <Toolbar >
-          <Button onClick={home} color="inherit" style={{ width: "20vw" }}>Home</Button>
-          <Button onClick={planTrip} color="inherit" style={{ width: "20vw" }}>Planing Trip</Button>
-          <Button onClick={login} color="inherit" style={{ width: "20vw" }}>Login</Button>
-          <Button onClick={personal_area} color="inherit" style={{ width: "20vw" }}>Personal  area</Button>
-          <Button onClick={secrtery} color="inherit" style={{ width: "20vw" }}>Secrtery</Button>
+          <Button onClick={home} color="inherit" style={{ width: "20vw" }}>דף הבית</Button>
+          <Button onClick={planTrip} color="inherit" style={{ width: "20vw" }}>לתכן טיול חדש</Button>
+          <Button onClick={login} color="inherit" style={{ width: "20vw" }}>התחבר</Button>
+          <Button onClick={personal_area} color="inherit" style={{ width: "20vw" }}>הטיולים שלי</Button>
+          <Button onClick={secrtery} color="inherit" style={{ width: "20vw" }}>מזכירה</Button>
           {auth && (
             <div>
               <IconButton

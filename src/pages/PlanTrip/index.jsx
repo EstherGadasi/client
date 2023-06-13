@@ -76,8 +76,8 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
         let money = 0
         if (selectOption) {
             selectOption.forEach(element => {
-                if(element.payment)
-                money += element.payment
+                if (element.payment)
+                    money += element.payment
             });
             setpayment(money)
         }
@@ -87,7 +87,6 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
         let arr1 = []
         for (let i = 0; i < sites.length; i++) {
             setarrid([...arrid, sites[i].idsites])
-            console.log(sites[i].idsites)
         }
         setSelectedOption([...sites])
         setdistanceSite([{
@@ -119,7 +118,6 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
                 setSelectedOption([...selectOption, e])
                 setarrid([...arrid, e.idsites])
                 setpayment(payment + e.payment)
-                console.log(begin_point1, begin_point2)
                 setdistanceSite([{
                     name: selectOption[0].name, min: 0,
                     site: {
@@ -128,7 +126,6 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
                     }
                 }])
                 setnames([...names, selectOption[0].name])
-                console.log(locations)
                 setlocations([...locations, { "name": e.name, "lat": e.place1, "lng": e.place2 }])
                 setnames([...names, e.name])
             }
@@ -146,7 +143,6 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
         for (let i = 0; i < arrhelper.length; i++) {
             arr.push({ "name": arrhelper[i].name, "lat": arrhelper[i].place1, "lng": arrhelper[i].place2 })
         }
-        console.log("---------------------------", arr)
         setlocations(arr)
         setSelectedOption(
             arrhelper
@@ -161,7 +157,6 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
             "lng": selectOption[0].place2
 
         }
-        console.log(selectOption[0].name)
         setdistanceSite([{ name: selectOption[0].name, min: 0, site: site }])
     }
     async function save() {
@@ -206,31 +201,29 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
                 <div style={{ width: "100vw", display: "flex" }}>
                     <TripsOptions tripsOptions={tripsOptions} setcorrentitem={setcorrentitemAdd} addsite={addsite} />
                     <div style={{
-                        height: '100vh', width: "25vw", overflow: 'scroll', borderColor: "GrayText", borderWidth: "2px",
-                        border: "solid",
-                        marginLeft: "0.5px",marginRight:"1px"
-
+                        height: '100vh', width: "23vw", overflow: 'scroll', borderColor: "GrayText", borderWidth: "2px",
+                        border: "double",
+                        marginLeft: "2px"
                     }}>
                         {selectOption?.map((e, i) => {
                             return <>
-                                <Site startpoint={startpoint} setlocations={setlocations} locations={locations} key={i} len={selectOption.length} selectOption={selectOption} setSelectedOption={setSelectedOption} RemoveSite={RemoveSite} e={e} setcorrentitem={setcorrentitemReduce} i={i}></Site>  </>
+                                {i != 0 && <Site startpoint={startpoint} setlocations={setlocations} locations={locations} key={i} len={selectOption.length} selectOption={selectOption} setSelectedOption={setSelectedOption} RemoveSite={RemoveSite} e={e} setcorrentitem={setcorrentitemReduce} i={i}></Site>} </>
                         })}
-                        <label htmlFor=""> you may change the order of the sites: ckick on the position your position you want </label><br></br></div>
+                        <label htmlFor="">לשינוי סדר האתרים הכנס מיקום רצוי בהכנסת מיקום  </label><br></br></div>
                 </div>
                 <Box></Box>
 
-                {id ? <Button onClick={save}>update</Button> : <></>}
-                {selectOption && !id ? <Button onClick={save}>save</Button> : <></>}<br></br>
-                <label> if you want to see all the details of your trip click to save,
-                    dont worry you will be able to update it in your trips </label>
+                {id ? <Button onClick={save}>עדכון טיול</Button> : <></>}
+                {selectOption && !id ? <Button onClick={save}>שמירה</Button> : <></>}<br></br>
+                <label> אחרי שמירת הטיול תוכל לראות את כל הפרטים עליו ולערוך אותו שוב</label>
                 {trip ? <Save namestart={namestart} selectOption={selectOption[selectOption.length - 1]} setend_point1={setend_point1} setend_point2={setend_point2} isLoaded={isLoaded} setTripid={setTripid} payment={payment} userId={currentUser.idusers} begin_point1={begin_point1} begin_point2={begin_point2} end_point1={end_point1} end_point2={end_point2} date={date} listofsites={arrid} constrainsoftrip={constrains} idtrips={tripid} duration={duration} /> : <></>}
                 {isLoaded && <Map isLoaded={isLoaded} center={center} markers={markers} places={[...locations]} handleChange={handleChange} />}
                 <Box sx={{ width: "100vw" }} bgcolor="InfoBackground">
 
                     {selectOption ? <TripSettings setshowduration={setshowduration} setnamesarr={setnamesarr} namesar={namesar} names={names} setduration={setduration} duration={duration} flag={flag} setflag={setflag} setdistance={setdistanceSite} distanceSite={distanceSite} setend_point1={setend_point1} setend_point2={setend_point2} selectOption={selectOption} /> : <></>}
-                    <span>it will cost you: {payment}<AttachMoneyIcon /></span>
+                    <span>יעלה לך בסה"כ: {payment}<AttachMoneyIcon /></span>
                     {showduration ? console.log(showduration) : <></>}
-                    {showduration ? <div><QueryBuilderIcon />{showduration[0] ? <><span>{showduration[0]} days</span></> : <></>}{showduration[1] ? <><span>{showduration[1]} hours</span></> : <></>}{showduration[2] ? <><span>{showduration[2]} minits</span></> : <></>}</div> : <></>}
+                    {showduration ? <div><QueryBuilderIcon />{showduration[0] ? <><span>{showduration[0]} ימים</span></> : <></>}{showduration[1] ? <><span>{showduration[1]} שעות</span></> : <></>}{showduration[2] ? <><span>{showduration[2]} דקות</span></> : <></>}</div> : <></>}
                 </Box>
             </div>
         </Box>

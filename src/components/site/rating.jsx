@@ -32,7 +32,6 @@ console.log(realcode)
         if (user_opinion && level) {
             try {
                 const res = await axios.post("http://localhost:4000/opinion", { user_opinion, level, siteid, userid });
-                console.log(res.data)
             }
             catch { }
         }
@@ -47,7 +46,7 @@ console.log(realcode)
                     // endDecorator={<DeleteForever />}
                     onClick={() => setOpen(true)}
                 >
-                    show Rate  {/* {site.name} */}
+                   פרטים נוספים {/* {site.name} */}
                 </Button>
             </Box>
             <Modal open={open} onClose={() => setOpen(false)}>
@@ -63,7 +62,7 @@ console.log(realcode)
                         component="h2"
                         startDecorator={<GradeIcon />}
                     >
-                        Rating
+                       חוות דעת
                     </Typography>
                     <Divider />
                     {addsite || RemoveSite || realcode ? <> {site.opinion?.map((e) => <Opinion e={e} ></Opinion>)}</> : <>
@@ -79,7 +78,7 @@ console.log(realcode)
 
                     <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end', pt: 2 }}>
                         <Button variant="plain" color="neutral" onClick={() => setOpen(false)}>
-                            Cancel
+                            חזרה
                         </Button>
                         {!(addsite || RemoveSite || realcode) && <Button variant="solid" color="success" onClick={() => {
                             setOpen(false)
@@ -88,7 +87,7 @@ console.log(realcode)
                         }
 
                         }>
-                            Rate
+                            חוות דעת
                         </Button>}
                     </Box>
                 </ModalDialog>

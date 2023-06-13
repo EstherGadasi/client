@@ -9,6 +9,7 @@ import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIos from '@material-ui/icons/ArrowForwardIos';
 import { func } from "prop-types";
 import CarouselImg from "./carousel";
+import { Man } from "@mui/icons-material";
 //sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
 export const Home = () => {
   const [Opinions, setOpinions] = useState(null)
@@ -18,6 +19,15 @@ export const Home = () => {
   const [level, setlevel] = useState(0);
   const [startindex, setstartindex] = useState(0)
   const [endindex, setendindex] = useState(4)
+  const personal="התחביב הכי גדול שלי הוא לטייל "
+  const hoby="מאז שהייתי קטן נהניתי ללכת לראות עוד ועוד מקומות יפים לחקור להנות הנוף היפה שלנו בינינו אין על ארץ ישראל"
+ const israel="תמיד לא הבנתי את החברים שלי שיוצאים לנפוש בחוץ לארץ מה יש לנו לחפש שם אין על הארץ היפה שלנו שיש בה הכל מדבר מים ימים ונחלים "
+  const start=" לטיל בראש שקט הוקם לצורך ערך מוסף בשבליכם מטיילים יקרים"
+  const goal="מטרת האתר שלנו הוא לספק לכם מידע רב על המסלול אותו אתם בוחרים כגון דרכח הזגעה, מפות, אורך נסיעה ובעיקר דרך אופטימלית לנסוע"
+  const explain="האתר יספק לכם אפשרות סינון אתרים על פי האפשרויות שלכם כל שעליכם לעשות הוא לספר לנו במידה ואתם רוצים איזה סינונים מתאים לכם "
+  const descriptione="וכמובן התאמנו לכם עוד אפשרות סינון מיוחדת אתם תתארו לנו איזה אתרים אתם אוהבים והמערכת שלנו תביא לכם רשימת אתרים מתאימה"
+ const shalom="שלומציון: תמיד היינו יוצאים לטיול עם תקווה להספיק את כל התכניות אך תמיד פשלנו כשהלכנו לאתר מסוים קודם וגילינו שסתם הארכנו את הדרך מאז שגיליתי את לטייל בראש שקט אני מוצא את עצמי מטייל בשקט בידיעה שסדרו לי מסלול מוכןמ ומאורגן עם התאמה מלאה לצרכים שלי"
+  const man="דויוד: אם עד עכשיו היינו צריכים לחפש בכוחות עצמינו מה מתאים לנו לנתונים האישיים שלנו ולתכנן לעצמינו וכמובן לפפול שוב ושוב ולגלות שלא התכונוו באמת האתר לטייל בראש שקט נותן לנו את האתרים המתאימים לנו ואין טעויות"
   useEffect(() => {
     console.log("we")
     const GetBestOpinions = async () => {
@@ -74,9 +84,17 @@ export const Home = () => {
   return (<>
     {/* <img src='/assets/front_image.jpg' style={{ width: '100vw', height: '50vh' }}></img> */}
     <CarouselImg></CarouselImg>
-    <div>Hello we suggest you to register to our special site for surfing experience</div>
-    <label> our site.... </label><br></br>
-    <h3>our most visits sites:</h3>
+    <div></div>
+    <h4> {start} </h4>
+    <h5> {personal} </h5>
+    <h5> {hoby} </h5>
+    <h5> {israel} </h5>
+    <h6> {goal} </h6>
+    <h6> {explain} </h6>   
+    <h6> {descriptione} </h6>   
+    <h6> {man} </h6>  
+    <h6> {shalom} </h6>  
+     <h3>אתרים הכי מבוקרים</h3>
     <Box sx={{ display: "flex",alignItems:"center" ,margin:"auto" }} style={{ width: "75vw" }}>
    { startindex>0&&<ArrowForwardIos style={{ left: 150, zIndex: 100 }} onClick={left}></ArrowForwardIos>}
    <Box sx={{ display: "flex",alignItems:"center",margin:"auto"   }} style={{ width: "75vw" }}>

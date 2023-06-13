@@ -22,7 +22,7 @@ function FinallTrip() {
     const [road, setroad] = useState()
     const [travel_mode, settravel_mode] = useState([])
     const [flag, setflag] = useState(false)
-    const [messsage, setmesssage] = useState("these are the abilities: DRIVING,BICYCLING,TRANSIT,WALKING")
+    const [messsage, setmesssage] = useState("האפשרויות הם:נהיגה,אופניים,הליכה,מעבר")
     const { isLoaded } = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: "AIzaSyBWW1xrjKfvdMk2-oVeMEHDyYW83E0nU0A",
@@ -57,39 +57,49 @@ function FinallTrip() {
         return arr
     }
     function Travel_mode(e, i) {
-        if (e.target.value == "DRIVING" || e.target.value == "BICYCLING" || e.target.value == "TRANSIT" || e.target.value == "WALKING") {
-            travel_mode[i] = e.target.value
+        let d="";
+        if (e.target.value == "נהיגה") 
+         d="DRIVING"
+        else if(e.target.value == "אופניים")
+        d="BICYCLING"
+        else if( e.target.value == "מעבר")
+        d="TRANSIT"
+        else if(e.target.value == "הליכה")
+        d="WALKING"
+        if(d)
+        {
+            travel_mode[i] = d
             settravel_mode([...travel_mode])
             setmesssage("")
         }
-        else if(e.target.value!="")
-        setmesssage("these are the abilities: DRIVING,BICYCLING,TRANSIT,WALKING")
+        else if (e.target.value != "")
+            setmesssage("האפשרויות הם:נהיגה,אופניים,הליכה,מעבר")
     }
-   
+
     useEffect(() => { bringTrip() }, []);
 
     // useEffect(() => { Information() }, [information]);onClick={setflag(false)}
     return (<>
-        <br></br>
-        <h4>default by DRIVING</h4>
-        <label>you may change the trasnsforation</label><br></br>
+
+<br></br>
+        <h4>ברירת המחדל זה ע"י נהיגה</h4>
+        <label>אתה רשאי לשנות את אמצעי התחבורה שלך</label><br></br>
         {messsage&&<h3>{messsage}</h3>}
-        <label>start</label><br></br>
-        <input placeholder="your ablities: DRIVING, BICYCLING, TRANSIT ,WALKING " onChange={(e) => { Travel_mode(e, 0) }}>
+        <label>התחלה</label><br></br>
+        <input placeholder="האפשרויות הם:נהיגה,אופניים,הליכה,מעב" onChange={(e) => { Travel_mode(e, 0) }}>
         </input><br></br>
         {trip.sites?.map((el, i) => {
             return (<>
                 <label>{el.name}</label><br></br>
-                <input placeholder="your ablities: DRIVING, BICYCLING, TRANSIT ,WALKING" onChange={(e) => { Travel_mode(e, i) }}>
+                <input placeholder="האפשרויות הם:נהיגה,אופניים,הליכה,מעבר" onChange={(e) => { Travel_mode(e, i) }}>
                 </input><br></br>
             </>)
         })}
 
-      
         {trip ? <Trip trip={trip} setlocation={setlocations} /> : <></>}
-       
+
         {/* {locations?.map((e) =>travel_mode={travel_mode} <Autocomplete1 center={{ "lat": 34.2, "lng": 98.5 }} markers={{ "lat": 34.2, "lng": 98.5 }} placesarr={e} />)} */}
-     { trip.sites&&  <Map  sites={trip.sites} travel_mode={travel_mode} information={information} setinformation={setinformation} isLoaded={isLoaded} center={center} markers={markers} places={[...locations]} handleChange={handleChange} />}
+        {trip.sites && <Map sites={trip.sites} travel_mode={travel_mode} information={information} setinformation={setinformation} isLoaded={isLoaded} center={center} markers={markers} places={[...locations]} handleChange={handleChange} />}
     </>)
 }
 export default FinallTrip;

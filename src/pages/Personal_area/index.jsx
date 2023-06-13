@@ -46,8 +46,8 @@ function Personal_area() {
     return <>
         {!currentitem ? <>
         <Box style={{width:"100vw",display:"blok"}}>
-        <div>hello welcom to your personal area, here you can see all your trips edit them or delete and olso get to plan new one </div> 
-        <Button onClick={plan_new_trip}>plan new trip</Button>
+        <div>הטיולים שלך כאן תוכל לשנות למחוק </div> 
+        <Button onClick={plan_new_trip}>טיול חדש</Button>
         <Box style={{width:"100vw",display:"blok"}}>
             {trip?.map((e, i) => {
 

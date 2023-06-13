@@ -69,9 +69,9 @@ function Register() {
             <div className="login-page" style={{margin:"auto",alignItems:"center"}}>
             <form className="login-form" style={{width:"25vw",margin:"auto",marginTop:"10vw",padding: "2em",position: "relative",background: "rgba(black, .15)" }}>
             <div className="text-center" style={{ marginTop: "1em",color: "$green-light",fontSize: ".65em",textAlign: "center",position: "relative"}}>
-            Already registered?{" "}
+           רשום כבר?{" "}
             <span className="link-primary" onClick={ login} style={{ marginTop: "1em",color: "$green-light",fontSize: ".65em",textAlign: "center",position: "relative"}}>
-              Sign In
+              התחבר
             </span>
             </div>
             <div className="login-form-content" style={{display: "flex" ,marginBottom: "1em"}}>
@@ -103,7 +103,7 @@ function Register() {
   
     // fontWeight: 600,
     textShadow: "0 1px 0 rgba(black, .2)"
-    }}>register</button>
+    }}>הרשם</button>
             
         
          </form>

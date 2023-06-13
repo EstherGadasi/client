@@ -1,15 +1,7 @@
 import { useState } from "react"
 import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
 import CustomizedInputBase from '../secretery/input'
-//import Map from "./Map"
-//import Map1 from "./e";
-
 function Autocomplete1({setnamestart, locations, isLoaded, setlocations, setpoint1, setpoint2, placesarr, setSelectedOption, SelectedOption, setstartpoint }) {
-  // const { isLoaded } = useJsApiLoader({
-  //   id: "google-map-script",
-  //   googleMapsApiKey: "AIzaSyBWW1xrjKfvdMk2-oVeMEHDyYW83E0nU0A",
-  //   libraries: ['places']
-  // });
   const [center, setCenter] = useState({ lat: 31.732642099242874, lng: 35.18573300318892 })
   const [markers, setMarkers] = useState([{ lat: 31.732642099242874, lng: 35.18573300318892 }, { lat: 31.731318964884345, lng: 35.19509927741574 }])
   const [places, setPlaces] = useState("")
@@ -53,9 +45,11 @@ function Autocomplete1({setnamestart, locations, isLoaded, setlocations, setpoin
   }
 
   if (!isLoaded) {
-    return <h1>Loading the map</h1>;
+    return <h1>מעלה את המפה</h1>;
   }
-  return (<> <Autocomplete
+  return (<>
+  <div> 
+    <Autocomplete
   style={{ width: "100vw", display: "flex" }}
     onLoad={onLoad}
     onPlaceChanged={onPlaceChanged}
@@ -89,6 +83,7 @@ function Autocomplete1({setnamestart, locations, isLoaded, setlocations, setpoin
 
         {/* places={[...places]} */}
       </div>
+    </div>
     </div>
   </>
   )

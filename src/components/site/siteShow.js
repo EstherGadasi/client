@@ -26,7 +26,7 @@ function Siteshow({ site, addsite, RemoveSite, update, realcode }) {
             variant="plain" color="neutral"
             onClick={() => setOpen(true)}
           >
-            show Site
+            פרטים נוספים
           </Button>
 
         </Box>
@@ -41,22 +41,22 @@ function Siteshow({ site, addsite, RemoveSite, update, realcode }) {
               <CloseIcon></CloseIcon>
             </Button>
             <h3 >{site.name}</h3>
-            <img key={site.images.idimages} src={site.images.url?site.images.url:'/assets/deed_sea.jpg'} style={{ height: '40vh', maxWidth: '100vw' }}></img>
+            <img key={site.images?.idimages} src={site.images?site.images.url:'/assets/deed_sea.jpg'} style={{ height: '40vh', maxWidth: '100vw' }}></img>
 
             <Typography variant="body2" color="text.secondary" sx={{display: "grid", gridTemplateColumns: { xs: "repeat(1, minmax(0,1fr))", sm: "repeat(3, minmax(0,1fr))"}} }>
-              <div display="flex"><h4>Acces:</h4> {site.acces ? <><AccessibleIcon/> possible to acces</> : <> <NotAccessibleIcon/>not possible to acces</>}</div>
-              <div><h4>Bicycles:</h4> {site.bicycles ? <> <PedalBikeIcon/>possible to bicycles</> :<><CloseIcon/><PedalBikeIcon/>not possible to bicycles</>}</div>
-              <div><h4>Categories:</h4> {site.categories}</div>
-              <div><h4>Tripstype:</h4>{site.tripstype}</div>
+              <div display="flex"><h4>גישה:</h4> {site.acces ? <><AccessibleIcon/> יש גישה</> : <> <NotAccessibleIcon/>אין גישה</>}</div>
+              <div><h4>אופניים:</h4> {site.bicycles ? <> <PedalBikeIcon/>אפשרות לאופניים</> :<><CloseIcon/><PedalBikeIcon/>אין אפשרות לאופניים</>}</div>
+              <div><h4>קטגוריות:</h4> {site.categories}</div>
+              <div><h4>סוג טיול:</h4>{site.tripstype}</div>
               {/* <div><h4>Description:</h4> {site.description}</div>  */}
-              <div><h4>Area:</h4> {site.area}</div>
-              <div><h4>Truffic:</h4> {site.truffic ? <><DirectionsBusFilledIcon/>possible to truffic</> : <><BusAlertIcon/>not possible to truffic</>}</div>
-              <div><h4>Payment:</h4> <AttachMoneyIcon/>{site.payment}</div> 
-              <div><h4>Level:</h4>  {site.level}</div> 
+              <div><h4>אזור:</h4> {site.area}</div>
+              <div><h4>תחבורה ציבורית:</h4> {site.truffic ? <><DirectionsBusFilledIcon/>תחבורה ציבורית</> : <><BusAlertIcon/>אין תחבורה ציבורית</>}</div>
+              <div><h4>תשלום:</h4> <AttachMoneyIcon/>{site.payment}</div> 
+              <div><h4>רמה:</h4>  {site.level}</div> 
               {/* <div><h4>Name:</h4> {site.name} </div> */}
-              <div><h4>Adress:</h4>{site.adress}</div>
+              <div><h4>כתובת:</h4>{site.adress}</div>
             </Typography>
-            <Rate site={site} update={update} addsite={addsite} RemoveSite={RemoveSite} realcode={realcode}>rate</Rate>
+            <Rate site={site} update={update} addsite={addsite} RemoveSite={RemoveSite} realcode={realcode}></Rate>
           </ModalDialog>
         </Modal>
       </React.Fragment>

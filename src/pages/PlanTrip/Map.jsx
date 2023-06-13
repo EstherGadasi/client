@@ -6,7 +6,7 @@ import {
 } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import Lgoogle from "./searchShow";
-function Map({sites, travel_mode, isLoaded, center, markers, places, handleChange }) {
+function Map({ sites, travel_mode, isLoaded, center, markers, places, handleChange }) {
   const [map, setMap] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState([]);
   const [information, setinformation] = useState([])
@@ -18,9 +18,8 @@ function Map({sites, travel_mode, isLoaded, center, markers, places, handleChang
   useEffect(() => {
     calculateRoute();
     if (travel_mode) {
-      setinformation(arrResults)
-      originInformation()
-       count()
+
+
     }
     //   if(information){
     //   if(arrResults.length==0)
@@ -30,7 +29,6 @@ function Map({sites, travel_mode, isLoaded, center, markers, places, handleChang
     //    else calculateRoute()
   }, [places]);
   const onLoad = (marker) => {
-    console.log("marker: ", marker);
   };
   const google = (window.google = window.google ? window.google : {});
   async function calculateRoute() {
@@ -76,13 +74,18 @@ function Map({sites, travel_mode, isLoaded, center, markers, places, handleChang
     // setinformation(arrResults)
     setDirectionsResponse(directionRes);
     handleChange(distancesDurations)
+    if (travel_mode) {
+      setinformation(arrResults)
+      originInformation(arrResults)
+      count(arrResults)
+    }
   }
-  function originInformation() {
-    if (information.length) {
+  function originInformation(arrResults) {
+    if (arrResults.length) {
       let arr = []
       let time = 0
-      information.forEach((e) => { arr.push(e.routes[0].summary) })
-      information.forEach((e) => { time += e.routes[0].legs[0].distance.value })
+      arrResults.forEach((e) => { arr.push(e.routes[0].summary) })
+      arrResults.forEach((e) => { time += e.routes[0].legs[0].distance.value })
       setdurationtravels(parseseconds(time))
       setroad(arr)
 
@@ -93,57 +96,54 @@ function Map({sites, travel_mode, isLoaded, center, markers, places, handleChang
     arr[0] = parseInt(time / 24 / 60 / 60 / 24)
     arr[1] = parseInt(time / 24 / 60 / 60 % 24)
     arr[2] = parseInt(time / 60 % 60)
-    console.log(arr)
     return arr
   }
-  function count() {
-    console.log(sites)
-        let time=0
-        information.forEach((e) => { time+=e.routes[0].legs[0].distance.value })
-        sites.map((e) => time += e.duration)
-        console.log(time)
-        setduration(parseseconds(time))
-    
-}
+  function count(arrResults) {
+    let time = 0
+    arrResults.forEach((e) => { time += e.routes[0].legs[0].distance.value })
+    sites.map((e) => time += e.duration)
+    setduration(parseseconds(time))
+
+  }
   if (!isLoaded) return <h1>Loading</h1>
   return (<>
-    
-    {isLoaded}
-    
-   <div >
-    <GoogleMap google={window.google}
-      center={center}
-      zoom={15}
-      position="fixed"
-      mapContainerStyle={{ width: "50vw", height: "30vh" }}
-      options={{
-        zoomControl: false,
-        streetViewControl: false,
-        mapTypeControl: false,
-        fullscreenControl: false,
-      }}
-      onLoad={(map, maps) => {
-        console.log(map)
 
-      }}
-    >
-      {markers?.length &&
-        markers.map((marker, key) => {
-          return <Marker key={key} onLoad={onLoad} position={marker} />;
-        })}
-      {directionsResponse.length > 0 &&
-        directionsResponse.map((dirRes) => (
-          <DirectionsRenderer directions={dirRes} />
-        ))}
-    </GoogleMap>
-{/* {road&&<Lgoogle road={road} showduration={showduration} showdurationtravels={showdurationtravels} onLoad={onLoad} center={center} map={map} markers={markers}directionsResponse={directionsResponse} directionsResponse={directionsResponse} ></Lgoogle>} */}
+    {isLoaded}
+
+    <div >
+      <GoogleMap google={window.google}
+        center={center}
+        zoom={15}
+        position="fixed"
+        mapContainerStyle={{ width: "50vw", height: "30vh" }}
+        options={{
+          zoomControl: false,
+          streetViewControl: false,
+          mapTypeControl: false,
+          fullscreenControl: false,
+        }}
+        onLoad={(map, maps) => {
+
+        }}
+      >
+        {markers?.length &&
+          markers.map((marker, key) => {
+            return <Marker key={key} onLoad={onLoad} position={marker} />;
+          })}
+        {directionsResponse.length > 0 &&
+          directionsResponse.map((dirRes) => (
+            <DirectionsRenderer directions={dirRes} />
+          ))}
+      </GoogleMap>
+      {/* {road&&<Lgoogle road={road} showduration={showduration} showdurationtravels={showdurationtravels} onLoad={onLoad} center={center} map={map} markers={markers}directionsResponse={directionsResponse} directionsResponse={directionsResponse} ></Lgoogle>} */}
     </div>
-    {road?.map((e,i) => <div>road of point {i+1} to point {i+2}: {e}</div>)}
-    {showdurationtravels ? <div>count trip's travels time  {showdurationtravels[0] ? <><span>{showdurationtravels[0]} days </span></> : <></>}{showdurationtravels[1] ? <><span>{showdurationtravels[1]} hours </span></> : <></>}{showdurationtravels[2] ? <><span>{showdurationtravels[2]} minits </span></> : <></>}</div> : <></>}
-    {showduration ? <div>count all trip with sites  {showduration[0] ? <><span>{showduration[0]} days </span></> : <></>}{showduration[1] ? <><span>{showduration[1]} hours </span></> : <></>}{showduration[2] ? <><span>{showduration[2]} minits </span></> : <></>}</div> : <></>}
+    
+    {road?.map((e, i) => <div>כביש מנקודה {i + 1} לנקודה {i + 2}: {e}</div>)}
+    {showdurationtravels ? <div>זמן הנסיעות של הטיול  {showdurationtravels[0] ? <><span>{showdurationtravels[0]} ימים </span></> : <></>}{showdurationtravels[1] ? <><span>{showdurationtravels[1]} שעות </span></> : <></>}{showdurationtravels[2] ? <><span>{showdurationtravels[2]} דקות </span></> : <></>}</div> : <></>}
+    {showduration ? <div>אורך טיול בסה"כ {showduration[0] ? <><span>{showduration[0]} ימים </span></> : <></>}{showduration[1] ? <><span>{showduration[1]} שעות </span></> : <></>}{showduration[2] ? <><span>{showduration[2]} דקות </span></> : <></>}</div> : <></>}
   </>
   );
-  
+
 
 }
 

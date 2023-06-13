@@ -24,6 +24,7 @@ function Autocomplete1({setpoint1, setpoint2, f ,endpoint1,endpoint2}) {
       const currPlace = autocomplete.getPlace()
       console.log(currPlace)
       if (setpoint1) {
+        console.log(currPlace.geometry.location.lat(),currPlace.geometry.location.lng())
         setpoint1(currPlace.geometry.location.lat())
         setpoint2(currPlace.geometry.location.lng())
       }
@@ -45,7 +46,7 @@ function Autocomplete1({setpoint1, setpoint2, f ,endpoint1,endpoint2}) {
   return (<> <Autocomplete
     onLoad={onLoad}
     onPlaceChanged={onPlaceChanged} >
-    <CustomizedInputBase />
+    {/* <CustomizedInputBase /> */}
   </Autocomplete>
       <div className="map-container">
         <div className="map-options">
