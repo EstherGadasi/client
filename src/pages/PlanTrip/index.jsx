@@ -26,7 +26,7 @@ import { Grid } from "@material-ui/core";
 import { useJsApiLoader } from "@react-google-maps/api";
 import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 
-function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name, startpoint1 }) {
+function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name, startpoint1, durationtrip }) {
     const { token, currentUser } = useContext(AuthContext)
     const [correntitemReduce, setcorrentitemReduce] = useState({})
     const [correntitemAdd, setcorrentitemAdd] = useState()
@@ -88,7 +88,13 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
         for (let i = 0; i < sites.length; i++) {
             setarrid([...arrid, sites[i].idsites])
         }
-        setSelectedOption([...sites])
+        setSelectedOption([{
+            name: name, min: 0,
+            site: {
+                "lat": bg1,
+                "lng": bg2
+            }
+        }, ...sites])
         setdistanceSite([{
             name: name, min: 0,
             site: {
@@ -105,7 +111,7 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
         setbegin_point1(bg1)
         setbegin_point2(bg2)
         setstartpoint({ "name": startpoint1, "lat": bg1, "lng": bg2 })
-
+        setduration(durationtrip)
         setnamestart(startpoint1)
     }
     const handleChange = (newArray) => {
@@ -222,7 +228,7 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
 
                     {selectOption ? <TripSettings setshowduration={setshowduration} setnamesarr={setnamesarr} namesar={namesar} names={names} setduration={setduration} duration={duration} flag={flag} setflag={setflag} setdistance={setdistanceSite} distanceSite={distanceSite} setend_point1={setend_point1} setend_point2={setend_point2} selectOption={selectOption} /> : <></>}
                     <span>יעלה לך בסה"כ: {payment}<AttachMoneyIcon /></span>
-                 
+                    {duration && <div>{duration}</div>}
                     {showduration ? <div><QueryBuilderIcon />{showduration[0] ? <><span>{showduration[0]} ימים</span></> : <></>}{showduration[1] ? <><span>{showduration[1]} שעות</span></> : <></>}{showduration[2] ? <><span>{showduration[2]} דקות</span></> : <></>}</div> : <></>}
                 </Box>
             </div>

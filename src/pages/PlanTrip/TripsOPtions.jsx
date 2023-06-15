@@ -9,7 +9,8 @@ function TripsOptions({ tripsOptions, setcorrentitem, addsite }) {
     <Box sx={{display:"block",width:"100vw"}}>
     <div display="flex">
         <label>בחר את האתר המועדף עליך בהוסף   </label><br></br>
-        <label style={{color:"darkblue"}}> לפרטים נוספים לחץ על הראה אתר </label></div>
+        {/* <label style={{color:"darkblue"}}> ר </label> */}
+        </div>
         <Box sx={{ display: "grid", gridTemplateColumns: { xs: "repeat(1, minmax(0,1fr))", sm: "repeat(3, minmax(0,1fr))" } }} style={{ width: "75vw" }}>
             {tripsOptions?.map((e, i) => {
                 return <>

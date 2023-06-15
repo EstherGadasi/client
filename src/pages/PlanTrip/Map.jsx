@@ -6,7 +6,7 @@ import {
 } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import Lgoogle from "./searchShow";
-function Map({ sites, travel_mode, isLoaded, center, markers, places, handleChange }) {
+function Map({ trip, sites, travel_mode, isLoaded, center, markers, places, handleChange }) {
   const [map, setMap] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState([]);
   const [information, setinformation] = useState([])
@@ -16,19 +16,10 @@ function Map({ sites, travel_mode, isLoaded, center, markers, places, handleChan
   let arr = []
   let time1 = 0
   let arrResults = []
-  let time = 0
+  let time = trip?.duration ? trip.duration : 0
   useEffect(() => {
     calculateRoute();
-    if (travel_mode) {
 
-
-    }
-    //   if(information){
-    //   if(arrResults.length==0)
-    //  { calculateRoute();
-    //   //  setinformation(arrResults)
-    // }}
-    //    else calculateRoute()
   }, [places]);
   const onLoad = (marker) => {
   };
@@ -79,31 +70,30 @@ function Map({ sites, travel_mode, isLoaded, center, markers, places, handleChan
     if (travel_mode) {
       setinformation(arrResults)
       originInformation(arrResults)
-      count(arrResults)
+      count()
     }
   }
   function originInformation(arrResults) {
+    console.log(time)
     if (arrResults.length) {
-      
+
       arrResults.forEach((e) => { arr.push(e.routes[0].summary) })
-      arrResults.forEach((e) => { time1 += e.routes[0].legs[0].distance.value })
-      setdurationtravels(parseseconds(time1))
+      setdurationtravels(parseseconds(time))
       setroad(arr)
 
     }
   }
   function parseseconds(time) {
+    console.log(time)
     let arr = []
     arr[0] = parseInt(time / 24 / 60 / 60 / 24)
     arr[1] = parseInt(time / 24 / 60 / 60 % 24)
     arr[2] = parseInt(time / 60 % 60)
     return arr
   }
-  function count(arrResults) {
-    arrResults.forEach((e) => { time += e.routes[0].legs[0].distance.value })
+  function count() {
     sites.map((e) => time += e.duration)
     setduration(parseseconds(time))
-
   }
   if (!isLoaded) return <h1>Loading</h1>
   return (<>

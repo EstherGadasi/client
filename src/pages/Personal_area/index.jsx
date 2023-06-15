@@ -56,7 +56,7 @@ function Personal_area() {
 
                 </>
             })}</Box></Box>
-            </>: <Planning_a_trip startpoint1={currentitem.namestart} sites={currentitem.sites} id={currentitem.idtrips} paymenttrip={currentitem.payment} bg1={currentitem.begin_point1} bg2={currentitem.begin_point2} name={currentitem.name} />}
+            </>: <Planning_a_trip durationtrip={currentitem.duration} startpoint1={currentitem.namestart} sites={currentitem.sites} id={currentitem.idtrips} paymenttrip={currentitem.payment} bg1={currentitem.begin_point1} bg2={currentitem.begin_point2} name={currentitem.name} />}
     </>
 
 

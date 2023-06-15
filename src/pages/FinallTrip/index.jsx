@@ -99,7 +99,7 @@ function FinallTrip() {
         {trip ? <Trip trip={trip} setlocation={setlocations} /> : <></>}
 
         {/* {locations?.map((e) =>travel_mode={travel_mode} <Autocomplete1 center={{ "lat": 34.2, "lng": 98.5 }} markers={{ "lat": 34.2, "lng": 98.5 }} placesarr={e} />)} */}
-        {trip.sites && <Map sites={trip.sites} travel_mode={travel_mode} information={information} setinformation={setinformation} isLoaded={isLoaded} center={center} markers={markers} places={[...locations]} handleChange={handleChange} />}
+        {trip.sites && <Map trip={trip} sites={trip.sites} travel_mode={travel_mode} information={information} setinformation={setinformation} isLoaded={isLoaded} center={center} markers={markers} places={[...locations]} handleChange={handleChange} />}
     </>)
 }
 export default FinallTrip;
