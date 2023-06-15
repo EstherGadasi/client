@@ -222,7 +222,7 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
 
                     {selectOption ? <TripSettings setshowduration={setshowduration} setnamesarr={setnamesarr} namesar={namesar} names={names} setduration={setduration} duration={duration} flag={flag} setflag={setflag} setdistance={setdistanceSite} distanceSite={distanceSite} setend_point1={setend_point1} setend_point2={setend_point2} selectOption={selectOption} /> : <></>}
                     <span>יעלה לך בסה"כ: {payment}<AttachMoneyIcon /></span>
-                    {showduration ? console.log(showduration) : <></>}
+                 
                     {showduration ? <div><QueryBuilderIcon />{showduration[0] ? <><span>{showduration[0]} ימים</span></> : <></>}{showduration[1] ? <><span>{showduration[1]} שעות</span></> : <></>}{showduration[2] ? <><span>{showduration[2]} דקות</span></> : <></>}</div> : <></>}
                 </Box>
             </div>

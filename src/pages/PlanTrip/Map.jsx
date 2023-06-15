@@ -13,8 +13,10 @@ function Map({ sites, travel_mode, isLoaded, center, markers, places, handleChan
   const [road, setroad] = useState()
   const [showdurationtravels, setdurationtravels] = useState()
   const [showduration, setduration] = useState()
-
+  let arr = []
+  let time1 = 0
   let arrResults = []
+  let time = 0
   useEffect(() => {
     calculateRoute();
     if (travel_mode) {
@@ -82,11 +84,10 @@ function Map({ sites, travel_mode, isLoaded, center, markers, places, handleChan
   }
   function originInformation(arrResults) {
     if (arrResults.length) {
-      let arr = []
-      let time = 0
+      
       arrResults.forEach((e) => { arr.push(e.routes[0].summary) })
-      arrResults.forEach((e) => { time += e.routes[0].legs[0].distance.value })
-      setdurationtravels(parseseconds(time))
+      arrResults.forEach((e) => { time1 += e.routes[0].legs[0].distance.value })
+      setdurationtravels(parseseconds(time1))
       setroad(arr)
 
     }
@@ -99,7 +100,6 @@ function Map({ sites, travel_mode, isLoaded, center, markers, places, handleChan
     return arr
   }
   function count(arrResults) {
-    let time = 0
     arrResults.forEach((e) => { time += e.routes[0].legs[0].distance.value })
     sites.map((e) => time += e.duration)
     setduration(parseseconds(time))
@@ -137,7 +137,7 @@ function Map({ sites, travel_mode, isLoaded, center, markers, places, handleChan
       </GoogleMap>
       {/* {road&&<Lgoogle road={road} showduration={showduration} showdurationtravels={showdurationtravels} onLoad={onLoad} center={center} map={map} markers={markers}directionsResponse={directionsResponse} directionsResponse={directionsResponse} ></Lgoogle>} */}
     </div>
-    
+
     {road?.map((e, i) => <div>כביש מנקודה {i + 1} לנקודה {i + 2}: {e}</div>)}
     {showdurationtravels ? <div>זמן הנסיעות של הטיול  {showdurationtravels[0] ? <><span>{showdurationtravels[0]} ימים </span></> : <></>}{showdurationtravels[1] ? <><span>{showdurationtravels[1]} שעות </span></> : <></>}{showdurationtravels[2] ? <><span>{showdurationtravels[2]} דקות </span></> : <></>}</div> : <></>}
     {showduration ? <div>אורך טיול בסה"כ {showduration[0] ? <><span>{showduration[0]} ימים </span></> : <></>}{showduration[1] ? <><span>{showduration[1]} שעות </span></> : <></>}{showduration[2] ? <><span>{showduration[2]} דקות </span></> : <></>}</div> : <></>}
