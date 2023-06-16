@@ -74,12 +74,13 @@ function Map({ trip, sites, travel_mode, isLoaded, center, markers, places, hand
     }
   }
   function originInformation(arrResults) {
-    console.log(time)
+    console.log(arrResults)
     if (arrResults.length) {
-
+    
       arrResults.forEach((e) => { arr.push(e.routes[0].summary) })
       setdurationtravels(parseseconds(time))
       setroad(arr)
+      console.log(arr)
 
     }
   }
@@ -92,8 +93,10 @@ function Map({ trip, sites, travel_mode, isLoaded, center, markers, places, hand
     return arr
   }
   function count() {
-    sites.map((e) => time += e.duration)
-    setduration(parseseconds(time))
+    let t=0
+    sites.map((e) => t += e.duration)
+    console.log(t)
+    setduration(parseseconds(time+t))
   }
   if (!isLoaded) return <h1>Loading</h1>
   return (<>

@@ -81,7 +81,7 @@ function FinallTrip() {
     // useEffect(() => { Information() }, [information]);onClick={setflag(false)}
     return (<>
 
-<br></br>
+{/* <br></br>
         <h4>ברירת המחדל זה ע"י נהיגה</h4>
         <label>אתה רשאי לשנות את אמצעי התחבורה שלך</label><br></br>
         {messsage&&<h3>{messsage}</h3>}
@@ -94,7 +94,7 @@ function FinallTrip() {
                 <input placeholder="האפשרויות הם:נהיגה,אופניים,הליכה,מעבר" onChange={(e) => { Travel_mode(e, i) }}>
                 </input><br></br>
             </>)
-        })}
+        })} */}
 
         {trip ? <Trip trip={trip} setlocation={setlocations} /> : <></>}
 
