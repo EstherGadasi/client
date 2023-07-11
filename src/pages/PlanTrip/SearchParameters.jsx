@@ -18,7 +18,7 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
     const [bicycles, setbicycles] = useState(false);
     const [categories, setcategories] = useState([false, false, false, false]);
 
-   // const [categories, setcategories] = useState();
+    const [categories1, setcategories1] = useState();
     const [tripstype, settripstype] = useState(["around", "riding", "lines"])
     const [description, setdescription] = useState(null);
    // const [area, setarea] = useState(["south", "center", "JerusalemSurroundingArea", "north"])
@@ -43,7 +43,7 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
     function clearConstrains() {
         setacces(false)
         setbicycles(false)
-        setcategories([1, 2, 3, 4])
+        setcategories1([1, 2, 3, 4])
         settripstype(["around", "riding", "lines"])
         setarea(["nortn", "south", "center", "JerusalemSurroundingArea"])
         settruffic(false)
@@ -55,6 +55,7 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
         setacces(false)
         setbicycles(false)
         setcategories([])
+        setcategories1([])
         settripstype([])
         setdescription()
         setarea([])
@@ -74,7 +75,6 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
         const arr=Level
         arr[num]=event.target.checked
        setlevel([...arr]) 
-
     }
     function check3(event,setarea,area, num) {
         const arr=area
@@ -88,11 +88,20 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
        settripstype([...arr]) 
 
     }
+   function set_categoris()
+   { const arr=[];
+     for(let i in categories)
+     if(categories[i]==true)
+     arr.push(i);
+     setcategories1([...arr]);
+
+   }
     async function bringmatchessites() {
         setf(false)
         setempty("")
         console.log("Gjhkuyhkuhegliutr")
         const GetMatchesSites = async () => {
+            set_categoris();
             const constrain = {
                 acces: acces,
                 bicycles: bicycles,
@@ -102,7 +111,7 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
                 area: area,
                 payment: payment,
                 level: level,
-                categories: categories
+                categories: categories1
             }
 
             setconstrains(constrain)
