@@ -16,17 +16,18 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
     const [completed, setCompleted] = React.useState({});
     const [acces, setacces] = useState(false)
     const [bicycles, setbicycles] = useState(false);
-    const [categories, setcategories] = useState([false, false, false, false]);
+    const [categories, setcategories] = useState([1, 2, 3, 4]);
 
-   // const [categories, setcategories] = useState();
-    const [tripstype, settripstype] = useState(["around", "riding", "lines"])
+    // const [categories, setcategories] = useState();
+    const [tripstype, settripstype] = useState(["lines", "around", "riding"])
     const [description, setdescription] = useState(null);
-   // const [area, setarea] = useState(["south", "center", "JerusalemSurroundingArea", "north"])
-   const [area, setarea] = useState([false, false, false, false])
+    // const [area, setarea] = useState(["south", "center", "JerusalemSurroundingArea", "north"])
+    const [area, setarea] = useState(["south", "north", "center", "JerusalemSurroundingArea"])
     const [truffic, settruffic] = useState(false)
+    const [flagconstrains, setflagconstrains] = useState(false)
     const [payment, setpayment] = useState(200)
     //const [level, setlevel] = useState(["medium", "hard", "easy"])
-    const [level, setlevel] = useState([false, false,  false])
+    const [level, setlevel] = useState(["hard", "easy", "medium"])
     const [empty, setempty] = useState("")
     const steps = ['Participants', 'Select type', 'Constrains'];
     const [f, setf] = useState(false)
@@ -34,7 +35,6 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
     const [flagd, setflagd] = useState(false)
     const [load, setload] = useState("")
     const { token, currentUser } = useContext(AuthContext)
-
     useEffect(() => {
         if (flagcon) initialization()
         if (flag) bringmatchessites()
@@ -43,50 +43,55 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
     function clearConstrains() {
         setacces(false)
         setbicycles(false)
-        setcategories([1, 2, 3, 4])
-        settripstype(["around", "riding", "lines"])
-        setarea(["nortn", "south", "center", "JerusalemSurroundingArea"])
+        setcategories([null])
+        settripstype([null])
+        setdescription()
+        setarea([null])
         settruffic(false)
         setpayment(200)
-        setlevel(["medium", "hard", "easy"])
-        bringmatchessites()
+        setlevel([null])
+
     }
     function initialization() {
         setacces(false)
         setbicycles(false)
-        setcategories([])
-        settripstype([])
+        setcategories([1, 2, 3, 4])
+        settripstype(["lines", "around", "riding"])
         setdescription()
-        setarea([])
-        settruffic([])
+        setarea(["south", "north", "center", "JerusalemSurroundingArea"])
+        settruffic(false)
         setpayment(200)
-        setlevel([])
+        setlevel(["hard", "easy", "medium"])
         bringmatchessites()
     }
+    const check = (event, set, arr) => {
+        ifClear()
+        const value = event.target.value;
+        if (event.target.checked) {
+            set((prevState) => [...prevState, value]);
+        } else {
+            set((prevState) =>
+                prevState.filter((checkbox) => checkbox !== value)
+            );
+        }
+    };
+    function checkCategory(event, set, arr, num) {
+        
+      
+        if (event.target.checked) {
+            set((prevState) => [...prevState, num]);
+        } else {
+            set((prevState) =>
+                prevState.filter((checkbox) => checkbox !== num)
+            );
 
-    function check(event,setcategories,categories, num) {
-        const arr=categories
-        arr[num]=event.target.checked
-       setcategories([...arr]) 
-
+        }
     }
-    function check2(event,setlevel,Level, num) {
-        const arr=Level
-        arr[num]=event.target.checked
-       setlevel([...arr]) 
-
-    }
-    function check3(event,setarea,area, num) {
-        const arr=area
-        arr[num]=event.target.checked
-       setarea([...arr]) 
-
-    }
-    function check4(event,settripstype,tripstype, num) {
-        const arr=tripstype
-        arr[num]=event.target.checked
-       settripstype([...arr]) 
-
+    function ifClear() {
+        if (!flagconstrains) {
+            clearConstrains()
+            setflagconstrains(true)
+        }
     }
     async function bringmatchessites() {
         setf(false)
@@ -110,9 +115,7 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
             try {
 
                 const res = await axios.post(`http://localhost:4000/site/constrains`, constrain);//the url not excat
-
-
-                if (res.data != "ho no there is any matcn site!!") {
+                if (res.data.length != 0) {
                     return res.data
                 }
                 else
@@ -132,20 +135,23 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
             }
         }
         async function Merge() {
-            
+
             let arrorgin = []
             let specialarr = []
 
             arrorgin = await GetMatchesSites()
-            if (arrorgin=="ho no there is any matcn site!!") {
+            console.log(arrorgin)
+            if (arrorgin == null) {
                 setempty("אוי לא אין אתר מתאים!!")
+                setTripsOptions([])
+                setTripsOptionsh([])
                 return
             }
             if (description) {
                 setload("מתאים לך אתרים...")
                 specialarr = await getSitesByDescription()
                 if (specialarr)
-                setempty("אוי לא אין אתר מתאים!!")
+                    setempty("אוי לא אין אתר מתאים!!")
                 setload("")
             }
             if (!description) {
@@ -219,128 +225,124 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
             <input placeholder="תאור" onChange={(e) => { setdescription(e.target.value) }}></input>
             <h1>{load}</h1></>}
         <Box>
-            <Button onClick={() => { setflagd(true) ;clearConstrains()}}>סנן רק לפי תאור </Button>
+            <Button onClick={() => { setflagd(true); clearConstrains() }}>סנן רק לפי תאור </Button>
             <Button onClick={showconstrains}>בחירת אילוצים </Button>
             <Button onClick={bringmatchessites}>התאם לי אתרים</Button>
             <Button onClick={clearConstrains}>ביטול סינון</Button><br></br><br></br>
             {empty ? <h2>{empty}</h2> : <></>}
-            {f ? <div style={{ width: '100vw' }}><Box sx={{ width: '60vw',margin:'auto'  }} >
-            <Stepper nonLinear activeStep={activeStep}>
-                {steps.map((label, index) => (
-                    <Step key={label} completed={completed[index]}>
-                        <StepButton color="inherit" onClick={handleStep(index)}>
-                            {label}
-                        </StepButton>
-                    </Step>
-                ))}
-            </Stepper>
-            <div>
-                {allStepsCompleted() ? (
-                    <React.Fragment>
-                        <Typography sx={{ mt: 2, mb: 1 }}>
-                            All steps completed - you&apos;re finished
-                        </Typography>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                            <Box sx={{ flex: '1 1 auto' }} />
-                            <Button onClick={handleReset}>Reset</Button>
-                        </Box>
-                    </React.Fragment>
-                ) : (
-                    <React.Fragment>
-                        <Typography sx={{ mt: 2, mb: 1, py: 1 }} style={{textAlign:"center"}}>
-                        {(activeStep === 0) ? 
-                               <Box sx={{alignItems:"center",display: 'block'}}> 
-                                <p>Please select your constrains</p>
-                                <Box  sx={{alignItems:"center",margin:"auto", display:"grid", gap:1}}>
-                           
-                            <FormLabel id="demo-controlled-radio-buttons-group">Participants</FormLabel>
-                           
-                            <FormControlLabel checked={categories[0]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 0)  }/>} label="משפחות"/>
-                                 <FormControlLabel checked={categories[1]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 1) }/>} label="קבוצות"/>
-                                 <FormControlLabel checked={categories[2]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 2) }/>} label="זוגות"/>
-                                 <FormControlLabel checked={categories[3]} control={<Checkbox onChange={(e) =>check(e,setcategories,categories, 3) }/>} label="ילדים"/>
-</Box>
-                           
-                            <Box sx={{alignItems:"center", display:"flex", gap:1}}>
-                            <FormLabel id="demo-controlled-radio-buttons-group">Accesible</FormLabel>
-                            
-                                <FormControlLabel control={<Checkbox checked={bicycles}  onChange={(e)=>setbicycles(e.target.checked)}/>} label="אופניים"/>
-                                <FormControlLabel control={<Checkbox checked={truffic}  onChange={(e) => { settruffic(e.target.checked)}}/>} label=" תחבורה"/>
-                                <FormControlLabel control={<Checkbox checked={acces}  onChange={(e) => { setacces(e.target.checked)}}/>} label="גישה"/>
-                              </Box>  </Box>
-                             : (activeStep === 1) ? 
-                              <Box sx={{alignItems:"center",display: 'block'}}>
-                              <Box sx={{alignItems:"center"}}>
-                              <Box  sx={{alignItems:"center",margin:"auto", display:"grid", gap:1}}>
-                            <FormLabel id="demo-controlled-radio-buttons-group">Level</FormLabel>
-                        
-                          
-                           <FormControlLabel checked={level[0]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 0)  }/>} label="קשה"/>
-                                <FormControlLabel checked={level[1]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 1) }/>} label="קל"/>
-                                <FormControlLabel checked={level[2]} control={<Checkbox onChange={(e) =>check2(e,setlevel,level, 2)}/>} label="בינוני"/>
-                               
-</Box>
-                           
+            {f ? <div style={{ width: '100vw' }}><Box sx={{ width: '60vw', margin: 'auto' }} >
+                <Stepper nonLinear activeStep={activeStep}>
+                    {steps.map((label, index) => (
+                        <Step key={label} completed={completed[index]}>
+                            <StepButton color="inherit" onClick={handleStep(index)}>
+                                {label}
+                            </StepButton>
+                        </Step>
+                    ))}
+                </Stepper>
+                <div>
+                    {allStepsCompleted() ? (
+                        <React.Fragment>
+                            <Typography sx={{ mt: 2, mb: 1 }}>
+                              כל השלבים נגמרו&apos;
+                            </Typography>
+                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                                <Box sx={{ flex: '1 1 auto' }} />
+                                <Button onClick={handleReset}>Reset</Button>
                             </Box>
-                            <Box sx={{alignItems:"center"}}>
-                            <Box  sx={{alignItems:"center",margin:"auto", display:"grid", gap:1}}>
-                           
-                           <FormLabel id="demo-controlled-radio-buttons-group">Type</FormLabel>
-                          
-                           <FormControlLabel checked={tripstype[0]} control={<Checkbox onChange={(e) =>check4(e,settripstype,tripstype, 0)  }/>} label="Around"/>
-                                <FormControlLabel checked={tripstype[1]} control={<Checkbox onChange={(e) =>check4(e,settripstype,tripstype, 1) }/>} label="Lines"/>
-                                <FormControlLabel checked={tripstype[2]} control={<Checkbox onChange={(e) =>check4(e,settripstype,tripstype, 2) }/>} label="Riding"/>
-                               
-</Box></Box>
-                                </Box>
-                             : 
-                              <Box sx={{alignItems:"center",display: 'block'}}>
-                              <Box sx={{alignItems:"center"}}>
-                              <Box  sx={{alignItems:"center",margin:"auto", display:"grid", gap:1}}>
-                           
-                           
-                           <FormLabel id="demo-controlled-radio-buttons-group">Area</FormLabel>
-                           <FormControlLabel checked={area[0]} control={<Checkbox onChange={(e) =>check3(e,setarea,area, 0)  }/>} label="North"/>
-                                <FormControlLabel checked={area[1]} control={<Checkbox onChange={(e) =>check3(e,setarea,area, 1) }/>} label="South"/>
-                                <FormControlLabel checked={area[2]} control={<Checkbox onChange={(e) =>check3(e,setarea,area, 2) }/>} label="Center"/>
-                                <FormControlLabel checked={area[3]} control={<Checkbox onChange={(e) =>check3(e,setarea,area, 3) }/>} label="Jerusalem Surrounding Area"/>
-</Box>
-</Box> 
-                            <TextField  label="Payment" id="fullWidth" value={payment}  onChange={(e) => { setpayment(e.target.value) }}/>
-                            <TextField fullWidth label="description" id="fullWidth" value={description} onChange={(e) => { setdescription(e.target.value) }}/>
-                        </Box>
-                            }
-                        </Typography>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                            <Button
-                                color="inherit"
-                                disabled={activeStep === 0}
-                                onClick={handleBack}
-                                sx={{ mr: 1 }}
-                            >
-                                Back
-                            </Button>
-                            <Box sx={{ flex: '1 1 auto' }} />
-                            <Button onClick={handleNext} sx={{ mr: 1 }}>
-                                Next
-                            </Button>
-                            {activeStep !== steps.length &&
-                                (completed[activeStep] ? (
-                                    <Typography variant="caption" sx={{ display: 'inline-block' }}>
-                                        Step {activeStep + 1} already completed
-                                    </Typography>
-                                ) : (
-                                    <Button onClick={handleComplete}>
-                                        {completedSteps() === totalSteps() - 1
-                                            ? 'Finish'
-                                            : 'Complete Step'}
-                                    </Button>
-                                ))}
-                        </Box>
-                    </React.Fragment>
-                )}
-            </div>
-        </Box>  </div> : <></>}</Box>
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>
+                            <Typography sx={{ mt: 2, mb: 1, py: 1 }} style={{ textAlign: "center" }}>
+                                {(activeStep === 0) ?
+                                    <Box sx={{ alignItems: "center", display: 'block' }}>
+                                        <p>נא ביר את אילוציך</p>
+                                        <Box sx={{ alignItems: "center", margin: "auto", display: "grid", gap: 1 }}>
+
+                                            <FormLabel id="demo-controlled-radio-buttons-group">למי מיועד</FormLabel>
+                                            <FormControlLabel checked={categories.includes(1) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, categories, 1)} />} label="משפחות" />
+                                            <FormControlLabel checked={categories.includes(2) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, categories, 2)} />} label="קבוצות" />
+                                            <FormControlLabel checked={categories.includes(3) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, categories, 3)} />} label="זוגות" />
+                                            <FormControlLabel checked={categories.includes(4) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, categories, 4)} />} label="ילדים" />
+                                        </Box>
+
+                                        <Box sx={{ alignItems: "center", display: "flex", gap: 1 }}>
+                                            <FormLabel id="demo-controlled-radio-buttons-group">גישה</FormLabel>
+                                            <FormControlLabel checked={bicycles} control={<Checkbox checked={bicycles} onChange={(e) => { setbicycles(e.target.checked); ifClear() }} />} label="אופניים" />
+                                            <FormControlLabel checked={truffic} control={<Checkbox checked={truffic} onChange={(e) => { settruffic(e.target.checked); ifClear() }} />} label=" תחבורה" />
+                                            <FormControlLabel checked={acces} control={<Checkbox checked={acces} onChange={(e) => { setacces(e.target.checked); ifClear() }} />} label="גישה" />
+                                        </Box>  </Box>
+                                    : (activeStep === 1) ?
+                                        <Box sx={{ alignItems: "center", display: 'block' }}>
+                                            <Box sx={{ alignItems: "center" }}>
+                                                <Box sx={{ alignItems: "center", margin: "auto", display: "grid", gap: 1 }}>
+                                                    <FormLabel id="demo-controlled-radio-buttons-group">רמת קושי</FormLabel>
+
+
+                                                    <FormControlLabel value="hard" checked={level.includes("hard") ? true : false} control={<Checkbox onChange={(e) => check(e, setlevel, level)} />} label="קשה" />
+                                                    <FormControlLabel value="easy" checked={level.includes("easy") ? true : false} control={<Checkbox onChange={(e) => check(e, setlevel, level)} />} label="קל" />
+                                                    <FormControlLabel value="medium" checked={level.includes("medium") ? true : false} control={<Checkbox onChange={(e) => check(e, setlevel, level)} />} label="בינוני" />
+
+                                                </Box>
+
+                                            </Box>
+                                            <Box sx={{ alignItems: "center" }}>
+                                                <Box sx={{ alignItems: "center", margin: "auto", display: "grid", gap: 1 }}>
+
+                                                    <FormLabel id="demo-controlled-radio-buttons-group">סוג טיול</FormLabel>
+                                                    <FormControlLabel checked={tripstype.includes("around") ? true : false} value="around" control={<Checkbox onChange={(e) => check(e, settripstype, tripstype)} />} label="מעגלי" />
+                                                    <FormControlLabel checked={tripstype.includes("lines") ? true : false} value="lines" control={<Checkbox onChange={(e) => check(e, settripstype, tripstype)} />} label="קווי" />
+                                                    <FormControlLabel checked={tripstype.includes("riding") ? true : false} value="riding" control={<Checkbox onChange={(e) => check(e, settripstype, tripstype)} />} label="רכיבה" />
+                                                </Box></Box>
+                                        </Box>
+                                        :
+                                        <Box sx={{ alignItems: "center", display: 'block' }}>
+                                            <Box sx={{ alignItems: "center" }}>
+                                                <Box sx={{ alignItems: "center", margin: "auto", display: "grid", gap: 1 }}>
+
+
+                                                    <FormLabel id="demo-controlled-radio-buttons-group">אזור</FormLabel>
+                                                    <FormControlLabel checked={area.includes("north") ? true : false} value="north" control={<Checkbox onChange={(e) => check(e, setarea, area)} />} label="צפון" />
+                                                    <FormControlLabel checked={area.includes("south") ? true : false} value="south" control={<Checkbox onChange={(e) => check(e, setarea, area)} />} label="דרום" />
+                                                    <FormControlLabel checked={area.includes("center") ? true : false} value="center" control={<Checkbox onChange={(e) => check(e, setarea, area)} />} label="מרכז" />
+                                                    <FormControlLabel checked={area.includes("JerusalemSurroundingArea") ? true : false} value="JerusalemSurroundingArea" control={<Checkbox onChange={(e) => check(e, setarea, area)} />} label="ירושלים והסביבה" />
+                                                </Box>
+                                            </Box>
+                                            <TextField label="תשלום" id="fullWidth" value={payment} onChange={(e) => { setpayment(e.target.value) }} />
+                                            <TextField fullWidth label="תאור" id="fullWidth" value={description} onChange={(e) => { setdescription(e.target.value) }} />
+                                        </Box>
+                                }
+                            </Typography>
+                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                                <Button
+                                    color="inherit"
+                                    disabled={activeStep === 0}
+                                    onClick={handleBack}
+                                    sx={{ mr: 1 }}
+                                >
+                                    הקודם
+                                </Button>
+                                <Box sx={{ flex: '1 1 auto' }} />
+                                <Button onClick={handleNext} sx={{ mr: 1 }}>
+                                    הבא
+                                </Button>
+                                {activeStep !== steps.length &&
+                                    (completed[activeStep] ? (
+                                        <Typography variant="caption" sx={{ display: 'inline-block' }}>
+                                            שלב {activeStep + 1} כבר הושלם
+                                        </Typography>
+                                    ) : (
+                                        <Button onClick={handleComplete}>
+                                            {completedSteps() === totalSteps() - 1
+                                                ? 'Finish'
+                                                : 'Complete Step'}
+                                        </Button>
+                                    ))}
+                            </Box>
+                        </React.Fragment>
+                    )}
+                </div>
+            </Box>  </div> : <></>}</Box>
 
 
 
