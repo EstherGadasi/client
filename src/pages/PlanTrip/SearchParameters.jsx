@@ -18,8 +18,8 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
     const [bicycles, setbicycles] = useState(false);
     const [categories, setcategories] = useState([1, 2, 3, 4]);
 
-    // const [categories, setcategories] = useState();
-    const [tripstype, settripstype] = useState(["lines", "around", "riding"])
+   // const [categories, setcategories] = useState();
+    const [tripstype, settripstype] = useState(["around", "riding", "lines"])
     const [description, setdescription] = useState(null);
     // const [area, setarea] = useState(["south", "center", "JerusalemSurroundingArea", "north"])
     const [area, setarea] = useState(["south", "north", "center", "JerusalemSurroundingArea"])
@@ -43,10 +43,9 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
     function clearConstrains() {
         setacces(false)
         setbicycles(false)
-        setcategories([null])
-        settripstype([null])
-        setdescription()
-        setarea([null])
+        setcategories([1, 2, 3, 4])
+        settripstype(["around", "riding", "lines"])
+        setarea(["nortn", "south", "center", "JerusalemSurroundingArea"])
         settruffic(false)
         setpayment(200)
         setlevel([null])
@@ -55,8 +54,8 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
     function initialization() {
         setacces(false)
         setbicycles(false)
-        setcategories([1, 2, 3, 4])
-        settripstype(["lines", "around", "riding"])
+        setcategories([])
+        settripstype([])
         setdescription()
         setarea(["south", "north", "center", "JerusalemSurroundingArea"])
         settruffic(false)
@@ -64,40 +63,37 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
         setlevel(["hard", "easy", "medium"])
         bringmatchessites()
     }
-    const check = (event, set, arr) => {
-        ifClear()
-        const value = event.target.value;
-        if (event.target.checked) {
-            set((prevState) => [...prevState, value]);
-        } else {
-            set((prevState) =>
-                prevState.filter((checkbox) => checkbox !== value)
-            );
-        }
-    };
-    function checkCategory(event, set, arr, num) {
-        
-      
-        if (event.target.checked) {
-            set((prevState) => [...prevState, num]);
-        } else {
-            set((prevState) =>
-                prevState.filter((checkbox) => checkbox !== num)
-            );
 
-        }
+    function check(event,setcategories,categories, num) {
+        const arr=categories
+        arr[num]=event.target.checked
+       setcategories([...arr]) 
+
     }
-    function ifClear() {
-        if (!flagconstrains) {
-            clearConstrains()
-            setflagconstrains(true)
-        }
+    function check2(event,setlevel,Level, num) {
+        const arr=Level
+        arr[num]=event.target.checked
+       setlevel([...arr]) 
+
+    }
+    function check3(event,setarea,area, num) {
+        const arr=area
+        arr[num]=event.target.checked
+       setarea([...arr]) 
+
+    }
+    function check4(event,settripstype,tripstype, num) {
+        const arr=tripstype
+        arr[num]=event.target.checked
+       settripstype([...arr]) 
+
     }
     async function bringmatchessites() {
         setf(false)
         setempty("")
         console.log("Gjhkuyhkuhegliutr")
         const GetMatchesSites = async () => {
+            set_categoris();
             const constrain = {
                 acces: acces,
                 bicycles: bicycles,
@@ -107,7 +103,7 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
                 area: area,
                 payment: payment,
                 level: level,
-                categories: categories
+                categories: categories1
             }
 
             setconstrains(constrain)
