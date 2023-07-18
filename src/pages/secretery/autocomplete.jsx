@@ -1,8 +1,6 @@
 import { useState } from "react"
 import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
 import CustomizedInputBase from '../secretery/input'
-//import Map from "./Map"
-//import Map1 from "./e";
 import Map from "./map";
 function Autocomplete1({ setpoint1, setpoint2, f, endpoint1, endpoint2 }) {
   const { isLoaded } = useJsApiLoader({
@@ -10,7 +8,6 @@ function Autocomplete1({ setpoint1, setpoint2, f, endpoint1, endpoint2 }) {
     googleMapsApiKey: "AIzaSyBWW1xrjKfvdMk2-oVeMEHDyYW83E0nU0A",
     libraries: ['places']
   });
-  // const [center, setCenter] = useState({ lat: 31.732642099242874, lng: 35.18573300318892 })
   const [markers, setMarkers] = useState([{ lat: 31.732642099242874, lng: 35.18573300318892 }, { lat: 31.731318964884345, lng: 35.19509927741574 }])
   const [places, setPlaces] = useState("")
   const [distances, setDistances] = useState([])
@@ -58,7 +55,7 @@ function Autocomplete1({ setpoint1, setpoint2, f, endpoint1, endpoint2 }) {
           <div>lat:  {places[places.length - 1].lat} </div>
           <div>lng:  {places[places.length - 1].lng} </div></>}
 
-        {distances.length>0 && <><div>   מרחק({distances[distances.length - 1].distance.text} | {distances[distances.length - 1].distance.value})</div>
+        {distances.length > 0 && <><div>   מרחק({distances[distances.length - 1].distance.text} | {distances[distances.length - 1].distance.value})</div>
           <div>     זמן({distances[distances.length - 1].duration.text} | {distances[distances.length - 1].duration.value})</div>
         </>}
 

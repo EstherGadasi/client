@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Geocode from "react-geocode";
-// Geocode.setApiKey("AIzaSyBWW1xrjKfvdMk2-oVeMEHDyYW83E0nU0A");
 import { useJsApiLoader, } from "@react-google-maps/api";
 Geocode.setApiKey("AIzaSyBWW1xrjKfvdMk2-oVeMEHDyYW83E0nU0A");
 const PointsSites = ({ point, site1, setname

@@ -17,16 +17,12 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
     const [acces, setacces] = useState(false)
     const [bicycles, setbicycles] = useState(false);
     const [categories, setcategories] = useState([1, 2, 3, 4]);
-
-   // const [categories, setcategories] = useState();
     const [tripstype, settripstype] = useState(["around", "riding", "lines"])
     const [description, setdescription] = useState(null);
-    // const [area, setarea] = useState(["south", "center", "JerusalemSurroundingArea", "north"])
     const [area, setarea] = useState(["south", "north", "center", "JerusalemSurroundingArea"])
     const [truffic, settruffic] = useState(false)
     const [flagconstrains, setflagconstrains] = useState(false)
     const [payment, setpayment] = useState(200)
-    //const [level, setlevel] = useState(["medium", "hard", "easy"])
     const [level, setlevel] = useState(["hard", "easy", "medium"])
     const [empty, setempty] = useState("")
     const steps = ['Participants', 'Select type', 'Constrains'];
@@ -43,9 +39,9 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
     function clearConstrains() {
         setacces(false)
         setbicycles(false)
-        setcategories([1, 2, 3, 4])
-        settripstype(["around", "riding", "lines"])
-        setarea(["nortn", "south", "center", "JerusalemSurroundingArea"])
+        setcategories([null])
+        settripstype([null])
+        setarea([null])
         settruffic(false)
         setpayment(200)
         setlevel([null])
@@ -54,8 +50,8 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
     function initialization() {
         setacces(false)
         setbicycles(false)
-        setcategories([])
-        settripstype([])
+        setcategories([1,2,3,4])
+        settripstype(["around", "riding", "lines"])
         setdescription()
         setarea(["south", "north", "center", "JerusalemSurroundingArea"])
         settruffic(false)
@@ -64,36 +60,31 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
         bringmatchessites()
     }
 
-    function check(event,setcategories,categories, num) {
-        const arr=categories
-        arr[num]=event.target.checked
-       setcategories([...arr]) 
-
+    const check = (event, set) => {
+        const value = event.target.value;
+        if (event.target.checked) {
+            set((prevState) => [...prevState, value]);
+        } else {
+            set((prevState) =>
+                prevState.filter((checkbox) => checkbox !== value)
+            );
+        }
     }
-    function check2(event,setlevel,Level, num) {
-        const arr=Level
-        arr[num]=event.target.checked
-       setlevel([...arr]) 
-
+    function checkCategory(event, setcategories, num) {
+        if (event.target.checked) {
+            setcategories((prevState) => [...prevState, num]);
+        } else {
+            setcategories((prevState) =>
+                prevState.filter((checkbox) => checkbox !== num)
+            );
+        }
     }
-    function check3(event,setarea,area, num) {
-        const arr=area
-        arr[num]=event.target.checked
-       setarea([...arr]) 
 
-    }
-    function check4(event,settripstype,tripstype, num) {
-        const arr=tripstype
-        arr[num]=event.target.checked
-       settripstype([...arr]) 
-
-    }
     async function bringmatchessites() {
         setf(false)
         setempty("")
         console.log("Gjhkuyhkuhegliutr")
         const GetMatchesSites = async () => {
-            set_categoris();
             const constrain = {
                 acces: acces,
                 bicycles: bicycles,
@@ -103,7 +94,7 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
                 area: area,
                 payment: payment,
                 level: level,
-                categories: categories1
+                categories: categories
             }
 
             setconstrains(constrain)
@@ -155,7 +146,6 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
                 setTripsOptionsh(arrorgin)
                 return
             }
-            // && a[1] == 0.03889820724725723;
             let a
             let newarr = specialarr.filter((el) => { return arrorgin.find((e) => el[0] == e.idsites) != undefined && el[1] > 0.5 })
             newarr = arrorgin.filter((e) => newarr.find((el) => el[0] == e.idsites))
@@ -166,6 +156,7 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
         Merge()
     }
     function showconstrains() {
+        clearConstrains()
         setf(true)
     }
     const totalSteps = () => {
@@ -240,7 +231,7 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
                     {allStepsCompleted() ? (
                         <React.Fragment>
                             <Typography sx={{ mt: 2, mb: 1 }}>
-                              כל השלבים נגמרו&apos;
+                                כל השלבים נגמרו&apos;
                             </Typography>
                             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                                 <Box sx={{ flex: '1 1 auto' }} />
@@ -256,17 +247,17 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
                                         <Box sx={{ alignItems: "center", margin: "auto", display: "grid", gap: 1 }}>
 
                                             <FormLabel id="demo-controlled-radio-buttons-group">למי מיועד</FormLabel>
-                                            <FormControlLabel checked={categories.includes(1) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, categories, 1)} />} label="משפחות" />
-                                            <FormControlLabel checked={categories.includes(2) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, categories, 2)} />} label="קבוצות" />
-                                            <FormControlLabel checked={categories.includes(3) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, categories, 3)} />} label="זוגות" />
-                                            <FormControlLabel checked={categories.includes(4) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, categories, 4)} />} label="ילדים" />
+                                            <FormControlLabel checked={categories.includes(1) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, 1)} />} label="משפחות" />
+                                            <FormControlLabel checked={categories.includes(2) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, 2)} />} label="קבוצות" />
+                                            <FormControlLabel checked={categories.includes(3) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, 3)} />} label="זוגות" />
+                                            <FormControlLabel checked={categories.includes(4) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, 4)} />} label="ילדים" />
                                         </Box>
 
                                         <Box sx={{ alignItems: "center", display: "flex", gap: 1 }}>
                                             <FormLabel id="demo-controlled-radio-buttons-group">גישה</FormLabel>
-                                            <FormControlLabel checked={bicycles} control={<Checkbox checked={bicycles} onChange={(e) => { setbicycles(e.target.checked); ifClear() }} />} label="אופניים" />
-                                            <FormControlLabel checked={truffic} control={<Checkbox checked={truffic} onChange={(e) => { settruffic(e.target.checked); ifClear() }} />} label=" תחבורה" />
-                                            <FormControlLabel checked={acces} control={<Checkbox checked={acces} onChange={(e) => { setacces(e.target.checked); ifClear() }} />} label="גישה" />
+                                            <FormControlLabel checked={bicycles} control={<Checkbox checked={bicycles} onChange={(e) => { setbicycles(e.target.checked)}} />} label="אופניים" />
+                                            <FormControlLabel checked={truffic} control={<Checkbox checked={truffic} onChange={(e) => { settruffic(e.target.checked) }} />} label=" תחבורה" />
+                                            <FormControlLabel checked={acces} control={<Checkbox checked={acces} onChange={(e) => { setacces(e.target.checked) }} />} label="גישה" />
                                         </Box>  </Box>
                                     : (activeStep === 1) ?
                                         <Box sx={{ alignItems: "center", display: 'block' }}>

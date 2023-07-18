@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { AuthContext } from "../../context/authContext"
 import axios from "axios";
 import { func } from "prop-types";
-
 
 function Save({ namestart, selectOption, setend_point1, setend_point2, duration, setTripid, payment, area, userId, begin_point1, begin_point2, end_point1, end_point2, date, listofsites, constrainsoftrip, idtrips }) {
     const navigate = useNavigate()

@@ -21,22 +21,12 @@ const MapTest = ()=>{
         libraries:['places']
       }); 
     const [currentLocation, setCurrentLocation] = useState({ lat: 40.756795, lng: -73.954298 })
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       currentLocation: { lat: 40.756795, lng: -73.954298 }
-//     };
-//   }
-
-
     const apiIsLoaded = (map, maps) => {
       const directionsService = new window.google.maps.DirectionsService();
       const directionsRenderer = new window.google.maps.DirectionsRenderer();
       directionsRenderer.setMap(map);
       const origin = { lat: 40.756795, lng: -73.954298 };
       const destination = { lat: 41.756795, lng: -78.954298 };
-
       directionsService.route(
         {
           origin: origin,
@@ -63,8 +53,6 @@ const MapTest = ()=>{
              defaultCenter={{ lat: 40.756795, lng: -73.954298 }}
              defaultZoom={10}
              center={currentLocation}
-           // yesIWantToUseGoogleMapApiInternals
-            // onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}
           /> 
         </div>
 }

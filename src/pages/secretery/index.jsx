@@ -1,6 +1,5 @@
 import { AirlineSeatFlatAngled } from "@mui/icons-material"
 import axios from "axios"
-//import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Point from "./points"
 import Uploader from "./Uploader"
@@ -13,7 +12,6 @@ import { Grid } from '@mui/material';
 import MapOptions from "../PlanTrip/x"
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
-
 import StepButton from '@mui/material/StepButton';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -54,7 +52,22 @@ const Secrtery = ({ site, setcurrentsite }) => {
     const [id, setid] = useState(0)
     useEffect(() => {
         if (site) {
-
+            setacces(site.acces)
+            setadress(site.address)
+            setduration(site.duration)
+            setpoint1(site.place1)
+            setpoint2(site.place2)
+            setdescription(site.description)
+            settruffic(site.truffic)
+            setbicycles(site.bicycles)
+            setcategories(site.category)
+            settripstype(site.tripstype)
+            setarea(site.area)
+            setpayment(site.payment)
+            setlevel(site.level)
+            setname(site.name)
+            if (site.images)
+                seturl(site.images.url)
             setflag(true)
         }
     }, []);
@@ -84,23 +97,15 @@ const Secrtery = ({ site, setcurrentsite }) => {
 
         }
     }
-    function check(event, setcategories, categories, num) {
-        const arr = categories
-        let arr1 = categories1
-        arr[num] = event.target.checked
-        setcategories([...arr])
-
-
-        if (arr[num] == false) {
-            arr1 = arr1.filter((e) => e != (num + 1))
+    function checkCategory(event, setcategories, num) {
+        if (event.target.checked) {
+            setcategories((prevState) => [...prevState, num]);
+        } else {
+            setcategories((prevState) =>
+                prevState.filter((checkbox) => checkbox !== num)
+            );
         }
-        else
-            arr1.push(num + 1);
-        setcategories1([...arr1])
-        console.log("aaa", categories, categories1)
-
     }
-
     async function addsite() {
         console.log(address)
 
@@ -216,10 +221,10 @@ const Secrtery = ({ site, setcurrentsite }) => {
 
                                             <FormLabel id="demo-controlled-radio-buttons-group">מיועד ל..</FormLabel>
 
-                                            <FormControlLabel checked={categories[0]} control={<Checkbox onChange={(e) => check(e, setcategories, categories, 1)} />} label="משפחות" />
-                                            <FormControlLabel checked={categories[1]} control={<Checkbox onChange={(e) => check(e, setcategories, categories, 2)} />} label="קבוצות" />
-                                            <FormControlLabel checked={categories[2]} control={<Checkbox onChange={(e) => check(e, setcategories, categories, 3)} />} label="זוגות" />
-                                            <FormControlLabel checked={categories[3]} control={<Checkbox onChange={(e) => check(e, setcategories, categories, 4)} />} label="ילדים" />
+                                            <FormControlLabel checked={categories.includes(1) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, 1)} />} label="משפחות" />
+                                            <FormControlLabel checked={categories.includes(2) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, 2)} />} label="קבוצות" />
+                                            <FormControlLabel checked={categories.includes(3) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, 3)} />} label="זוגות" />
+                                            <FormControlLabel checked={categories.includes(4) ? true : false} control={<Checkbox onChange={(e) => checkCategory(e, setcategories, 4)} />} label="ילדים" />
                                         </Box>
 
                                         <Box sx={{ alignItems: "center", display: "flex", gap: 1 }}>
@@ -236,7 +241,7 @@ const Secrtery = ({ site, setcurrentsite }) => {
 
                                                     <FormControl>
                                                         <FormLabel>רמת קושי</FormLabel>
-                                                        <RadioGroup aria-label="gender" name="gender" value={level} onChange={(event) => { setlevel(event.target.value) }}>
+                                                        <RadioGroup aria-label="level" name="level" value={level} onChange={(event) => { setlevel(event.target.value) }}>
                                                             <FormControlLabel value="hard" control={<Radio />} label="קשה" />
                                                             <FormControlLabel value="easy" control={<Radio />} label="קל" />
                                                             <FormControlLabel value="medium" control={<Radio />} label="בינוני" />
@@ -251,7 +256,7 @@ const Secrtery = ({ site, setcurrentsite }) => {
 
                                                     <FormControl>
                                                         <FormLabel>סוג אתר</FormLabel>
-                                                        <RadioGroup aria-label="gender" name="gender" value={tripstype} onChange={(event) => { settripstype(event.target.value) }}>
+                                                        <RadioGroup aria-label="triptype" name="triptype" value={tripstype} onChange={(event) => { settripstype(event.target.value) }}>
                                                             <FormControlLabel value="around" control={<Radio />} label="מעגלי" />
                                                             <FormControlLabel value="riding" control={<Radio />} label="רכיבה" />
                                                             <FormControlLabel value="lines" control={<Radio />} label="קווי" />
@@ -269,7 +274,7 @@ const Secrtery = ({ site, setcurrentsite }) => {
 
                                                     <FormControl>
                                                         <FormLabel>אזור</FormLabel>
-                                                        <RadioGroup aria-label="gender" name="gender" value={area} onChange={(event) => { setarea(event.target.value) }}>
+                                                        <RadioGroup aria-label="area" name="area" value={area} onChange={(event) => { setarea(event.target.value) }}>
                                                             <FormControlLabel value="north" control={<Radio />} label="צפון" />
                                                             <FormControlLabel value="south" control={<Radio />} label="דרום" />
                                                             <FormControlLabel value="center" control={<Radio />} label="מרכז" />
@@ -307,45 +312,39 @@ const Secrtery = ({ site, setcurrentsite }) => {
                                         <Button onClick={handleComplete}>
                                             {completedSteps() === totalSteps() - 1
                                                 ? 'גמרת'
-                                                : 'Complete Step'}
+                                                : 'גמרת'}
                                         </Button>
                                     ))}
                             </Box>
                         </React.Fragment>
                     )}
                 </div>
-            </Box>
+
+            </Box><br></br>
+            <Uploader file={url} setFile={seturl} label="הוסף תמונה" /><br></br><br></br>
             <TextField
                 label="שם"
                 variant="standard"
                 placeholder="שם האתר"
+                value={name}
                 onChange={(e) => { setname(e.target.value) }}
             />
+
+            <label>            </label>
             <TextField
                 label="משך זמן"
                 variant="standard"
                 placeholder="משך זמן שהיה באתר"
+                value={duration}
                 onChange={(e) => { setduration(e.target.value) }}
             />
             <div>
                 <Autocomplete1 endpoint2={place2} endpoint1={place1} setpoint1={setpoint1} setpoint2={setpoint2} f={true} ></Autocomplete1>
             </div>
-            <Uploader file={url} setFile={seturl} label="הוסף תמונה" />
-            {/* <input type={"text"} placeholder="place2" onChange={(e) => { f(e) }}></input><br></br> */}
-            <div>
-
-            </div>
 
 
         </>
             : <TextField type="password" placeholder="הכנס קוד מזכירה" visible={visible} style={{ marginTop: "20vh", margin: "auto" }} onChange={(e) => { checkadmine(e) }} />}
-
-
-
-
     </>
-
-
-
 }
 export default Secrtery;

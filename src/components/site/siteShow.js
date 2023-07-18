@@ -45,14 +45,14 @@ function Siteshow({ site, addsite, RemoveSite, update, realcode }) {
 
             <Typography variant="body2" color="text.secondary" sx={{display: "grid", gridTemplateColumns: { xs: "repeat(1, minmax(0,1fr))", sm: "repeat(3, minmax(0,1fr))"}} }>
               <div display="flex"><h4>גישה:</h4> {site.acces ? <><AccessibleIcon/> יש גישה</> : <> <NotAccessibleIcon/>אין גישה</>}</div>
-              <div><h4>אופניים:</h4> {site.bicycles ? <> <PedalBikeIcon/>אפשרות לאופניים</> :<><CloseIcon/><PedalBikeIcon/>אין אפשרות לאופניים</>}</div>
-              <div><h4>קטגוריות:</h4> {site.categories}</div>
-              <div><h4>סוג טיול:</h4>{site.tripstype}</div>
+              <div><h4>אופניים: </h4> {site.bicycles ? <> <PedalBikeIcon/>אפשרות לאופניים</> :<><CloseIcon/><PedalBikeIcon/>אין אפשרות לאופניים</>}</div>
+              <div><h4>מתאים ל: </h4> {site.categories}</div>
+              <div><h4>סוג טיול: </h4>{site.tripstype}</div>
               {/* <div><h4>Description:</h4> {site.description}</div>  */}
-              <div><h4>אזור:</h4> {site.area}</div>
-              <div><h4>תחבורה ציבורית:</h4> {site.truffic ? <><DirectionsBusFilledIcon/>תחבורה ציבורית</> : <><BusAlertIcon/>אין תחבורה ציבורית</>}</div>
-              <div><h4>תשלום:</h4> <AttachMoneyIcon/>{site.payment}</div> 
-              <div><h4>רמה:</h4>  {site.level}</div> 
+              <div><h4>אזור: </h4> {site.area}</div>
+              <div><h4>תחבורה ציבורית: </h4> {site.truffic ? <><DirectionsBusFilledIcon/>תחבורה ציבורית</> : <><BusAlertIcon/>אין תחבורה ציבורית</>}</div>
+              <div><h4>תשלום: </h4> <AttachMoneyIcon/>{site.payment}</div> 
+              <div><h4>רמה: </h4>  {site.level}</div> 
               {/* <div><h4>Name:</h4> {site.name} </div> */}
               <div><h4>כתובת:</h4>{site.adress}</div>
             </Typography>

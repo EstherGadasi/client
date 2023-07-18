@@ -5,7 +5,6 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
-import Lgoogle from "./searchShow";
 function Map({ trip, sites, travel_mode, isLoaded, center, markers, places, handleChange }) {
   const [map, setMap] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState([]);
@@ -76,7 +75,7 @@ function Map({ trip, sites, travel_mode, isLoaded, center, markers, places, hand
   function originInformation(arrResults) {
     console.log(arrResults)
     if (arrResults.length) {
-    
+
       arrResults.forEach((e) => { arr.push(e.routes[0].summary) })
       setdurationtravels(parseseconds(time))
       setroad(arr)
@@ -93,10 +92,10 @@ function Map({ trip, sites, travel_mode, isLoaded, center, markers, places, hand
     return arr
   }
   function count() {
-    let t=0
+    let t = 0
     sites.map((e) => t += e.duration)
     console.log(t)
-    setduration(parseseconds(time+t))
+    setduration(parseseconds(time + t))
   }
   if (!isLoaded) return <h1>Loading</h1>
   return (<>
@@ -128,16 +127,12 @@ function Map({ trip, sites, travel_mode, isLoaded, center, markers, places, hand
             <DirectionsRenderer directions={dirRes} />
           ))}
       </GoogleMap>
-      {/* {road&&<Lgoogle road={road} showduration={showduration} showdurationtravels={showdurationtravels} onLoad={onLoad} center={center} map={map} markers={markers}directionsResponse={directionsResponse} directionsResponse={directionsResponse} ></Lgoogle>} */}
     </div>
-
     {road?.map((e, i) => <div>כביש מנקודה {i + 1} לנקודה {i + 2}: {e}</div>)}
     {showdurationtravels ? <div>זמן הנסיעות של הטיול  {showdurationtravels[0] ? <><span>{showdurationtravels[0]} ימים </span></> : <></>}{showdurationtravels[1] ? <><span>{showdurationtravels[1]} שעות </span></> : <></>}{showdurationtravels[2] ? <><span>{showdurationtravels[2]} דקות </span></> : <></>}</div> : <></>}
     {showduration ? <div>אורך טיול בסה"כ {showduration[0] ? <><span>{showduration[0]} ימים </span></> : <></>}{showduration[1] ? <><span>{showduration[1]} שעות </span></> : <></>}{showduration[2] ? <><span>{showduration[2]} דקות </span></> : <></>}</div> : <></>}
   </>
   );
-
-
 }
 
 

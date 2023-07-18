@@ -105,10 +105,8 @@ const TripSettings = ({ setend_point1, setend_point2, selectOption, setdistance,
   }
   function pushtoaar(min, time, site, name) {
     let arrh = [0]
-
     arrh = arrs.find((el) => el.site.lat == site.lat && el.site.lng == site.lng)
     if (arrs.length == 0) {
-      // setcount(count + min)
       t += min
       arrs.push({
         time: time,

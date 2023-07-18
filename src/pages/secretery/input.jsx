@@ -11,23 +11,17 @@ export default function CustomizedInputBase() {
   return (
     <Paper
       component="form"
-      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 ,margin:"2px"}}
+      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400, margin: "2px" }}
     >
-      {/* <IconButton sx={{ p: '10px' }} aria-label="menu"> */}
-        <MenuIcon />
-      {/* </IconButton> */}
+      <MenuIcon />
       <InputBase
         sx={{ ml: 1, flex: 1 }}
         placeholder="Search Google Maps"
         inputProps={{ 'aria-label': 'search google maps' }}
       />
-      
-        <SearchIcon />
-     
+      <SearchIcon />
       <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-      {/* <IconButton color="primary" sx={{ p: '10px' }} aria-label="directions"> */}
-        <DirectionsIcon />
-      {/* </IconButton> */}
+      <DirectionsIcon />
     </Paper>
   );
 }

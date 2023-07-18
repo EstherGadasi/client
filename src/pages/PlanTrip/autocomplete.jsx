@@ -56,32 +56,22 @@ function Autocomplete1({setnamestart, locations, isLoaded, setlocations, setpoin
   >
     <CustomizedInputBase />
   </Autocomplete>
-    {/* {setstartpoint || f ?<Map center={center} markers={markers} handleChange={handleChange} places={places} />:<></>} */}
     <div className="map-container">
       <div className="map-options">
-
-        {/* <button>Center the map</button> */}
-
         {places?.length > 0 && places.map((place, key) => {
           return (<div className="route-detail" key={`a${key}`} >
             <div>{place.name}</div>
-            {/* <div>lat:  {place.lat} </div>
-            <div>lng:  {place.lng} </div> */}
-
           </div>)
         })}
         {distances?.length > 0 && distances.map((distance, key) => {
           return (<div className="distance-detail" key={`d${key}`} >
             <div>   מרחק({distance.distance.text} | {distance.distance.value})</div>
             <div>     זמן({distance.duration.text} | {distance.duration.value})</div>
-
           </div>)
         })}
 
       </div>
       <div className="g-map">
-
-        {/* places={[...places]} */}
       </div>
     </div>
     </div>
