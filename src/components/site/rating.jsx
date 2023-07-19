@@ -25,13 +25,16 @@ export default function Rate({ site, addsite, RemoveSite, realcode }) {
     const [siteid, setsiteid] = React.useState(site.idsites);
     const [opinion, setopinion] = useState([])
     const navigate = useNavigate()
-console.log(realcode)
+    console.log(realcode)
     async function addopion() {
         if (!currentUser) navigate("/login")
         const userid = currentUser.idusers
         if (user_opinion && level) {
             try {
                 const res = await axios.post("http://localhost:4000/opinion", { user_opinion, level, siteid, userid });
+                alert(`חוות דעתך ${user_opinion} נוספה למערכת`)
+                setuser_opinion("")
+                setRating(0)
             }
             catch { }
         }
@@ -46,7 +49,9 @@ console.log(realcode)
                     // endDecorator={<DeleteForever />}
                     onClick={() => setOpen(true)}
                 >
-                   פרטים נוספים {/* {site.name} */}
+                    {addsite || RemoveSite || realcode ?<h3> לחוות דעת על  {site.name}</h3>
+                    :<h3> להוספת חוות דעת על {site.name}</h3>}
+                
                 </Button>
             </Box>
             <Modal open={open} onClose={() => setOpen(false)}>
@@ -62,7 +67,7 @@ console.log(realcode)
                         component="h2"
                         startDecorator={<GradeIcon />}
                     >
-                       חוות דעת
+                        חוות דעת
                     </Typography>
                     <Divider />
                     {addsite || RemoveSite || realcode ? <> {site.opinion?.map((e) => <Opinion e={e} ></Opinion>)}</> : <>
@@ -71,8 +76,8 @@ console.log(realcode)
                             value={level}
                             onChange={(event, newValue) => {
                                 setRating(newValue);
-                            }} /> 
-                        <input placeholder='youropinion' onChange={(e) => { setuser_opinion(e.target.value) }}></input>
+                            }} />
+                        <input value={user_opinion} placeholder='youropinion' onChange={(e) => { setuser_opinion(e.target.value) }}></input>
 
                     </>}
 
@@ -80,15 +85,16 @@ console.log(realcode)
                         <Button variant="plain" color="neutral" onClick={() => setOpen(false)}>
                             חזרה
                         </Button>
-                        {!(addsite || RemoveSite || realcode) && <Button variant="solid" color="success" onClick={() => {
-                            setOpen(false)
-                            addopion()
-                            Rate();
-                        }
+                        {!(addsite || RemoveSite || realcode) &&
+                            <Button variant="solid" color="success" onClick={() => {
+                                // setOpen(false)
+                                addopion()
+                                Rate();
+                            }
 
-                        }>
-                            חוות דעת
-                        </Button>}
+                            }>
+                              הוספת חוות דעת
+                            </Button>}
                     </Box>
                 </ModalDialog>
             </Modal>

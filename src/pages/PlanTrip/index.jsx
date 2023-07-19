@@ -219,8 +219,8 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
                 <Box></Box>
 
                 {id ? <Button onClick={save}>עדכון טיול</Button> : <></>}
-                {selectOption && !id ? <Button onClick={save}>שמירה</Button> : <></>}<br></br>
-                <label> אחרי שמירת הטיול תוכל לראות את כל הפרטים עליו ולערוך אותו שוב</label>
+                {selectOption && !id ? <Button onClick={save}><h1>שמירה</h1></Button> : <></>}<br></br>
+                <label> *אחרי שמירת הטיול תוכל לראות את כל הפרטים עליו ולערוך אותו שוב</label><br></br>
                 {trip ? <Save namestart={namestart} selectOption={selectOption[selectOption.length - 1]} setend_point1={setend_point1} setend_point2={setend_point2} isLoaded={isLoaded} setTripid={setTripid} payment={payment} userId={currentUser.idusers} begin_point1={begin_point1} begin_point2={begin_point2} end_point1={end_point1} end_point2={end_point2} date={date} listofsites={arrid} constrainsoftrip={constrains} idtrips={tripid} duration={duration} /> : <></>}
                 {isLoaded && <Map isLoaded={isLoaded} center={center} markers={markers} places={[...locations]} handleChange={handleChange} />}
                 <Box sx={{ width: "100vw" }} bgcolor="InfoBackground">

@@ -25,7 +25,6 @@ const Secrtery = ({ site, setcurrentsite }) => {
     const [visible, setvisible] = useState(true)
     const [bicycles, setbicycles] = useState(false);
     const [categories, setcategories] = useState([]);
-    const [categories1, setcategories1] = useState([]);
     const [tripstype, settripstype] = useState([])
     const [description, setdescription] = useState(null);
     const [area, setarea] = useState([])
@@ -52,6 +51,10 @@ const Secrtery = ({ site, setcurrentsite }) => {
     const [id, setid] = useState(0)
     useEffect(() => {
         if (site) {
+            let arr = []
+            site.category.forEach((e) => {
+                arr.push(e.idcategory)
+            })
             setacces(site.acces)
             setadress(site.address)
             setduration(site.duration)
@@ -60,7 +63,7 @@ const Secrtery = ({ site, setcurrentsite }) => {
             setdescription(site.description)
             settruffic(site.truffic)
             setbicycles(site.bicycles)
-            setcategories(site.category)
+            setcategories(arr)
             settripstype(site.tripstype)
             setarea(site.area)
             setpayment(site.payment)
@@ -92,10 +95,14 @@ const Secrtery = ({ site, setcurrentsite }) => {
             const res = await axios.put(`http://localhost:4000/site/${site.idsites}`, { duration, acces, bicycles, categories, tripstype, description, area, truffic, payment, level, name, place1, place2, url, address });
 
             console.log(res.data)
+            alert(`אתר ${name}עודכן `)
+            navigate("/secrtery")
         } catch (err) {
             //   setErr(err.response.data?.message);
 
         }
+
+
     }
     function checkCategory(event, setcategories, num) {
         if (event.target.checked) {
@@ -113,6 +120,8 @@ const Secrtery = ({ site, setcurrentsite }) => {
             try {
                 const ressite = await axios.post("http://localhost:4000/site", { duration, url, acces, bicycles, categories, tripstype, description, area, truffic, payment, level, name, place1, place2, url, address });
                 console.log(ressite.data)
+                alert(`אתר ${name}נוסף `)
+
             } catch (err) {
                 //   setErr(err.response.data?.message);
 

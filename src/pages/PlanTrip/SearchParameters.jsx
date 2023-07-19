@@ -215,7 +215,6 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
             <Button onClick={() => { setflagd(true); clearConstrains() }}>סנן רק לפי תאור </Button>
             <Button onClick={showconstrains}>בחירת אילוצים </Button>
             <Button onClick={bringmatchessites}>התאם לי אתרים</Button>
-            <Button onClick={clearConstrains}>ביטול סינון</Button><br></br><br></br>
             {empty ? <h2>{empty}</h2> : <></>}
             {f ? <div style={{ width: '100vw' }}><Box sx={{ width: '60vw', margin: 'auto' }} >
                 <Stepper nonLinear activeStep={activeStep}>
@@ -321,8 +320,8 @@ function SearchParameters({ flag, startpoint, setTripsOptions, setconstrains, co
                                     ) : (
                                         <Button onClick={handleComplete}>
                                             {completedSteps() === totalSteps() - 1
-                                                ? 'Finish'
-                                                : 'Complete Step'}
+                                                ? 'גמרת'
+                                                : 'נגמר השלב'}
                                         </Button>
                                     ))}
                             </Box>
