@@ -31,7 +31,7 @@ const Secrtery = ({ site, setcurrentsite }) => {
     const [truffic, settruffic] = useState(false)
     const [payment, setpayment] = useState(null)
     const [level, setlevel] = useState([])
-    const [name, setname] = useState(null)
+    const [name, setname] = useState("")
     const [place, setplace] = useState(null)
     const [place1, setpoint1] = useState(null)
     const [place2, setpoint2] = useState(null)
@@ -41,9 +41,7 @@ const Secrtery = ({ site, setcurrentsite }) => {
     const [duration, setduration] = useState(false)
     const [optionalladress, setoptionalladress] = useState([" "])
     const [flag, setflag] = useState(false)
-    const [days, setdays] = useState(0)
-    const [hours, sethours] = useState(0)
-    const [minuets, setminuets] = useState(0)
+    const [days, setdays] = useState()
     const realcode = 1234
     const steps = ['Participants', 'Select type', 'Constrains'];
     const navigate = useNavigate()
@@ -82,13 +80,20 @@ const Secrtery = ({ site, setcurrentsite }) => {
         else { setflag(false) }
 
     }
-    function castingtimetoseconds() {
+    function castingtimetoseconds(e) {
+        setdays(e.target.value)
+        let time = e.target.value.split(":")
         let count = 0
-        count += days * 60 * 60 * 24
-        count += hours * 60 * 60
-        count += minuets * 60
+
+        count += parseInt(deletezero(time[0])*60*60)
+        count += parseInt(deletezero(time[1]) *60)
         console.log(count)
         setduration(count)
+    }
+    function deletezero(time) {
+        if (time[0] == 0)
+            time=time.substring(1)
+        return time
     }
     async function update() {
         try {
@@ -306,11 +311,11 @@ const Secrtery = ({ site, setcurrentsite }) => {
                                     onClick={handleBack}
                                     sx={{ mr: 1 }}
                                 >
-                                    Back
+                                    הקודם
                                 </Button>
                                 <Box sx={{ flex: '1 1 auto' }} />
                                 <Button onClick={handleNext} sx={{ mr: 1 }}>
-                                    Next
+                                    הבא
                                 </Button>
                                 {activeStep !== steps.length &&
                                     (completed[activeStep] ? (
@@ -330,7 +335,8 @@ const Secrtery = ({ site, setcurrentsite }) => {
                 </div>
 
             </Box><br></br>
-            <Uploader file={url} setFile={seturl} label="הוסף תמונה" /><br></br><br></br>
+           < h5>הוסף תמונה</h5>
+            <Uploader file={url} setFile={seturl} /><br></br><br></br>
             <TextField
                 label="שם"
                 variant="standard"
@@ -339,14 +345,16 @@ const Secrtery = ({ site, setcurrentsite }) => {
                 onChange={(e) => { setname(e.target.value) }}
             />
 
-            <label>            </label>
+            <label htmlFor="time-picker"></label>
             <TextField
-                label="משך זמן"
-                variant="standard"
+                id="time-picker"
+                label="משך זמן שהיה באתר"
                 placeholder="משך זמן שהיה באתר"
-                value={duration}
-                onChange={(e) => { setduration(e.target.value) }}
+                type="time"
+                value={days}
+                onChange={(e) => { castingtimetoseconds(e) }}
             />
+
             <div>
                 <Autocomplete1 endpoint2={place2} endpoint1={place1} setpoint1={setpoint1} setpoint2={setpoint2} f={true} ></Autocomplete1>
             </div>

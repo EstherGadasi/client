@@ -94,19 +94,20 @@ export const Home = () => {
     <h6> {descriptione} </h6>   
     <h6> {man} </h6>  
     <h6> {shalom} </h6>  
-     <h3>אתרים הכי מבוקרים</h3>
+     <h3 style={{justifycontent: "center" ,display: "flex",   }}>אתרים הכי מבוקרים</h3>
     <Box sx={{ display: "flex",alignItems:"center" ,margin:"auto" }} style={{ width: "75vw" }}>
    { startindex>0&&<ArrowForwardIos style={{ left: 150, zIndex: 100 }} onClick={left}></ArrowForwardIos>}
    <Box sx={{ display: "flex",alignItems:"center",margin:"auto"   }} style={{ width: "75vw" }}>
       {BestSites?.map((e,i) => e.map((ev) => <Site index={i} e={ev} startindex={startindex} endindex={endindex}></Site>))}</Box>
     {BestSites&& endindex<BestSites.length&&<ArrowBackIos  onClick={right}></ArrowBackIos>}</Box>
     {/* <ArrowForwardIos style={{ right: 150, position: "fixed", zIndex: 100 }} */}
-    <h5>מה אנשים אומרים עלינו</h5>
-    <Box sx={{display:"flex",margin:"auto",alignItems:"center",textAlign:"center"}}>{Opinions?.map((e, i) => <Opinion key={i} e={e} ></Opinion>)}</Box>
+    <h5 style={{ display: "flex", justifycontent: "center"  }}>מה אנשים אומרים עלינו</h5>
+    <Box sx={{ width: "100vw", display: "flex", justifycontent: "center"  }}>{Opinions?.map((e, i) => <Opinion key={i} e={e} ></Opinion>)}</Box>
     <h5>מה דעתך על האתר שלנו</h5>
     
     <TextField placeholder='   הדעה שלך' onChange={(e) => { setopinion(e.target.value) }}></TextField>
-       <span>   </span><Rating
+       <span>   </span>
+       <Rating
       name="simple-controlled"
       value={level}
       onChange={(event, newValue) => {

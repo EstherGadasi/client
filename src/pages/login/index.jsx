@@ -2,17 +2,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-//import './login.css'
+import { useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, Link, NavLink } from 'react-router-dom'
 import { AuthContext } from "../../context/authContext"
 import Register from '../register';
 import { Box } from '@mui/material';
-function Login() {
+function Login({ setauth }) {
+  const location = useLocation();
   const [password, setpassword] = useState("")
   const [username, setuserName] = useState("")
   const [err1, setErr] = useState(null);
   const [flag, setflag] = useState(true);
   const { login, err } = useContext(AuthContext)
+  const [id, setid] = useState()
+
   const navigate = useNavigate()
 
   const checkuser = async (e) => {
@@ -23,7 +26,10 @@ function Login() {
         alert("שם משתמש או סיסמא אינם נכונים")
       if (err == "all fileds arr required")
         alert("all fileds arr required")
-      else { navigate("/myTrips", { replace: false }) }
+      else {
+        navigate("/myTrips", { replace: false });
+        location.state.setAuth.setAuth(true)
+      }
     } catch (err1) {
       //   setErr(err.response.data?.message);
     }
@@ -48,13 +54,13 @@ function Login() {
       <div className="login-page" style={{ margin: "auto", alignItems: "center" }}>
         <form className="login-form" borderColor={"GrayText"} style={{ width: "25vw", margin: "auto", marginTop: "10vw", padding: "2em", position: "relative", background: "rgba(black, .15)" }}>
           <div className="text-center">
-            Not registered yet?{" "}
+            לא נרשמת עדין?{" "}
             <a className="link-primary" style={{ marginTop: "1em", color: "$green-light", fontSize: ".65em", textAlign: "center", position: "relative" }} onClick={register}>
-              Sign Up
+              מהר להרשם
             </a>
           </div>
           <div className="login-form-content">
-            <h3 className="login-form-title">Sing In</h3>
+            <h3 className="login-form-title">התחבר</h3>
             <div style={{ display: "flex", marginBottom: "1em" }}>
               <label for="username" style={{ width: "2em", display: "flex", alignItems: "center", justifyContent: "center", background: " $gray-light", cursor: "pointer" }}><svg x="0px" y="0px" width="12px" height="13px">
                 <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z" />
@@ -77,7 +83,7 @@ function Login() {
                 cursor: "pointer",
                 fontSize: ".75em",
                 textShadow: "0 1px 0 rgba(black, .2)"
-              }}>login</button>
+              }}>התחבר</button>
             </div>
 
           </div>

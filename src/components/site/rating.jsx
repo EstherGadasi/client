@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 export default function Rate({ site, addsite, RemoveSite, realcode }) {
     const { currentUser, token } = useContext(AuthContext);
     const [open, setOpen] = React.useState(false);
-    const [level, setRating] = React.useState(0);
+    const [level, setRating] = React.useState();
     const [user_opinion, setuser_opinion] = React.useState("");
     const [siteid, setsiteid] = React.useState(site.idsites);
     const [opinion, setopinion] = useState([])

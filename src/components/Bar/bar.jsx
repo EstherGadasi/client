@@ -21,6 +21,8 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { AuthContext } from "../../context/authContext"
+import NoAccountsIcon from '@mui/icons-material/NoAccounts';
+import Login from '../../pages/login';
 //const navigate = useNavigate();
 
 const useStyles = makeStyles((theme) => ({
@@ -41,7 +43,7 @@ export default function ButtonAppBar() {
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { token, currentUser } = useContext(AuthContext)
+  const { token, currentUser,logout } = useContext(AuthContext)
   const [auth, setAuth] = React.useState(true);
   const handleClose = () => {
     setAnchorEl(null);
@@ -54,13 +56,23 @@ export default function ButtonAppBar() {
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const logout = () => {
+  const logoutuser = async() => {
 
-
+    try {
+      await logout()
+      setAuth(false);
+      navigate("../", { replace: false })
+ handleClose()
+    } catch (err1) {
+      //   setErr(err.response.data?.message);
+    }
+   
+    
   };
   const login = () => {
 
-    navigate("../login", { replace: false })
+    navigate("/login", { state: { setAuth: { setAuth } } })
+    handleClose()
   }
   const planTrip = () => {
 
@@ -77,11 +89,9 @@ export default function ButtonAppBar() {
   const personal_area = () => {
 
     navigate("../myTrips", { replace: false })
+    handleClose()
   }
-  const ListSite = () => {
 
-    navigate("../ListSite", { replace: false })
-  }
   const secrtery = () => {
 
     navigate("../secrtery", { replace: false })
@@ -104,7 +114,7 @@ export default function ButtonAppBar() {
           <Button onClick={login} color="inherit" style={{ width: "20vw" }}>התחבר</Button>
           <Button onClick={personal_area} color="inherit" style={{ width: "20vw" }}>הטיולים שלי</Button>
           <Button onClick={secrtery} color="inherit" style={{ width: "20vw" }}>מזכירה</Button>
-          {auth && (
+          {auth ? (
             <div>
               <IconButton
                 size="large"
@@ -131,11 +141,40 @@ export default function ButtonAppBar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem><br></br>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={personal_area}>הטיולים שלי</MenuItem><br></br>
+                <MenuItem onClick={logoutuser}>צא מהמשתמש</MenuItem>
               </Menu>
             </div>
-          )}
+          ) :
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <NoAccountsIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={login}> התחבר</MenuItem><br></br>
+              </Menu>
+            </div>}
         </Toolbar>
       </AppBar>
     </div>

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Trip from "../../components/trip/trip";
 import { AuthContext } from "../../context/authContext"
 import PointsSites from "../PlanTrip/pointsSites";
-import { Button,Box } from '@mui/material';
+import { Button, Box } from '@mui/material';
 
 function Personal_area() {
     const navigate = useNavigate()
@@ -33,6 +33,10 @@ function Personal_area() {
             if (res.data == "Unauthorized")
                 navigate("/login")
             console.log(res.data)
+            if (res.data.length == 0) {
+                alert("אין לך טיולים תכנן לך טיול")
+                navigate('/PlanTrip')
+            }
             settrips(res.data)
 
         }
@@ -45,18 +49,22 @@ function Personal_area() {
     }
     return <>
         {!currentitem ? <>
-        <Box style={{width:"100vw",display:"blok"}}>
-        <div>הטיולים שלך כאן תוכל לשנות למחוק </div> 
-        <Button onClick={plan_new_trip}>טיול חדש</Button>
-        <Box style={{width:"100vw",display:"blok"}}>
-            {trip?.map((e, i) => {
+         <h2 style={{ display: 'flex', justifyContent: 'center' }}>הטיולים שלך כאן תוכל לשנות ולמחוק </h2>
+               
 
-                return <>
-                    <Trip settrips={settrips} key={i} trip={e} trips={trip} setflag={setflag} flag={flag} setcurrentitem={setcurrentitem} />
+                <Button style={{ display: 'flex', justifyContent: 'center' }}onClick={plan_new_trip}><h2>טיול חדש</h2> </Button>
+            <Box style={{ width: "100vw", display: "flex", justifycontent: "center" }}>
+             
+                   
+                <Box style={{ width: "100vw", display: "flex", justifycontent: "center"  }}>
+                    {trip?.map((e, i) => {
 
-                </>
-            })}</Box></Box>
-            </>: <Planning_a_trip durationtrip={currentitem.duration} startpoint1={currentitem.namestart} sites={currentitem.sites} id={currentitem.idtrips} paymenttrip={currentitem.payment} bg1={currentitem.begin_point1} bg2={currentitem.begin_point2} name={currentitem.name} />}
+                        return <>
+                            <Trip settrips={settrips} key={i} trip={e} trips={trip} setflag={setflag} flag={flag} setcurrentitem={setcurrentitem} />
+
+                        </>
+                    })}</Box></Box>
+        </> : <Planning_a_trip durationtrip={currentitem.duration} startpoint1={currentitem.namestart} sites={currentitem.sites} id={currentitem.idtrips} paymenttrip={currentitem.payment} bg1={currentitem.begin_point1} bg2={currentitem.begin_point2} name={currentitem.name} />}
     </>
 
 
