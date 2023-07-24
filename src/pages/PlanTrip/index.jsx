@@ -32,7 +32,7 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
     const [startpoint, setstartpoint] = useState()
     const { isLoaded } = useJsApiLoader({
         id: "google-map-script",
-        googleMapsApiKey: "AIzaSyBWW1xrjKfvdMk2-oVeMEHDyYW83E0nU0A",
+        googleMapsApiKey: "AIzaSyCbGmLWQJtKnQpMNv6bP9F5heJ5hUPwSto",
         libraries: ['places']
     });
     const current = new Date();

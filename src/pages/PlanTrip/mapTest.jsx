@@ -17,7 +17,7 @@ const MapTest = ()=>{
 
     const { isLoaded } = useJsApiLoader({
         id: "google-map-script",
-        googleMapsApiKey: "AIzaSyBWW1xrjKfvdMk2-oVeMEHDyYW83E0nU0A",
+        googleMapsApiKey: "AIzaSyCbGmLWQJtKnQpMNv6bP9F5heJ5hUPwSto",
         libraries:['places']
       }); 
     const [currentLocation, setCurrentLocation] = useState({ lat: 40.756795, lng: -73.954298 })

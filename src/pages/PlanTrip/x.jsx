@@ -7,7 +7,7 @@ import Map1 from "./e";
 function MapOptions({placesarr}) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyBWW1xrjKfvdMk2-oVeMEHDyYW83E0nU0A",
+    googleMapsApiKey: "AIzaSyCbGmLWQJtKnQpMNv6bP9F5heJ5hUPwSto",
     libraries: ['places']
   });
   const [ center, setCenter] = useState({lat:31.732642099242874, lng:35.18573300318892})

@@ -6,7 +6,7 @@ const PointsSites = ({ point, site1, setname
 }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyBWW1xrjKfvdMk2-oVeMEHDyYW83E0nU0A",
+    googleMapsApiKey: "AIzaSyCbGmLWQJtKnQpMNv6bP9F5heJ5hUPwSto",
     libraries: ['places']
   });
   const [site, setsite] = useState()

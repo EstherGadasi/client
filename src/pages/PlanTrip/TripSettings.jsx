@@ -14,7 +14,7 @@ const TripSettings = ({ setend_point1, setend_point2, selectOption, setdistance,
   let arrs = distanceSite
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyBWW1xrjKfvdMk2-oVeMEHDyYW83E0nU0A",
+    googleMapsApiKey: "AIzaSyCbGmLWQJtKnQpMNv6bP9F5heJ5hUPwSto",
     libraries: ['places']
   });
   let counttime = 0

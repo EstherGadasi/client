@@ -17,7 +17,7 @@ const Point = ({
 }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyBWW1xrjKfvdMk2-oVeMEHDyYW83E0nU0A",
+    googleMapsApiKey: "AIzaSyDixFC_GhvfskrRxu4KM09Dz-zeclSeke4",
   libraries:['places']
   });
   const [newArray, setnewArray] = useState([])
