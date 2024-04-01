@@ -8,7 +8,8 @@ const Uploader = ({ file, setFile, label }) => {
     if (selectFile) {
       const formData = new FormData()
       formData.append("file", selectFile)
-      axios.post("http://localhost:4000/api/upload", ).then(({ data }) => {
+      console.log(selectFile)
+      axios.post("http://localhost:4000/api/upload",formData ).then(({ data }) => {
         if (data?.name) {
           setFile(data.name)
         }
@@ -43,7 +44,7 @@ const Uploader = ({ file, setFile, label }) => {
 
   const onSelectFile = (e) => {
     setSelectFile(e.target.files[0])
-    handleFileSelected(e)
+    // handleFileSelected(e)
 
   }
   return (

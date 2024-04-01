@@ -5,7 +5,7 @@ import Map from "./map";
 function Autocomplete1({ setpoint1, setpoint2, f, endpoint1, endpoint2 }) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyCbGmLWQJtKnQpMNv6bP9F5heJ5hUPwSto",
+    googleMapsApiKey: "AIzaSyDr4hJZxTXnNuaruWBC9gYKg-8ItccUmag",
     libraries: ['places']
   });
   const [markers, setMarkers] = useState([{ lat: 31.732642099242874, lng: 35.18573300318892 }, { lat: 31.731318964884345, lng: 35.19509927741574 }])
@@ -20,7 +20,8 @@ function Autocomplete1({ setpoint1, setpoint2, f, endpoint1, endpoint2 }) {
     if (autocomplete !== null) {
       const currPlace = autocomplete.getPlace()
       console.log(currPlace)
-      if (setpoint1) {
+
+      if (setpoint1&&currPlace.geometry.location.lat()) {
         console.log(currPlace.geometry.location.lat(), currPlace.geometry.location.lng())
         setpoint1(currPlace.geometry.location.lat())
         setpoint2(currPlace.geometry.location.lng())

@@ -5,6 +5,10 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
+import { Button, Box } from '@mui/material';
+import { CircularProgress } from '@mui/material';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import ElectricRickshawIcon from '@mui/icons-material/ElectricRickshaw';
 function Map({ trip, sites, travel_mode, isLoaded, center, markers, places, handleChange }) {
   const [map, setMap] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState([]);
@@ -13,6 +17,14 @@ function Map({ trip, sites, travel_mode, isLoaded, center, markers, places, hand
   const [showdurationtravels, setdurationtravels] = useState()
   const [showduration, setduration] = useState()
   let arr = []
+  const commonStyles = {
+    bgcolor: 'background.paper',
+    borderColor: 'text.primary',
+    m: 2,
+    border: 1,
+    width: '30rem',
+    height: '20rem',
+  };
   let time1 = 0
   let arrResults = []
   let time = trip?.duration ? trip.duration : 0
@@ -128,9 +140,17 @@ function Map({ trip, sites, travel_mode, isLoaded, center, markers, places, hand
           ))}
       </GoogleMap>
     </div>
-    {road?.map((e, i) => <div>כביש מנקודה {i + 1} לנקודה {i + 2}: {e}</div>)}
-    {showdurationtravels ? <div>זמן הנסיעות של הטיול  {showdurationtravels[0] ? <><span>{showdurationtravels[0]} ימים </span></> : <></>}{showdurationtravels[1] ? <><span>{showdurationtravels[1]} שעות </span></> : <></>}{showdurationtravels[2] ? <><span>{showdurationtravels[2]} דקות </span></> : <></>}</div> : <></>}
-    {showduration ? <div>אורך טיול בסה"כ {showduration[0] ? <><span>{showduration[0]} ימים </span></> : <></>}{showduration[1] ? <><span>{showduration[1]} שעות </span></> : <></>}{showduration[2] ? <><span>{showduration[2]} דקות </span></> : <></>}</div> : <></>}
+    <Box ></Box>
+
+    {road&&  <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ ...commonStyles , borderRadius: '50%'}}>
+      {road&& <ElectricRickshawIcon  style={{ width: '5rem',height: '5rem',}}></ElectricRickshawIcon>} {road?.map((e, i) =><> <h4 style={{ display: "flex", justifycontent: "center" }}>כביש מנקודה  {i + 1} לנקודה {i + 2}  :<div >{e}</div></h4></>)}
+    </Box>
+    <Box sx={{ ...commonStyles, borderRadius: '50%' }}>
+        {showdurationtravels ?<><AccessTimeIcon style={{ width: '5rem',height: '5rem',}}></AccessTimeIcon> <h4>זמן הנסיעות של הטיול:   {showdurationtravels[0] ? <><span>{showdurationtravels[0]} ימים </span></> : <></>}{showdurationtravels[1] ? <><span>{showdurationtravels[1]} שעות </span></> : <></>}{showdurationtravels[2] ? <><span>{showdurationtravels[2]} דקות </span></> : <></>}</h4> </>: <></>}
+        {showduration ?<> <h4>אורך טיול בסה"כ:   {showduration[0] ? <><span>{showduration[0]} ימים </span></> : <></>}{showduration[1] ? <><span>{showduration[1]} שעות </span></> : <></>}{showduration[2] ? <><span>{showduration[2]} דקות </span></> : <></>}</h4> </>: <></>}
+    </Box>
+    </Box>}
   </>
   );
 }

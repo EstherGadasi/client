@@ -32,7 +32,7 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
     const [startpoint, setstartpoint] = useState()
     const { isLoaded } = useJsApiLoader({
         id: "google-map-script",
-        googleMapsApiKey: "AIzaSyCbGmLWQJtKnQpMNv6bP9F5heJ5hUPwSto",
+        googleMapsApiKey: "AIzaSyDr4hJZxTXnNuaruWBC9gYKg-8ItccUmag",
         libraries: ['places']
     });
     const current = new Date();
@@ -117,6 +117,10 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
 
     }
     async function addsite(e) {
+        if (!currentUser) {
+            alert("כדי להשתמש באתר שלנו עליך להתחבר")
+            navigate("/login")
+        }
         if (!selectOption.find((el) => el.idsites == e.idsites)) {
             if (startpoint) {
                 setnamesarr([...selectOption, e])
@@ -134,10 +138,10 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
                 setlocations([...locations, { "name": e.name, "lat": e.place1, "lng": e.place2 }])
                 setnames([...names, e.name])
             }
-            else alert("enter start point")
+            else alert("מכנס נקודת מוצא")
         }
         else {
-            alert("site exist")
+            alert(`כבר הוספת את אתר ${e.name}`)
         }
     }
     async function RemoveSite(e) {
@@ -218,8 +222,8 @@ function Planning_a_trip({ constrainsarr, sites, id, paymenttrip, bg1, bg2, name
                 </div>
                 <Box></Box>
 
-                {id ? <Button onClick={save}>עדכון טיול</Button> : <></>}
-                {selectOption && !id ? <Button onClick={save}><h1>שמירה</h1></Button> : <></>}<br></br>
+                {id ? <Button onClick={save}> <h1>עדכון טיול </h1></Button> : <></>}
+                {selectOption.length>1 && !id ? <Button onClick={save}><h1>שמירה</h1></Button> : <></>}<br></br>
                 <label> *אחרי שמירת הטיול תוכל לראות את כל הפרטים עליו ולערוך אותו שוב</label><br></br>
                 {trip ? <Save namestart={namestart} selectOption={selectOption[selectOption.length - 1]} setend_point1={setend_point1} setend_point2={setend_point2} isLoaded={isLoaded} setTripid={setTripid} payment={payment} userId={currentUser.idusers} begin_point1={begin_point1} begin_point2={begin_point2} end_point1={end_point1} end_point2={end_point2} date={date} listofsites={arrid} constrainsoftrip={constrains} idtrips={tripid} duration={duration} /> : <></>}
                 {isLoaded && <Map isLoaded={isLoaded} center={center} markers={markers} places={[...locations]} handleChange={handleChange} />}

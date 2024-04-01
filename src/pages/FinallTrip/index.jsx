@@ -25,7 +25,7 @@ function FinallTrip() {
     const [messsage, setmesssage] = useState("האפשרויות הם:נהיגה,אופניים,הליכה,מעבר")
     const { isLoaded } = useJsApiLoader({
         id: "google-map-script",
-        googleMapsApiKey: "AIzaSyCbGmLWQJtKnQpMNv6bP9F5heJ5hUPwSto",
+        googleMapsApiKey: "AIzaSyDr4hJZxTXnNuaruWBC9gYKg-8ItccUmag",
         libraries: ['places']
     });
     async function bringTrip() {
