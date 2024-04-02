@@ -6,8 +6,8 @@ export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
-    
-    
+
+
     JSON.parse(localStorage.getItem("user")) || null
   );
   //console.log(JSON.parse(localStorage.getItem("user")),"llllllllll")
@@ -17,8 +17,17 @@ export const AuthContextProvider = ({ children }) => {
     localStorage.getItem("token") || null
   );
 
+  function deleteUndefinedKeys() {
+    if (localStorage.getItem('token') === undefined) {
+      localStorage.removeItem('token');
+    }
+    if (localStorage.getItem('user') === undefined) {
+      localStorage.removeItem('user');
+    }
+  }
 
-  const login = async ({ username, password,setflag }) => {
+
+  const login = async ({ username, password, setflag }) => {
     const res = await axios.post(
       "http://localhost:4000/api/auth/login",
       { username, password },
@@ -27,28 +36,32 @@ export const AuthContextProvider = ({ children }) => {
       // }
     );
     console.log(res.data)
-    seterr(res.data)
-    
-    setCurrentUser(res.data.user)
+    if (res.data == "Unauthorizedtf")
+      deleteUndefinedKeys();
+    else {
+      seterr(res.data)
 
-    setToken(res.data.accessToken);
+      setCurrentUser(res.data.user)
+
+      setToken(res.data.accessToken);
+    }
   };
-  
+
   const logout = () => {
 
     setCurrentUser(null);
     setToken(null);
   };
   useEffect(() => {
-    localStorage.setItem("user",  JSON.stringify(currentUser));
+    localStorage.setItem("user", JSON.stringify(currentUser));
   }, [currentUser]);
   useEffect(() => {
     localStorage.setItem("token", token);
   }, [token]);
-// const navigate = useNavigate()
-  return(
-    <AuthContext.Provider value={{currentUser, token, login, logout, setCurrentUser, setToken,err}}>
-        {children}
+  // const navigate = useNavigate()
+  return (
+    <AuthContext.Provider value={{ currentUser, token, login, logout, setCurrentUser, setToken, err }}>
+      {children}
     </AuthContext.Provider>
 
   )

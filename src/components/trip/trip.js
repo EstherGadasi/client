@@ -52,9 +52,9 @@ function Trip({ settrips, trip, trips, setflag, flag, setlocation, setcurrentite
 
   return (<><div style={{ borderColor: "pink", borderWidth: "0.5px", border: "solid", margin: "2px", alignItems: "center", alignContent: 'center' }}>
     {flag ? <>
-      <Button onClick={update} variant="text" color="secondary" size="medium" startIcon={<EditIcon />}>ערוך</Button>
-      <Button onClick={showFullTrip} style={{ color: "black" }} size="medium" startIcon={<CommuteIcon />}> הראה טיול מלא</Button>
-      <Button onClick={deletetrip} variant="text" size="medium" startIcon={<DeleteIcon />}>מחק</Button>
+      <Button onClick={update} variant="text" color="secondary" size="medium" startIcon={<EditIcon />}><h2>ערוך</h2></Button>
+      <Button onClick={showFullTrip} style={{ color: "black" }} size="medium" startIcon={<CommuteIcon />}><h2>הראה טיול מלא</h2></Button>
+      <Button onClick={deletetrip} variant="text" size="medium" startIcon={<DeleteIcon />}><h2>מחק</h2></Button>
       {name ? <div>{name}</div> : <></>}
     </> : <></>}
     <div className="site">

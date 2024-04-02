@@ -38,7 +38,7 @@ const Secrtery = ({ site, setcurrentsite }) => {
     const [address, setadress] = useState(null)
     const [url, seturl] = useState(null)
     const [current, setcorrent] = useState(false)
-    const [duration, setduration] = useState(false)
+    const [duration, setduration] = useState("")
     const [optionalladress, setoptionalladress] = useState([" "])
     const [flag, setflag] = useState(false)
     const [days, setdays] = useState()
@@ -72,6 +72,36 @@ const Secrtery = ({ site, setcurrentsite }) => {
             setflag(true)
         }
     }, []);
+    function checkField(field, fieldName) {
+        if (!field) {
+            alert(`השדה ${fieldName} ריק`);
+            return false;
+        }
+        return true;
+    }
+
+    function checkFields() {
+        const fields = {
+            "משך זמן": duration,
+            "קטגוריה": categories,
+            "סוג טיול": tripstype,
+            "תאור": description,
+            "אזור": area,
+            "תשלום": payment,
+            "רמה": level,
+            "שם": name,
+            "נקודה 1": place1,
+            "נקודה 2": place2,
+            "כתובת": address
+        };
+
+        for (let fieldName in fields) {
+            if (!checkField(fields[fieldName], fieldName))
+                return false;
+        }
+        return true;
+    }
+
     function checkadmine(e) {
 
         console.log(realcode)
@@ -85,17 +115,19 @@ const Secrtery = ({ site, setcurrentsite }) => {
         let time = e.target.value.split(":")
         let count = 0
 
-        count += parseInt(deletezero(time[0])*60*60)
-        count += parseInt(deletezero(time[1]) *60)
+        count += parseInt(deletezero(time[0]) * 60 * 60)
+        count += parseInt(deletezero(time[1]) * 60)
         console.log(count)
         setduration(count)
     }
     function deletezero(time) {
         if (time[0] == 0)
-            time=time.substring(1)
+            time = time.substring(1)
         return time
     }
     async function update() {
+        if (!checkFields())
+            return
         try {
             const res = await axios.put(`http://localhost:4000/site/${site.idsites}`, { duration, acces, bicycles, categories, tripstype, description, area, truffic, payment, level, name, place1, place2, url, address });
 
@@ -119,8 +151,8 @@ const Secrtery = ({ site, setcurrentsite }) => {
         }
     }
     async function addsite() {
-        console.log(address)
-
+        if (!checkFields())
+            return
         const handleAddSite = async (e) => {
             try {
                 debugger;
@@ -300,6 +332,7 @@ const Secrtery = ({ site, setcurrentsite }) => {
 
                                                 </Box>
                                             </Box>
+                                            <TextField label="כתובת" id="fullWidth" value={address} onChange={(e) => { setadress(e.target.value) }} />
                                             <TextField label="תשלום" id="fullWidth" value={payment} onChange={(e) => { setpayment(e.target.value) }} />
                                             <TextField fullWidth label="תאור" id="fullWidth" value={description} onChange={(e) => { setdescription(e.target.value) }} />
                                         </Box>
@@ -336,7 +369,7 @@ const Secrtery = ({ site, setcurrentsite }) => {
                 </div>
 
             </Box><br></br>
-           < h5>הוסף תמונה</h5>
+            < h5>הוסף תמונה</h5>
             <Uploader file={url} setFile={seturl} /><br></br><br></br>
             <TextField
                 label="שם"
