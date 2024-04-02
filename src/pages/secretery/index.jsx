@@ -33,8 +33,8 @@ const Secrtery = ({ site, setcurrentsite }) => {
     const [level, setlevel] = useState([])
     const [name, setname] = useState("")
     const [place, setplace] = useState(null)
-    const [place1, setpoint1] = useState(null)
-    const [place2, setpoint2] = useState(null)
+    const [place1, setpoint1] = useState(0)
+    const [place2, setpoint2] = useState(0)
     const [address, setadress] = useState(null)
     const [url, seturl] = useState(null)
     const [current, setcorrent] = useState(false)
@@ -123,6 +123,7 @@ const Secrtery = ({ site, setcurrentsite }) => {
 
         const handleAddSite = async (e) => {
             try {
+                debugger;
                 const ressite = await axios.post("http://localhost:4000/site", { duration, url, acces, bicycles, categories, tripstype, description, area, truffic, payment, level, name, place1, place2, url, address });
                 console.log(ressite.data)
                 alert(`אתר ${name}נוסף `)

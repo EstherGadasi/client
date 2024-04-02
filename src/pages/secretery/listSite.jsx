@@ -7,6 +7,7 @@ import { Box } from '@mui/material';
 import Secrtery from ".";
 
 function ListSite({ code }) {
+    const [inputValue, setInputValue] = useState('');
     const [visible, setvisible] = useState(true)
     const [sites, setsites] = useState([]);
     const [flag, setflag] = useState(false);
@@ -14,11 +15,20 @@ function ListSite({ code }) {
     const [currentsite, setcurrentsite] = useState(false)
     const realcode = 1234;
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+        // Send the input value here, for example by calling a function or dispatching an action
+        checkadmine(inputValue);
+        }
+    };
+    const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
     function checkadmine(e) {
 
-        console.log(realcode)
-        console.log(e.target.value)
-        if (e.target.value == realcode) {
+       
+        if (e == realcode) {
             setflag(true)
         }
         else {
@@ -39,7 +49,14 @@ function ListSite({ code }) {
         }
     }
 
-    return (<> <TextField type="password" placeholder="הכנס קוד מזכירה" visible={visible} style={{marginTop:"20vh", margin:"auto"}} onChange={(e) => { checkadmine(e) }}/><br></br>
+    return (<>    <TextField
+        type="password"
+        placeholder="הכנס קוד מזכירה"
+        style={{ marginTop: "20vh", margin: "auto" }}
+        value={inputValue}
+        onKeyDown={handleKeyDown}
+        onChange={handleChange} // This captures input changes
+      /><br></br>
                  
         {flag && !currentsite ?
             <Box sx={{ display: "grid", gridTemplateColumns: { xs: "repeat(1, minmax(0,1fr))", sm: "repeat(4, minmax(0,1fr))" } }}>

@@ -104,7 +104,7 @@ function Site({ index, startindex, endindex, startpoint, setcurrentsite, realcod
           <CardMedia
             component="img"
             height="140"
-            image={e.images ? e.images.url : '/assets/deed_sea.jpg'}
+            image={e.images ? e.images.url : '//deed_sea.jpg'}
             title={e.name}
           />
 
