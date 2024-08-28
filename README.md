@@ -1,7 +1,7 @@
 # this is the client side of my final project in study
 
 
-## this project is writen in react 
+## this project was written in react 
 
 
 
